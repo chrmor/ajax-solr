@@ -3,8 +3,13 @@
 AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
   start: 0,
 
-  facetsNamesMapping : {"type_ss":"Tipo di voce", "norm_length_s":"Lunghezza voce", "topic_ss":"Tema", "cites_quaderno_ss":"Contiene citazioni da", "label_s":"Titolo della voce", "text":"Testo della voce"},
-  
+  constructor: function (attributes) {
+    AjaxSolr.CurrentSearchWidget.__super__.constructor.apply(this, arguments);
+    AjaxSolr.extend(this, {
+      facetsNamesMapping: null,
+    }, attributes);
+  },
+
   afterRequest: function () {
       
     var self = this;

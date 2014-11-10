@@ -2,7 +2,13 @@
 
 AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
 
-  facetsNamesMapping : {"type_ss":"Tipo di voce", "norm_length_s":"Lunghezza voce", "topic_ss":"Tema", "cites_quaderno_ss":"Contiene citazioni da", "label_s":"Titolo della voce", "text":"Testo della voce"},
+  constructor: function (attributes) {
+    AjaxSolr.AutocompleteWidget.__super__.constructor.apply(this, arguments);
+    AjaxSolr.extend(this, {
+      facetsNamesMapping: null,
+      submitOnlyIfTermSelect: false
+    }, attributes);
+  },
 
   afterRequest: function () {
     $(this.target).find('input').unbind().removeData('events').val('');
@@ -72,9 +78,11 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
       // This has lower priority so that requestSent is set.
       $(self.target).find('input').bind('keydown', function(e) {
         if (self.requestSent === false && e.which == 13) {
-          var value = $(this).val();
-          if (value && self.set(value)) {
-            self.doRequest();
+          if (!self.submitOnlyIfTermSelect) {
+            var value = $(this).val();
+            if (value && self.set(value)) {
+              self.doRequest();
+            }
           }
         }
       });

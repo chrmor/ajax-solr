@@ -20,7 +20,10 @@ var Manager;
         $('#pager-header').html($('<span style="margin:3pt"></span>').text('Stai visualizzando da ' + Math.min(total, offset + 1) + ' a ' + Math.min(total, offset + perPage) + ' di ' + total + ' risultati'));
       }
     }));
+
     var fields = ['topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'author_s'];
+    var facetsNamesMapping = {"type_ss":"Tipo di voce", "norm_length_s":"Lunghezza voce", "topic_ss":"Tema", "cites_quaderno_ss":"Contiene citazioni da", "label_s":"Titolo della voce", "text":"Testo della voce"};
+    
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.FacetsWidget({
         id: fields[i],
@@ -30,13 +33,16 @@ var Manager;
     }
     Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
       id: 'currentsearch',
-      target: '#selection'
+      target: '#selection',
+      facetsNamesMapping: facetsNamesMapping
     }));
 //    'Gramsci dictionary', 'DBpedia entity', 'Public Notebook'
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dic_title_text',
       target: '#dic_title_search',
-      fields: [ 'label_s']
+      fields: [ 'label_s'],
+      facetsNamesMapping: facetsNamesMapping,
+      submitOnlyIfTermSelect: true
     }));
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dic_text',
