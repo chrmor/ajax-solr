@@ -184,3 +184,7 @@ font-size: 140%;
   background-color: #eee !important;
   font-weight: bold;
 }
+
+.ui-autocomplete .ui-menu-item {
+  font-size: 14px !important;
+}
