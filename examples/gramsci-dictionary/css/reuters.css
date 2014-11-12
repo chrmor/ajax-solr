@@ -178,3 +178,9 @@ font-size: 130%;
 a.tagcloud_size_10 {
 font-size: 140%;
 }
+
+.pager-current {
+  color:#333 !important;
+  background-color: #eee !important;
+  font-weight: bold;
+}
