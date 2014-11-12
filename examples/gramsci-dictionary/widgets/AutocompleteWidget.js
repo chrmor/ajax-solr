@@ -6,7 +6,8 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
     AjaxSolr.AutocompleteWidget.__super__.constructor.apply(this, arguments);
     AjaxSolr.extend(this, {
       facetsNamesMapping: null,
-      submitOnlyIfTermSelect: false
+      submitOnlyIfTermSelect: false,
+      autocompleteOnlyOnStartWith: false
     }, attributes);
   },
 
@@ -57,12 +58,19 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
         delay: 500,
         source: function(request, response) {
           var re = $.ui.autocomplete.escapeRegex(request.term);
-          var strtWithPattern = new RegExp("^" + re, "i");
+          var regExPattern = null;
+
+          if (self.autocompleteOnlyOnStartWith)
+            regExPattern = new RegExp("^" + re, "i");
+          else 
+            regExPattern = new RegExp(re, "i");
           
           var a  = $.grep(list, function(item, index) {
-            return strtWithPattern.test(item.value);
+            return regExPattern.test(item.value);
           });
+
           a.sort(sortValues);
+
           response(a);
         },
         select: function(event, ui) {
@@ -80,6 +88,19 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
         if (self.requestSent === false && e.which == 13) {
           if (!self.submitOnlyIfTermSelect) {
             var value = $(this).val();
+
+            // Clean multiple blank spaces
+            if (value.indexOf(' ') != -1) {
+              value = value.replace(/\s{2,}/g, ' ');
+
+              // to correctly search multiple words
+              // separated by spaces, add ""
+              var pattern = new RegExp('^".+"$');
+              if (!pattern.test(value)) {
+                value = '"' + value + '"';
+              }
+            }
+
             if (value && self.set(value)) {
               self.doRequest();
             }

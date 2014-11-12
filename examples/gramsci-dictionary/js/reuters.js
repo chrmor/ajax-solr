@@ -36,7 +36,6 @@ var Manager;
       target: '#selection',
       facetsNamesMapping: facetsNamesMapping
     }));
-//    'Gramsci dictionary', 'DBpedia entity', 'Public Notebook'
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dic_title_text',
       target: '#dic_title_search',
@@ -49,7 +48,8 @@ var Manager;
       target: '#dic_search',
       fields: [ 'text'],
       facetsNamesMapping: facetsNamesMapping,
-      submitOnlyIfTermSelect: false
+      submitOnlyIfTermSelect: false,
+      autocompleteOnlyOnStartWith: true
     }));
     Manager.init();
     var query;
