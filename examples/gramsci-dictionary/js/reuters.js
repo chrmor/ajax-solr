@@ -47,7 +47,9 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dic_text',
       target: '#dic_search',
-      fields: [ 'text']
+      fields: [ 'text'],
+      facetsNamesMapping: facetsNamesMapping,
+      submitOnlyIfTermSelect: false
     }));
     Manager.init();
     var query;
