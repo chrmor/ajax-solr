@@ -100,9 +100,19 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
                 value = '"' + value + '"';
               }
             }
+        
+            if (value) {
+              var result = false;
+              var type = $(this).attr('type');              
+              if (type === 'dic_text') {
+                var qf = 'text:' +  AjaxSolr.Parameter.escapeValue(value);
+                result = self.set(qf);
+              } else {
+                result = self.set(value);
+              }
 
-            if (value && self.set(value)) {
-              self.doRequest();
+              if (result)
+                self.doRequest();
             }
           }
         }

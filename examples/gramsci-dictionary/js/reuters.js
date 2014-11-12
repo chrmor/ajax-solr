@@ -63,7 +63,7 @@ var Manager;
     Manager.store.addByValue('q', query);
     var params = {
       facet: true,
-      'facet.field': [ 'topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'label_s', 'author_s'],
+      'facet.field': [ 'topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'label_s', 'author_s', 'text'],
       'facet.limit': 200,
       'facet.mincount': 1,
       'json.nl': 'map',
