@@ -58,6 +58,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
         delay: 500,
         source: function(request, response) {
           var re = $.ui.autocomplete.escapeRegex(request.term);
+          var re = request.term;
           var regExPattern = null;
 
           if (self.autocompleteOnlyOnStartWith)
@@ -66,7 +67,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
             regExPattern = new RegExp(re, "i");
           
           var a  = $.grep(list, function(item, index) {
-            return regExPattern.test(item.value);
+            return regExPattern.test(item.value.normalize());
           });
 
           a.sort(sortValues);
@@ -105,7 +106,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
               var result = false;
               var type = $(this).attr('type');              
               if (type === 'dic_text') {
-                var qf = 'text:' +  AjaxSolr.Parameter.escapeValue(value);
+                var qf = ('text:' +  AjaxSolr.Parameter.escapeValue(value)).normalize("NFD");
                 result = self.set(qf);
               } else {
                 result = self.set(value);
