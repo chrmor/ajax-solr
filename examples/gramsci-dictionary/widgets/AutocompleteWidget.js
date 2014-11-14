@@ -92,31 +92,6 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
             list.sort(sortValues);
             response(list);
           }
-
-          // if (self.autocompleteOnlyOnStartWith)
-          //   if (advancedAutocomplete) {
-            
-          //   } else {
-
-          //   }
-          //   regExPattern = new RegExp("^" + re, "i");
-          // else {
-          //   if (re.indexOf('*') == 0) {
-          //     regExPattern = new RegExp(re.replace(/\*/g, '') + "$");
-          //   } else if (re.indexOf('*') == re.length) {
-          //     regExPattern = new RegExp("^" + re.replace(/\*/g, ''));
-          //   } else {
-          //     regExPattern = new RegExp(re, "i");
-          //   }
-          // }
-          
-          // var a  = $.grep(list, function(item, index) {
-          //   return regExPattern.test(item.value.normalize());
-          // });
-
-          // a.sort(sortValues);
-
-          // response(a);
         },
         select: function(event, ui) {
           if (ui.item) {
