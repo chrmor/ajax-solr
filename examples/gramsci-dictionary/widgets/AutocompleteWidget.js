@@ -7,6 +7,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
     AjaxSolr.extend(this, {
       facetsNamesMapping: null,
       submitOnlyIfTermSelect: false,
+      advancedAutocomplete: true,
       autocompleteOnlyOnStartWith: false
     }, attributes);
   },
@@ -57,22 +58,65 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
       $(self.target).find('input').autocomplete('destroy').autocomplete({
         delay: 500,
         source: function(request, response) {
-          var re = $.ui.autocomplete.escapeRegex(request.term);
+          //var re = $.ui.autocomplete.escapeRegex(request.term);
           var re = request.term;
           var regExPattern = null;
 
-          if (self.autocompleteOnlyOnStartWith)
-            regExPattern = new RegExp("^" + re, "i");
-          else 
-            regExPattern = new RegExp(re, "i");
+          if (re !== '*') {
+            var indexOfw = re.indexOf('*');
+
+            if (indexOfw == 0) {
+              regExPattern = new RegExp(re.replace(/\*/g, '') + "$");
+            } else if (indexOfw == re.length) {
+              regExPattern = new RegExp("^" + re.replace(/\*/g, ''));
+            } else if (indexOfw > 0 && indexOfw < re.length) {
+              var tokens = re.split('*');
+              regExPattern = new RegExp("^" + tokens[0].replace(/\*/g, '') + ".*" + tokens[1].replace(/\*/g, ''));
+            } else {
+              if (self.autocompleteOnlyOnStartWith) {
+                regExPattern = new RegExp("^" + re, "i");
+              } else {
+                regExPattern = new RegExp(re, "i");
+              }
+            }
+
+            var a  = $.grep(list, function(item, index) {
+              return regExPattern.test(item.value.normalize());
+            });
+
+            a.sort(sortValues);
+
+            response(a);
+
+          } else {
+            list.sort(sortValues);
+            response(list);
+          }
+
+          // if (self.autocompleteOnlyOnStartWith)
+          //   if (advancedAutocomplete) {
+            
+          //   } else {
+
+          //   }
+          //   regExPattern = new RegExp("^" + re, "i");
+          // else {
+          //   if (re.indexOf('*') == 0) {
+          //     regExPattern = new RegExp(re.replace(/\*/g, '') + "$");
+          //   } else if (re.indexOf('*') == re.length) {
+          //     regExPattern = new RegExp("^" + re.replace(/\*/g, ''));
+          //   } else {
+          //     regExPattern = new RegExp(re, "i");
+          //   }
+          // }
           
-          var a  = $.grep(list, function(item, index) {
-            return regExPattern.test(item.value.normalize());
-          });
+          // var a  = $.grep(list, function(item, index) {
+          //   return regExPattern.test(item.value.normalize());
+          // });
 
-          a.sort(sortValues);
+          // a.sort(sortValues);
 
-          response(a);
+          // response(a);
         },
         select: function(event, ui) {
           if (ui.item) {
