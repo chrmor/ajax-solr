@@ -7,7 +7,6 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
     AjaxSolr.extend(this, {
       facetsNamesMapping: null,
       submitOnlyIfTermSelect: false,
-      advancedAutocomplete: true,
       autocompleteOnlyOnStartWith: false
     }, attributes);
   },
