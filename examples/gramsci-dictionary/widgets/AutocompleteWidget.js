@@ -61,21 +61,27 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
           var re = request.term;
           var regExPattern = null;
 
-          if (re !== '*') {
-            var indexOfw = re.indexOf('*');
+          if (re !== '*' && re !== "?") {
+            var indexOfw  = re.indexOf('*');
+            var indexOfcw = re.indexOf('?');
+            var nre = re;
 
-            if (indexOfw == 0) {
-              regExPattern = new RegExp(re.replace(/\*/g, '') + "$");
+            if (indexOfcw != -1) {
+                nre = nre.replace(/\?/g, '\.');
+            }
+
+            if (indexOfw == 0 || indexOfcw == 0) {
+              regExPattern = new RegExp(nre.replace(/\*/g, '') + "$");
             } else if (indexOfw == re.length-1) {
-              regExPattern = new RegExp("^" + re.replace(/\*/g, ''), "i");
+              regExPattern = new RegExp("^" + nre.replace(/\*/g, ''), "i");
             } else if (indexOfw > 0 && indexOfw < re.length) {
               var tokens = re.split('*');
               regExPattern = new RegExp("^" + tokens[0].replace(/\*/g, '') + ".*" + tokens[1].replace(/\*/g, ''), "i");
             } else {
-              if (self.autocompleteOnlyOnStartWith) {
-                regExPattern = new RegExp("^" + re, "i");
+              if (self.autocompleteOnlyOnStartWith) {                
+                regExPattern = new RegExp("^" + nre, "i");
               } else {
-                regExPattern = new RegExp(re, "i");
+                regExPattern = new RegExp(nre, "i");
               }
             }
 
