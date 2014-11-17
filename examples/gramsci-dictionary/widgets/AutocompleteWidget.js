@@ -66,11 +66,11 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
 
             if (indexOfw == 0) {
               regExPattern = new RegExp(re.replace(/\*/g, '') + "$");
-            } else if (indexOfw == re.length) {
-              regExPattern = new RegExp("^" + re.replace(/\*/g, ''));
+            } else if (indexOfw == re.length-1) {
+              regExPattern = new RegExp("^" + re.replace(/\*/g, ''), "i");
             } else if (indexOfw > 0 && indexOfw < re.length) {
               var tokens = re.split('*');
-              regExPattern = new RegExp("^" + tokens[0].replace(/\*/g, '') + ".*" + tokens[1].replace(/\*/g, ''));
+              regExPattern = new RegExp("^" + tokens[0].replace(/\*/g, '') + ".*" + tokens[1].replace(/\*/g, ''), "i");
             } else {
               if (self.autocompleteOnlyOnStartWith) {
                 regExPattern = new RegExp("^" + re, "i");
