@@ -117,20 +117,14 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
             // Clean multiple blank spaces
             if (value.indexOf(' ') != -1) {
               value = value.replace(/\s{2,}/g, ' ');
-
-              // to correctly search multiple words
-              // separated by spaces, add ""
-              var pattern = new RegExp('^".+"$');
-              if (!pattern.test(value)) {
-                value = '"' + value + '"';
-              }
             }
         
             if (value) {
               var result = false;
               var type = $(this).attr('type');              
               if (type === 'dic_text') {
-                var qf = ('text:' +  AjaxSolr.Parameter.escapeValue(value)).normalize("NFD");
+                //var qf = ('text:' +  AjaxSolr.Parameter.escapeValue(value)).normalize("NFD");
+                var qf = 'text:' +  value.normalize("NFD");
                 result = self.set(qf);
               } else {
                 result = self.set(value);
