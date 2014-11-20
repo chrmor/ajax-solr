@@ -61,6 +61,7 @@ var Manager;
         query = "*:*";
     }
     Manager.store.addByValue('q', query);
+    Manager.store.addByValue('q.op', 'AND');
     var params = {
       facet: true,
       'facet.field': [ 'topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'label_s', 'author_s', 'text'],
