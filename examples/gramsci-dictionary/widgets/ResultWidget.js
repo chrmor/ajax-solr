@@ -42,7 +42,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     var accordion = $('#accordion');
     for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
       var doc = this.manager.response.response.docs[i];
-      accordion.append(this.template(doc));
+      
+      if (this.manager.response.response.docs.length == 1)
+        accordion.append(this.template(doc, true));
+      else
+        accordion.append(this.template(doc, false));
 
       var items = [];
       items = items.concat(this.facetLinks('topics', doc.topics));
@@ -57,7 +61,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     }
   },
 
-  template: function (doc) {
+  template: function (doc, forceOpenAccordion) {
     var snippet = '';
     
     /*
@@ -73,18 +77,14 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     }
     */
     
-    
-    
-    
     var output = "";
     output += '<div class="panel panel-default">' +
                         '<div class="panel-heading">' +
                               '<h4>' +
-                                '<a data-toggle="collapse" data-parent="#accordion" href="#collapse' + doc.id + '">';
-    
+                                '<a data-toggle="collapse" data-parent="#accordion" href="#collapse' + doc.id + '">';    
     
     if (doc.label_s != null) {
-         output += doc.label_s;
+        output += doc.label_s;
     } else {
         output += 'Unnamed element';
     }
@@ -92,9 +92,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     output += '</a></h4s></div>';
     
     var openPanels;
-    if (location.href.indexOf('?uri=') != -1) {
-        // XXX: this is disabled for now...
-        //openPanels = 'in';
+    if (forceOpenAccordion /* location.href.indexOf('?uri=') != -1 */) {
+        openPanels = 'in';
     } else {
         openPanel = '';
     }
