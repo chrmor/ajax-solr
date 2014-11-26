@@ -4,7 +4,7 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://metasound.dibet.univpm.it:8080/solr-gramsci-dictionary/'
+      solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-dictionary/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
