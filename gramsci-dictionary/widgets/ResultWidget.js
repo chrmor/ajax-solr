@@ -102,7 +102,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
                       '<div class="panel-body">';
 
     if (doc.type_ss != undefined) {
-        output += '<p><strong>Type: ' + doc.type_ss + '</strong><p/>';
+        output += '<p><strong>' + doc.type_ss + '</strong><p/>';
     }
 
 
