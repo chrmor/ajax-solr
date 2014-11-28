@@ -22,7 +22,7 @@ var Manager;
     }));
 
     var fields = ['topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'author_s'];
-    var facetsNamesMapping = {"type_ss":"Tipo di voce", "norm_length_s":"Lunghezza voce", "topic_ss":"Tema", "cites_quaderno_ss":"Contiene citazioni da", "label_s":"Titolo della voce", "text":"Testo della voce"};
+    var facetsNamesMapping = {"author_s":"Autore dell voce", "type_ss":"Tipo di voce", "norm_length_s":"Lunghezza voce", "topic_ss":"Tema", "cites_quaderno_ss":"Contiene citazioni da", "label_s":"Titolo della voce", "text":"Testo della voce"};
     
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.FacetsWidget({
