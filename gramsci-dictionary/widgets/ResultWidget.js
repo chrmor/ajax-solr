@@ -123,6 +123,16 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<p>' + snippet + '</p>';
 
+	if (doc.related_to_ss.length>0) {
+		output += "<div><strong>Voci relazionate:</strong></div>";
+	}
+
+	for (var k=0; k < doc.related_to_ss.length; k++) {
+		var relatedentity = doc.related_to_ss[k];		
+		output += "<a href=\"/?title=" + relatedentity + "\">" + relatedentity + "</a></br>";
+	}
+
+
     /*
     if (doc.annotated_by_ss != undefined && doc.notebook_id_ss != undefined) {
         output += '<hr/>' + doc.annotated_by_ss + ' annotated this note. <a href="http://ask.thepund.it/#/notebooks/' + doc.notebook_id_ss[0] +'" target="_blank"><br/>See notebook at Ask.ThePund.it</a></div>';
