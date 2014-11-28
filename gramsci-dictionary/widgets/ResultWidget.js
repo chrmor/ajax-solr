@@ -49,14 +49,14 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         accordion.append(this.template(doc, false));
 
       var items = [];
-      items = items.concat(this.facetLinks('topics', doc.topics));
-      items = items.concat(this.facetLinks('organisations', doc.organisations));
-      items = items.concat(this.facetLinks('exchanges', doc.exchanges));
+      items = items.concat(this.facetLinks('label_s', doc.related_to_ss));
+      //items = items.concat(this.facetLinks('organisations', doc.organisations));
+      //items = items.concat(this.facetLinks('exchanges', doc.exchanges));
 
       var $links = $('#links_' + doc.id);
       $links.empty();
       for (var j = 0, m = items.length; j < m; j++) {
-        $links.append($('<li></li>').append(items[j]));
+        $links.append($('<h5></h5>').append(items[j]));
       }
     }
   },
@@ -124,13 +124,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     output += '<p>' + snippet + '</p>';
 
 	if (doc.related_to_ss.length>0) {
-		output += "<div><strong>Voci relazionate:</strong></div>";
+		output += "<hr/><h4>Voci relazionate:</strong></h4>";
+		output += '<p id="links_' + doc.id + '" class="links"></p>';
 	}
 
-	for (var k=0; k < doc.related_to_ss.length; k++) {
-		var relatedentity = doc.related_to_ss[k];		
-		output += "<a href=\"/?title=" + relatedentity + "\">" + relatedentity + "</a></br>";
-	}
+		
 
 
     /*
