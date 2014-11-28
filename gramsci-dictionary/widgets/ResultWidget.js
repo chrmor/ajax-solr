@@ -58,6 +58,25 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       for (var j = 0, m = items.length; j < m; j++) {
         $links.append($('<h5></h5>').append(items[j]));
       }
+	  
+	  items = [];
+	  items = items.concat(this.facetLinks('author_s', [doc.author_s]));
+      $links = $('#author_' + doc.id);
+      $links.empty();
+      for (var j = 0, m = items.length; j < m; j++) {
+        $links.append($('<h5></h5>').append(items[j]));
+      }
+	  
+
+		  items = [];
+		  items = items.concat(this.facetLinks('topic_ss', doc.topic_ss));
+	      $links = $('#topics_' + doc.id);
+	      $links.empty();
+	      for (var j = 0, m = items.length; j < m; j++) {
+	        $links.append($('<h5></h5>').append(items[j]));
+	      }	
+
+	  
     }
   },
 
@@ -101,10 +120,6 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     output += '<div id="collapse' + doc.id + '" class="panel-collapse collapse ' + openPanels + '">' +
                       '<div class="panel-body">';
 
-    if (doc.type_ss != undefined) {
-        output += '<p><strong>' + doc.type_ss + '</strong><p/>';
-    }
-
 
     //snippet += doc.text[0];
 
@@ -123,8 +138,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<p>' + snippet + '</p>';
 
+	output += '<hr/><h5>Autore della voce: <a id="author_' + doc.id + '" class="authors"></a>';
+	if (doc.topic_ss) {
+		output += '<hr/><h5>Tema: <a id="topics_' + doc.id + '" class="topics"></a>';		
+	}
+
+    //if (doc.type_ss != undefined) {
+    //    output += '<h6>Tipo: ' + doc.type_ss + '<p/>';
+    //}
+	
 	if (doc.related_to_ss.length>0) {
-		output += "<hr/><h4>Voci relazionate:</strong></h4>";
+		output += "<hr/><h5>Vedi anche le voci:</strong></h5>";
 		output += '<p id="links_' + doc.id + '" class="links"></p>';
 	}
 
