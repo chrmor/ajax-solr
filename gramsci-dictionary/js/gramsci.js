@@ -23,7 +23,7 @@ var Manager;
 
     var fields = ['topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'author_s'];
     var facetsNamesMapping = {"author_s":"Autore dell voce", "type_ss":"Tipo di voce", "norm_length_s":"Lunghezza voce", "topic_ss":"Tema", "cites_quaderno_ss":"Contiene citazioni da", "label_s":"Titolo della voce", "text":"Testo della voce"};
-    
+
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.FacetsWidget({
         id: fields[i],
@@ -55,7 +55,7 @@ var Manager;
     var query;
     if (location.href.indexOf('?title=') != -1) {
         query = 'label_s:"' + decodeURI(location.href.split('?title=')[1]) + '"';
-        // XXX: we need to remove the query string from the URL 
+        // XXX: we need to remove the query string from the URL
         // to avoid bad behaviours with click on subsequent links in the pages....
     } else {
         query = "*:*";
@@ -70,7 +70,7 @@ var Manager;
       'json.nl': 'map',
       'sort': 'label_s asc',
       'rows': 50
-      
+
     };
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
@@ -89,3 +89,12 @@ var Manager;
   }
 
 })(jQuery);
+
+$(document).ready(function() {
+  $('[data-toggle="popover"]').popover({
+    container: 'body',
+    html: true,
+    trigger: 'focus',
+    title: 'Search Instructions',
+  });
+});

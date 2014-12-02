@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 </head>
 <body>
+    <a name="top-page"></a>
 
     <div class="jumbotron">
-          <div class="container">
-              <div class="col-md-8">
-				  <div class="h5"><a href="http://gramsciproject.org">Gramsci Project</a></div>
-                  <div class="h2">Dizionario Gramsciano - Versione navigabile</div>
-              </div>
-              <div class="col-md-4">
-              <a class="brand" href="http://semedia.dibet.univpm.it/">
-                  <img width="180" src="http://semedia.dibet.univpm.it/images/semedia/logo/semedia_logo_text.png" />
-              </a>
-          </div>
-         </div>
+      <div class="container">
+        <div class="col-md-8">
+			    <div class="h5"><a href="http://gramsciproject.org">Gramsci Project</a></div>
+          <div class="h2">Dizionario Gramsciano - Versione navigabile</div>
         </div>
+        <div class="col-md-4">
+          <a class="brand" href="http://semedia.dibet.univpm.it/">
+              <img width="180" src="http://semedia.dibet.univpm.it/images/semedia/logo/semedia_logo_text.png" />
+          </a>
+        </div>
+      </div>
+    </div>
 
         <div class="panel panel-default">
           <div class="panel-body">
@@ -38,7 +39,24 @@
                       </ul>
                       <ul class="h5" id="dic_search">
                           <label class="control-label">Cerca nel testo della voce:</label>
-                          <input class="form-control" type="dic_text" id="dic_query" name="dic_query" autocomplete="off">
+                          <div class="input-group">
+                            <input class="form-control" type="dic_text" id="dic_query" name="dic_query" autocomplete="off">
+                            <span class="input-group-btn">
+                              <button
+                                class="btn btn-default gramsci-info-button"
+                                type="button" data-toggle="popover"
+                                data-content="Per cercare una parola, ad esempio <i>stato</i>,
+                                              scrivila nella maschera di ricerca.<br/>Puoi utilizzare il punto
+                                              interrogativo come carattere jolly al posto di una lettera: <i>stat?</i>
+                                              trova stato ma anche <i>stati</i>.<br/>Poi cercare due o più parole,
+                                              ad esempio stato e italiano. Scrivile nella maschera di ricerca separate da uno spazio.<br/>
+                                              Puoi cercare un'espressione o un'intera frase semplicemente ponendola
+                                              fra virgolette, ad esempio <i>&quot;stato in generale e italiano in particolare&quot;</i>."
+                                >
+                                <span class="glyphicon glyphicon-question-sign"></span>
+                              </button>
+                            </span>
+                          </div>
                       </ul>
                       <hr/>
                       <p class="h5">Voci del tipo</p>

@@ -10,10 +10,10 @@
 * {
   padding: 0;
   margin: 0;
-} 
+}
 
 body {
-  
+
   color: #333;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 12px;
@@ -135,7 +135,7 @@ a:hover {
 }
 
 .facets_item {
- 
+
   margin-right: 4px;
   color: #6998f0;
 }
@@ -187,4 +187,8 @@ font-size: 140%;
 
 .ui-autocomplete .ui-menu-item {
   font-size: 14px !important;
+}
+
+.popover {
+  font-size: 12px !important;
 }

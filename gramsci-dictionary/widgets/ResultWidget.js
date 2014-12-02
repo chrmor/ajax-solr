@@ -1,3 +1,14 @@
+function isOnScreen($elem)
+{
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $elem.offset().top;
+    var elemBottom = elemTop + $elem.height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
 (function ($) {
 
 AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
@@ -39,6 +50,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   afterRequest: function () {
     $(this.target).empty();
     $(this.target).append('<div class="panel-group" id="accordion"></div>');
+
     var accordion = $('#accordion');
     for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
       var doc = this.manager.response.response.docs[i];
@@ -58,7 +70,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       for (var j = 0, m = items.length; j < m; j++) {
         $links.append($('<h5></h5>').append(items[j]));
       }
-	  
+
 	  items = [];
 	  items = items.concat(this.facetLinks('author_s', [doc.author_s]));
       $links = $('#author_' + doc.id);
@@ -66,7 +78,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       for (var j = 0, m = items.length; j < m; j++) {
         $links.append($('<h5></h5>').append(items[j]));
       }
-	  
+
 
 		  items = [];
 		  items = items.concat(this.facetLinks('topic_ss', doc.topic_ss));
@@ -74,10 +86,33 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	      $links.empty();
 	      for (var j = 0, m = items.length; j < m; j++) {
 	        $links.append($('<h5></h5>').append(items[j]));
-	      }	
-
-	  
+	      }
     }
+
+    var scrolled = false;
+    $('#accordion').on('shown.bs.collapse', function (e) {
+      var $element = $(e.target)
+      var docid = $element.attr('data-docid');
+      var $targetElement = $('#a-' + docid);
+
+      if (!isOnScreen($targetElement) ) {
+        scrolled = true;
+        $('html, body').animate({
+          scrollTop: $targetElement.offset().top - 10
+        }, 300);
+      }
+    });
+
+    if (!scrolled) {
+      var doc = this.manager.response.response.docs[0];
+      var $targetElement = $('#a-' + doc.id);
+      if (!isOnScreen($targetElement) ) {
+        $('html, body').animate({
+          scrollTop: $targetElement.offset().top - 10
+        }, 300);
+      }
+    }
+
   },
 
   template: function (doc, forceOpenAccordion) {
@@ -97,7 +132,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     */
 
     var output = "";
-    output += '<div class="panel panel-default">' +
+    output += '<div class="panel panel-default"><a id="a-' + doc.id + '" name="a-' + doc.id + '"></a>' +
                         '<div class="panel-heading">' +
                               '<h4>' +
                                 '<a data-toggle="collapse" data-parent="#accordion" href="#collapse' + doc.id + '">';
@@ -117,9 +152,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         openPanel = '';
     }
 
-    output += '<div id="collapse' + doc.id + '" class="panel-collapse collapse ' + openPanels + '">' +
+    output += '<div id="collapse' + doc.id + '"  data-docid="' + doc.id + '" class="panel-collapse collapse ' + openPanels + '">' +
                       '<div class="panel-body">';
-
 
     //snippet += doc.text[0];
 
@@ -140,20 +174,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
 	output += '<hr/><h5>Autore della voce: <a id="author_' + doc.id + '" class="authors"></a>';
 	if (doc.topic_ss) {
-		output += '<hr/><h5>Tema: <a id="topics_' + doc.id + '" class="topics"></a>';		
+		output += '<hr/><h5>Tema: <a id="topics_' + doc.id + '" class="topics"></a>';
 	}
 
     //if (doc.type_ss != undefined) {
     //    output += '<h6>Tipo: ' + doc.type_ss + '<p/>';
     //}
-	
+
 	if (doc.related_to_ss.length>0) {
 		output += "<hr/><h5>Vedi anche le voci:</strong></h5>";
 		output += '<p id="links_' + doc.id + '" class="links"></p>';
 	}
-
-		
-
 
     /*
     if (doc.annotated_by_ss != undefined && doc.notebook_id_ss != undefined) {
