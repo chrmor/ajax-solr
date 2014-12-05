@@ -96,6 +96,14 @@ a:hover {
   padding-top: 1px;
 }
 
+/* panels */
+
+.panel-facet {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+
 /* left */
 
 .left {
