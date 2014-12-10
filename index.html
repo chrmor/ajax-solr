@@ -34,7 +34,7 @@
                       <ul id="selection"></ul>
                       <hr/>
                       <ul class="h5" id="dic_title_search">
-                          <label class="control-label">Cerca la voce:</label></
+                          <label class="control-label">Cerca la voce:</label>
                           <input class="form-control" type="dic_title_text" id="dic_title_query" name="dic_title_query" autocomplete="off">
                       </ul>
                       <ul class="h5" id="dic_search">
@@ -42,7 +42,8 @@
                           <div class="input-group">
                             <input class="form-control" type="dic_text" id="dic_query" name="dic_query" autocomplete="off">
                             <span class="input-group-btn">
-                              <button
+                              <a
+                                tabindex="0" 
                                 class="btn btn-default gramsci-info-button"
                                 type="button" data-toggle="popover"
                                 data-content="Per cercare una parola, ad esempio <i>stato</i>,
@@ -54,7 +55,7 @@
                                               fra virgolette, ad esempio <i>&quot;stato in generale e italiano in particolare&quot;</i>."
                                 >
                                 <span class="glyphicon glyphicon-question-sign"></span>
-                              </button>
+                              </a>
                             </span>
                           </div>
                       </ul>
@@ -113,6 +114,7 @@
         <script src="gramsci-dictionary/widgets/SmallFacetsWidget.js"></script>
         <script src="gramsci-dictionary/widgets/CurrentSearchWidget.9.js"></script>
         <script src="core/AbstractTextWidget.js"></script>
+        <script src="gramsci-dictionary/js/unorm.js"></script>
         <script src="gramsci-dictionary/widgets/AutocompleteWidget.js"></script>
         <script src="gramsci-dictionary/widgets/CountryCodeWidget.js"></script>
         <script src="gramsci-dictionary/widgets/CalendarWidget.js"></script>

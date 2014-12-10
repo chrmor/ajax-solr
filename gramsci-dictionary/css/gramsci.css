@@ -1,12 +1,3 @@
-
-.orange {
-  background-color: @brand-warning;
-}
-
-
-
-
-
 * {
   padding: 0;
   margin: 0;
@@ -197,6 +188,13 @@ font-size: 140%;
   font-size: 14px !important;
 }
 
+.ui-autocomplete {
+    z-index:10000 !important; 
+    width: 480px !important
+}
+
 .popover {
   font-size: 12px !important;
 }
+
+
