@@ -52,16 +52,20 @@ var Manager;
       autocompleteOnlyOnStartWith: true
     }));
     Manager.init();
-    var query;
-    if (location.href.indexOf('?title=') != -1) {
-        query = 'label_s:"' + decodeURI(location.href.split('?title=')[1]) + '"';
-        // XXX: we need to remove the query string from the URL
-        // to avoid bad behaviours with click on subsequent links in the pages....
-    } else {
-        query = "*:*";
+    var query = "*:*";
+	Manager.store.addByValue('q', query);
+	Manager.store.addByValue('q.op', 'AND');
+    
+	
+	//API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE... 
+	if (location.hash.indexOf('title:') != -1) {
+        query = 'label_s:' + AjaxSolr.Parameter.escapeValue(decodeURI(location.hash.split(':')[1].replace(new RegExp('\\+', 'g'),' ')).replace(new RegExp('%2C', 'g'),','));
+        Manager.store.addByValue('fq', query);
+		location.hash = "";
     }
-    Manager.store.addByValue('q', query);
-    Manager.store.addByValue('q.op', 'AND');
+	
+    
+
     var params = {
       facet: true,
       'facet.field': [ 'topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'label_s', 'author_s', 'text'],
@@ -75,8 +79,8 @@ var Manager;
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
-
-    Manager.doRequest();
+	Manager.doRequest();
+	
   });
 
   $.fn.showIf = function (condition) {
