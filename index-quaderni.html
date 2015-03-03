@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Quaderni dal Carcere by Antonio Gramsci</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="gramsci-quaderni/css/gramsci.css">
+  <link rel="stylesheet" href="gramsci-quaderni/css/bootstrap-3.1.1-dist/css/bootstrap.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+</head>
+
+<body>
+    <a name="top-page"></a>
+
+    <div class="jumbotron">
+      <div class="container">
+          <div class="col-md-8">
+            <div class="h5"><a href="http://gramsciproject.org">Gramsci Project</a></div>
+            <div class="h2"><em>Quaderni del carcere</em> by Antonio Gramsci.</div>
+          </div>
+          <div class="col-md-4">
+            <a class="brand" href="http://semedia.dibet.univpm.it/">
+                <img width="180" src="http://semedia.dibet.univpm.it/images/semedia/logo/semedia_logo_text.png"></img>
+            </a>
+          </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="container-fluid">
+
+          <div class="col-md-3">
+            <p class="h3">The Gramsci Dictionary<br/><small>Select Notes related to one ore more Dictionary Entries</small></p>
+            <hr/>
+            <ul class="h5" id="dic_search">
+                <label class="control-label">Search the Dictionary:</label>
+                <input class="form-control" type="dic_text" id="dic_query" name="dic_query" autocomplete="off">
+            </ul>
+            <hr/>
+
+            <p class="h5">Indice Gerratana</p>
+            <div class="tagcloud panel-facet" id="topic_ss"></div>
+            <hr/>
+
+            <p class="h5">Browse the Dictionary:</p>
+            <div class="tagcloud panel-facet" id="cited_by_ss"></div>
+
+          </div>
+
+          <div class="col-md-6">
+            <p class="h3">Gramsci's Notes</p>
+            <hr/>
+            <div id="result">
+              <div id="navigation">
+                <ul id="pager" class="pagination"></ul>
+                <div id="pager-header"></div>
+              </div>
+              <hr/>
+              <div id="docs"></div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+
+            <p class="h5">Selected Facets</p>
+            <ul id="selection"></ul>
+            <hr/>
+
+            <p class="h5">Search in text:</p>
+            <ul id="search">
+              <input class="form-control" type="text" id="query" name="query" autocomplete="off">
+            </ul>
+            <hr/>
+
+            <p class="h3">Entities mentioned<small><br/>in your current selection (by type)</small></p>
+            <p class="h4">Persons</p>
+            <ul id="dbp_search">
+              <input class="form-control" type="dbp_text" id="dbp_query" name="dbp_query" autocomplete="off">
+            </ul>
+            <div class="tagcloud panel-facet" id="mentions_person_ss"></div>
+            <hr/>
+
+            <p class="h4">Books</p>
+            <ul id="book_search">
+              <input class="form-control" type="book_text" id="book_query" name="book_query" autocomplete="off">
+            </ul>
+            <div class="tagcloud panel-facet" id="mentions_book_ss"></div>
+            <hr/>
+
+            <p class="h4">Languages</p>
+            <ul id="language_search">
+              <input class="form-control" type="language_text" id="language_query" name="language_query" autocomplete="off">
+            </ul>
+            <div class="tagcloud panel-facet" id="mentions_language_ss"></div>
+            <hr/>
+
+            <p class="h4">Events</p>
+            <ul id="event_search">
+              <input class="form-control" type="event_text" id="event_query" name="event_query" autocomplete="off">
+            </ul>
+            <div class="tagcloud panel-facet" id="mentions_event_ss"></div>
+            <hr/>
+
+            <p class="h4">Places</p>
+            <ul id="place_search">
+              <input class="form-control" type="place_text" id="place_query" name="place_query" autocomplete="off">
+            </ul>
+            <div class="tagcloud panel-facet" id="mentions_place_ss"></div>
+            <hr/>
+
+            <p class="h4">Pundit annotations <small><br/>(experimental section)</small></p>
+
+            <p class="h5">Notebooks <small> where selected notes are annotated</small></p>
+            <div class="tagcloud panel-facet" id="annotated_in_ss"></div>
+
+            <p class="h5">Pundit users <small> who annotated selected notes</small></p>
+            <div class="tagcloud panel-facet" id="annotated_by_ss"></div>
+            <div class="clear"></div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+    <script src="gramsci-media/css/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+    <script src="core/Core.js"></script>
+    <script src="core/AbstractManager.js"></script>
+    <script src="managers/Manager.jquery.js"></script>
+    <script src="core/Parameter.js"></script>
+    <script src="core/ParameterStore.js"></script>
+    <script src="core/AbstractWidget.js"></script>
+    <script src="gramsci-quaderni/widgets/ResultWidget.js"></script>
+    <script src="widgets/jquery/PagerWidget.js"></script>
+    <script src="core/AbstractFacetWidget.js"></script>
+    <script src="gramsci-quaderni/widgets/TagcloudWidget.js"></script>
+    <script src="gramsci-quaderni/widgets/FacetsWidget.js"></script>
+    <script src="gramsci-quaderni/widgets/SmallFacetsWidget.js"></script>
+    <script src="gramsci-quaderni/widgets/CurrentSearchWidget.9.js"></script>
+    <script src="core/AbstractTextWidget.js"></script>
+    <script src="gramsci-quaderni/js/unorm.js"></script>
+    <script src="gramsci-quaderni/widgets/AutocompleteWidget.js"></script>
+    <script src="gramsci-quaderni/widgets/CountryCodeWidget.js"></script>
+    <script src="gramsci-quaderni/widgets/CalendarWidget.js"></script>
+    <script src="gramsci-quaderni/js/gramsci.js"></script>
+</body>
+</html>
