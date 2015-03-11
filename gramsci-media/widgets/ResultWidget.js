@@ -43,7 +43,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       self.manager.store.remove('fq');
       self.manager.store.addByValue('fq', facet_field + ':' + AjaxSolr.Parameter.escapeValue(facet_value));
       // We set start to 0 beacause we want to select the first page of results!!!
-	  self.start = 0;      
+	  self.start = 0;
       self.doRequest();
       return false;
     };
@@ -76,17 +76,59 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       $subjects = $('#subjects_' + doc.id);
       $subjects.empty();
       for (var j = 0, m = items.length; j < m; j++) {
-        $subjects.append($('<h5></h5>').append(items[j]));
+        var $span = $('<span></span>');
+        $span.append(items[j])
+
+        if (j != items.length-1)
+          $span.append(',&nbsp;')
+
+        $subjects.append($span);
       }
 
 	  items = [];
 	  items = items.concat(this.facetLinks('contributor_ss', doc.contributor_ss));
-      $contributors = $('#contributors_' + doc.id);
-      $contributors.empty();
-      for (var j = 0, m = items.length; j < m; j++) {
-        $contributors.append($('<h5></h5>').append(items[j]));
-      }
+    $contributors = $('#contributors_' + doc.id);
+    $contributors.empty();
+    for (var j = 0, m = items.length; j < m; j++) {
+      var $span = $('<span></span>');
+      $span.append(items[j])
+
+      if (j != items.length-1)
+        $span.append(',&nbsp;')
+
+      $contributors.append($span);
     }
+
+    items = [];
+    items = items.concat(this.facetLinks('language_ss', doc.language_ss));
+    $languages = $('#languages_' + doc.id);
+    $languages.empty();
+    for (var j = 0, m = items.length; j < m; j++) {
+      var $span = $('<span></span>');
+      $span.append(items[j])
+
+      if (j != items.length-1)
+        $span.append(',&nbsp;')
+
+      $languages.append($span);
+    }
+
+    items = [];
+    items = items.concat(this.facetLinks('ctype_ss', doc.ctype_ss));
+    $ctype = $('#ctype_' + doc.id);
+    $ctype.empty();
+    for (var j = 0, m = items.length; j < m; j++) {
+      var $span = $('<span></span>');
+      $span.append(items[j])
+
+      if (j != items.length-1)
+        $span.append(',&nbsp;')
+
+      $ctype.append($span);
+    }
+
+  }
+
 
     var scrolled = false;
     $('#accordion').on('shown.bs.collapse', function (e) {
@@ -140,14 +182,14 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<div id="collapse' + doc.id + '"  data-docid="' + doc.id + '" class="panel-collapse collapse ' + openPanels + '">' +
                       '<div class="panel-body">';
-        
+
     output += '<p>' + doc.description_s + '</p>';
-    
+
     var generateDefaultMediaLink = false;
     if (doc.shownAt_s.indexOf('vimeo.com/') !== -1) {
         var videoId = '';
         var uriTokens = doc.shownAt_s.split('/');
-        
+
         for (var i = uriTokens.length-1; i >= 0; i--) {
             var token = uriTokens[i];
             if (/^[0-9]+$/.test(token)) {
@@ -155,40 +197,40 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
                 break;
             }
         }
-        
+
         if (videoId !== '') {
             output += '<iframe src="//player.vimeo.com/video/' + videoId + '?title=0&amp;byline=0&amp;portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
         } else {
             generateDefaultMediaLink = true;
         }
-        
+
     } else if (doc.shownAt_s.indexOf('youtube.com/') !== -1) {
         var videoId = '';
         var indexOfVParameter = doc.shownAt_s.indexOf('?v=');
         if (indexOfVParameter !== -1) {
             videoId = doc.shownAt_s.substring(indexOfVParameter+3, doc.shownAt_s.length);
-            videoId = videoId.split('&')[0];            
+            videoId = videoId.split('&')[0];
             output += '<iframe width="560" height="315" src="//www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
         } else {
             generateDefaultMediaLink = true;
-        }        
+        }
     } else {
         generateDefaultMediaLink = true;
     }
-    
+
     if (generateDefaultMediaLink) {
         output += '<p><a href="' + doc.shownAt_s + '" target="_blank">Accedi al Media</a></p>';
     }
 
 	output += '<hr/>';
-	
-    output += '<div class="col-xs-6" style="margin-left:0;padding-left:0">';    
-    output += '  <h5>Tema: <a id="subjects_' + doc.id + '" class="subjects"></a></h5>';    
+
+    output += '<div class="col-xs-12" style="margin-left:0;padding-left:0">';
+    output += '  <h5>Tipologia Contributo: <span id="ctype_' + doc.id + '" class="ctype"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Tema: <span id="subjects_' + doc.id + '" class="subjects"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Speaker: <span id="contributors_' + doc.id + '" class="contributors"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Lingue: <span id="languages_' + doc.id + '" class="languages"></span></h5>';
     output += '</div>';
-    output += '<div class="col-xs-6" style="margin-left:0;padding-left:0">';
-    output += '  <h5>Speaker: <a id="contributors_' + doc.id + '" class="contributors"></a></h5>';
-    output += '</div>';
-    
+
     output += '</div></div>';
 
     output += '</div>';
