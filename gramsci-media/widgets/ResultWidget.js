@@ -72,12 +72,16 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       }
 
 	  items = [];
-	  items = items.concat(this.facetLinks('subject_ss', doc.subject_ss));
-      $subjects = $('#subjects_' + doc.id);
+	  items = items.concat(this.facetLinks('dictionary_ss', doc.dictionary_ss));
+      $subjects = $('#dictionary_' + doc.id);
       $subjects.empty();
       for (var j = 0, m = items.length; j < m; j++) {
         var $span = $('<span></span>');
         $span.append(items[j])
+
+        var link = 'http://dizionario.gramsciproject.org/#title:' + doc.dictionary_ss[j];
+        $span.append('&nbsp;');
+        $span.append($('<a href="' + link + '"><span class="glyphicon glyphicon-new-window"></span></a>'));
 
         if (j != items.length-1)
           $span.append(',&nbsp;')
@@ -226,7 +230,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<div class="col-xs-12" style="margin-left:0;padding-left:0">';
     output += '  <h5>Tipologia Contributo: <span id="ctype_' + doc.id + '" class="ctype"></span></h5>';
-    output += '  <h5 style="margin-top:10px">Tema: <span id="subjects_' + doc.id + '" class="subjects"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Voci del Dizionario: <span id="dictionary_' + doc.id + '" class="dictionary"></span></h5>';
     output += '  <h5 style="margin-top:10px">Speaker: <span id="contributors_' + doc.id + '" class="contributors"></span></h5>';
     output += '  <h5 style="margin-top:10px">Lingue: <span id="languages_' + doc.id + '" class="languages"></span></h5>';
     output += '</div>';

@@ -21,8 +21,8 @@ var Manager;
       }
     }));
 
-    var fields = ['ctype_ss', 'type_s', 'subject_ss', 'contributor_ss', 'language_ss', 'date_s', 'description_s'];
-    var facetsNamesMapping = {'ctype_ss':'Tipologia Media', 'type_s':'Tipologia Contributo', 'subject_ss':'Tema', 'contributor_ss':'Speaker', 'language_ss':'Lingua', 'date_s':'Data', "title_s":"Titolo", "description_s":"Descrizione", "text":"Descrizione"};
+    var fields = ['ctype_ss', 'type_s', 'subject_ss', 'contributor_ss', 'language_ss', 'date_s', 'description_s', 'dictionary_ss'];
+    var facetsNamesMapping = {'ctype_ss': 'Tipologia Media', 'type_s': 'Tipologia Contributo', 'subject_ss': 'Keyword', 'contributor_ss':'Speaker', 'language_ss':'Lingua', 'date_s':'Data', 'title_s': 'Titolo', 'description_s': 'Descrizione', 'text': 'Testo', 'dictionary_ss': 'Voce del dizionario' };
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.FacetsWidget({
@@ -37,17 +37,9 @@ var Manager;
       facetsNamesMapping: facetsNamesMapping
     }));
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
-      id: 'dic_title_text',
-      target: '#dic_title_search',
-      fields: [ 'title_s'],
-      facetsNamesMapping: facetsNamesMapping,
-      submitOnlyIfTermSelect: true,
-      autocompleteOnlyOnStartWith: true
-    }));
-    Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dic_text',
       target: '#dic_search',
-      fields: [ 'text'],
+      fields: [ 'text', 'title_s', 'contributor_ss', 'subject_ss', 'dictionary_ss' ],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: false,
       autocompleteOnlyOnStartWith: true

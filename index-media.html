@@ -10,21 +10,16 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 </head>
 <body>
-    <a name="top-page"></a>
+  <a name="top-page"></a>
 
-    <div class="jumbotron">
-      <div class="container">
-        <div class="col-md-8">
-			    <div class="h5"><a href="http://gramsciproject.org">Gramsci Project</a></div>
-          <div class="h2">Gramsci Media Library</div>
-        </div>
-        <div class="col-md-4">
-          <a class="brand" href="http://semedia.dibet.univpm.it/">
-              <img width="180" src="http://semedia.dibet.univpm.it/images/semedia/logo/semedia_logo_text.png" />
-          </a>
-        </div>
-      </div>
+  <div class="container-fluid">
+    <div class="col-sm-8 col-md-10" style="padding-left:0 !important">
+      <img src="gramsci-media/images/media_header.jpg"/>
     </div>
+    <div class="col-sm-4 col-md-2">
+      <a href="http://futuroinricerca.miur.it/"><img class="hidden-xs" src="http://www.unimi.it/cataloghi/finanziamento_nazionali/futuroinricerca.gif"  width="90" style="float:right;padding:5px"/></a>
+    </div>
+  </div>
 
   <div class="panel panel-default">
     <div class="panel-body">
@@ -33,12 +28,8 @@
                 <p class="h5">Filtri applicati</p>
                 <ul id="selection"></ul>
                 <hr/>
-                <ul class="h5" id="dic_title_search">
-                    <label class="control-label">Cerca per titolo:</label>
-                    <input class="form-control" type="dic_title_text" id="dic_title_query" name="dic_title_query" autocomplete="off">
-                </ul>
                 <ul class="h5" id="dic_search">
-                    <label class="control-label">Cerca nel testo della descrizione:</label>
+                    <label class="control-label">Cerca:</label>
                     <div class="input-group">
                       <input class="form-control" type="dic_text" id="dic_query" name="dic_query" autocomplete="off">
                       <span class="input-group-btn">
@@ -65,8 +56,8 @@
                 <p class="h5">Tipologia Contributo</p>
                 <div class="tagcloud panel-facet" id="type_s"></div>
                 <hr/>
-                <p class="h5">Tema</p>
-                <div class="tagcloud panel-facet" id="subject_ss"></div>
+                <p class="h5">Voci del Dizionario</p>
+                <div class="tagcloud panel-facet" id="dictionary_ss"></div>
                 <hr/>
                 <p class="h5">Speaker</p>
                 <div class="tagcloud panel-facet" id="contributor_ss"></div>
