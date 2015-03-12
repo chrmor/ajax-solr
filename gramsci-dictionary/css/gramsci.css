@@ -6,7 +6,7 @@
 body {
 
   color: #333;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: Georgia, Verdana, Arial, Helvetica, sans-serif !important;
   font-size: 12px;
   line-height: 18px;
 }
@@ -215,5 +215,3 @@ a:hover,
 {
   color: #714732 !important;
 }
-
-

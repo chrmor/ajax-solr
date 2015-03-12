@@ -57,7 +57,7 @@ var Manager;
     Manager.store.addByValue('q.op', 'AND');
     var params = {
       facet: true,
-      'facet.field': [ 'ctype_ss', 'type_s', 'subject_ss', 'contributor_ss', 'language_ss', 'date_s', 'title_s', 'description_s', 'shownAt_s', 'text'],
+      'facet.field': [ 'ctype_ss', 'type_s', 'subject_ss', 'contributor_ss', 'dictionary_ss', 'language_ss', 'date_s', 'title_s', 'description_s', 'shownAt_s', 'text'],
       'facet.limit': 200,
       'facet.mincount': 1,
       'json.nl': 'map',
