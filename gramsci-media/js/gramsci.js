@@ -55,6 +55,14 @@ var Manager;
     }
     Manager.store.addByValue('q', query);
     Manager.store.addByValue('q.op', 'AND');
+
+    // API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE...
+    if (location.hash.indexOf('title:') != -1) {
+      query = 'label_s:' + AjaxSolr.Parameter.escapeValue(decodeURI(location.hash.split(':')[1].replace(new RegExp('\\+', 'g'),' ')).replace(new RegExp('%2C', 'g'),','));
+      Manager.store.addByValue('fq', query);
+      location.hash = "";
+    }
+
     var params = {
       facet: true,
       'facet.field': [ 'ctype_ss', 'type_s', 'subject_ss', 'contributor_ss', 'dictionary_ss', 'language_ss', 'date_s', 'title_s', 'description_s', 'shownAt_s', 'text'],
