@@ -70,7 +70,13 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       var $links = $('#links_' + doc.id);
       $links.empty();
       for (var j = 0, m = items.length; j < m; j++) {
-        $links.append($('<h5></h5>').append(items[j]));
+        var $span = $('<span></span>');
+        $span.append(items[j]);
+
+        if (j != items.length-1)
+          $span.append(',&nbsp;')
+
+        $links.append($span);
       }
 
 	  items = [];
@@ -78,17 +84,46 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       $links = $('#author_' + doc.id);
       $links.empty();
       for (var j = 0, m = items.length; j < m; j++) {
-        $links.append($('<h5></h5>').append(items[j]));
-      }
+        var $span = $('<span></span>');
+        $span.append(items[j]);
 
+        if (j != items.length-1)
+          $span.append(',&nbsp;')
+
+        $links.append($span);
+      }
 
 		  items = [];
 		  items = items.concat(this.facetLinks('topic_ss', doc.topic_ss));
 	      $links = $('#topics_' + doc.id);
 	      $links.empty();
 	      for (var j = 0, m = items.length; j < m; j++) {
-	        $links.append($('<h5></h5>').append(items[j]));
+          var $span = $('<span></span>');
+          $span.append(items[j]);
+
+          if (j != items.length-1)
+            $span.append(',&nbsp;')
+
+          $links.append($span);
 	      }
+
+        items = [];
+        items = items.concat(this.facetLinks('media_ss', doc.media_ss));
+        $links = $('#media_' + doc.id);
+        $links.empty();
+        for (var j = 0, m = items.length; j < m; j++) {
+          var $span = $('<span></span>');
+          $span.append(items[j]);
+
+          var link = 'http://media.gramsciproject.org/#title:' + doc.media_ss[j];
+          $span.append('&nbsp;');
+          $span.append($('<a href="' + link + '" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>'));
+
+          if (j != items.length-1)
+            $span.append(',&nbsp;')
+
+          $links.append($span);
+        }
     }
 
     var scrolled = false;
@@ -174,19 +209,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<p>' + snippet + '</p>';
 
-	output += '<hr/><h5>Autore della voce: <a id="author_' + doc.id + '" class="authors"></a>';
-	if (doc.topic_ss) {
-		output += '<hr/><h5>Tema: <a id="topics_' + doc.id + '" class="topics"></a>';
-	}
+    output += '<hr/>';
 
-    //if (doc.type_ss != undefined) {
-    //    output += '<h6>Tipo: ' + doc.type_ss + '<p/>';
-    //}
+    output += '  <h5>Autore della voce: <span id="author_' + doc.id + '" class="ctype"></h5>';
+    if (doc.topic_ss)
+      output += '<h5 style="margin-top:10px">Tema: <span id="topics_' + doc.id + '" class="topics"></span></h5>';
 
-	if (doc.related_to_ss.length>0) {
-		output += "<hr/><h5>Vedi anche le voci:</strong></h5>";
-		output += '<p id="links_' + doc.id + '" class="links"></p>';
-	}
+  	if (doc.related_to_ss)
+      output += '<h5 style="margin-top:10px">Vedi anche le voci: <span id="links_' + doc.id + '" class="links"></span></h5>';
+
+    if (doc.media_ss)
+      output += '<h5 style="margin-top:10px">Vedi anche i media: <span id="media_' + doc.id + '" class="media"></span></h5>';
 
     /*
     if (doc.annotated_by_ss != undefined && doc.notebook_id_ss != undefined) {

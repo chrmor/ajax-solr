@@ -81,7 +81,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
         var link = 'http://dizionario.gramsciproject.org/#title:' + doc.dictionary_ss[j];
         $span.append('&nbsp;');
-        $span.append($('<a href="' + link + '"><span class="glyphicon glyphicon-new-window"></span></a>'));
+        $span.append($('<a href="' + link + '" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>'));
 
         if (j != items.length-1)
           $span.append(',&nbsp;')

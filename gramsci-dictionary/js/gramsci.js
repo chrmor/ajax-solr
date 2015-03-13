@@ -21,8 +21,8 @@ var Manager;
       }
     }));
 
-    var fields = ['topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'author_s'];
-    var facetsNamesMapping = {"author_s":"Autore dell voce", "type_ss":"Tipo di voce", "norm_length_s":"Lunghezza voce", "topic_ss":"Tema", "cites_quaderno_ss":"Contiene citazioni da", "label_s":"Titolo della voce", "text":"Testo della voce"};
+    var fields = ['topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'author_s', 'media_ss'];
+    var facetsNamesMapping = {'author_s': 'Autore dell voce', 'type_ss': 'Tipo di voce', 'norm_length_s': 'Lunghezza voce', 'topic_ss': 'Tema', 'cites_quaderno_ss': 'Contiene citazioni da', 'label_s': 'Titolo della voce', 'text': 'Testo della voce', 'media_ss': 'Media'};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.FacetsWidget({
@@ -55,20 +55,18 @@ var Manager;
     var query = "*:*";
 	Manager.store.addByValue('q', query);
 	Manager.store.addByValue('q.op', 'AND');
-    
-	
-	//API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE... 
+
+
+	//API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE...
 	if (location.hash.indexOf('title:') != -1) {
-        query = 'label_s:' + AjaxSolr.Parameter.escapeValue(decodeURI(location.hash.split(':')[1].replace(new RegExp('\\+', 'g'),' ')).replace(new RegExp('%2C', 'g'),','));
-        Manager.store.addByValue('fq', query);
+    query = 'title_s:' + AjaxSolr.Parameter.escapeValue(decodeURI(location.hash.split(':')[1].replace(new RegExp('\\+', 'g'),' ')).replace(new RegExp('%2C', 'g'),','));
+    Manager.store.addByValue('fq', query);
 		location.hash = "";
-    }
-	
-    
+  }
 
     var params = {
       facet: true,
-      'facet.field': [ 'topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'label_s', 'author_s', 'text'],
+      'facet.field': [ 'topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'label_s', 'author_s', 'text', 'media_ss'],
       'facet.limit': 200,
       'facet.mincount': 1,
       'json.nl': 'map',
@@ -80,7 +78,7 @@ var Manager;
       Manager.store.addByValue(name, params[name]);
     }
 	Manager.doRequest();
-	
+
   });
 
   $.fn.showIf = function (condition) {
