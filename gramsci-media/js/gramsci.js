@@ -59,7 +59,7 @@ var Manager;
     // API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE...
     if (location.hash.indexOf('title:') != -1) {
       var title = location.hash.split('#title:')[1];
-      var decoded_title = decodeURI(title);
+      var decoded_title = decodeURIComponent(title);
       query = 'title_s:' + AjaxSolr.Parameter.escapeValue(decoded_title).replace(new RegExp('%2C', 'g'), ',');
       Manager.store.addByValue('fq', query);
       location.hash = "";
