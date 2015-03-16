@@ -60,7 +60,7 @@ var Manager;
     if (location.hash.indexOf('title:') != -1) {
       var title = location.hash.split('#title:')[1];
       var decoded_title = decodeURI(title);
-      query = 'title_s:' + AjaxSolr.Parameter.escapeValue(decoded_title).replace(new RegExp('%2C', 'g'),','));
+      query = 'title_s:' + AjaxSolr.Parameter.escapeValue(decoded_title).replace(new RegExp('%2C', 'g'), ',');
       Manager.store.addByValue('fq', query);
       location.hash = "";
     }
