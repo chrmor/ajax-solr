@@ -115,7 +115,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var $span = $('<span></span>');
           // $span.append(items[j]);
 
-          var link = 'http://media.gramsciproject.org/#title:' + doc.media_ss[j];
+          var link = 'http://media.gramsciproject.org/#title:' + encodeURI(doc.media_ss[j]);
           $span.append($('<a href="' + link + '" target="_blank">' + doc.media_ss[j] + '</a>'));
 
           if (j != items.length-1)
