@@ -230,7 +230,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<div class="col-xs-12" style="margin-left:0;padding-left:0">';
     output += '  <h5>Tipologia Contributo: <span id="ctype_' + doc.id + '" class="ctype"></span></h5>';
-    output += '  <h5 style="margin-top:10px">Voci del Dizionario: <span id="dictionary_' + doc.id + '" class="dictionary"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Voci del Dizionario correlate: <span id="dictionary_' + doc.id + '" class="dictionary"></span></h5>';
     output += '  <h5 style="margin-top:10px">Speaker: <span id="contributors_' + doc.id + '" class="contributors"></span></h5>';
     output += '  <h5 style="margin-top:10px">Lingue: <span id="languages_' + doc.id + '" class="languages"></span></h5>';
     output += '</div>';
