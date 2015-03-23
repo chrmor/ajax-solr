@@ -14,8 +14,26 @@ function isOnScreen($elem)
 AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   start: 0,
 
+  sortByKey: function(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+  },
+
   beforeRequest: function () {
     $(this.target).html($('<img>').attr('src', 'gramsci-media/images/ajax-loader.gif'));
+  },
+
+  singleFacetLink: function(facet_field, facet_value) {
+    var link = '';
+    if (facet_value) {
+      link =
+        $('<a href="#"></a>')
+        .text(facet_value)
+        .click(this.facetHandler(facet_field, facet_value));
+    }
+    return link;
   },
 
   facetLinks: function (facet_field, facet_values) {
@@ -54,6 +72,9 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     $(this.target).append('<div class="panel-group" id="accordion"></div>');
 
     var accordion = $('#accordion');
+
+    this.manager.response.response.docs = this.sortByKey(this.manager.response.response.docs, 'title_s');
+
     for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
       var doc = this.manager.response.response.docs[i];
 
@@ -118,6 +139,20 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     }
 
     items = [];
+    items = this.singleFacetLink('type_s', doc.type_s);
+    $type = $('#type_' + doc.id);
+    $type.empty();
+    for (var j = 0, m = items.length; j < m; j++) {
+      var $span = $('<span></span>');
+      $span.append(items[j])
+
+      if (j != items.length-1)
+        $span.append(',&nbsp;')
+
+      $type.append($span);
+    }
+
+    items = [];
     items = items.concat(this.facetLinks('ctype_ss', doc.ctype_ss));
     $ctype = $('#ctype_' + doc.id);
     $ctype.empty();
@@ -131,8 +166,21 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       $ctype.append($span);
     }
 
-  }
+    items = [];
+    items = this.singleFacetLink('date_s', doc.date_s);
+    $date = $('#date_' + doc.id);
+    $date.empty();
+    for (var j = 0, m = items.length; j < m; j++) {
+      var $span = $('<span></span>');
+      $span.append(items[j])
 
+      if (j != items.length-1)
+        $span.append(',&nbsp;')
+
+      $date.append($span);
+    }
+
+  }
 
     var scrolled = false;
     $('#accordion').on('shown.bs.collapse', function (e) {
@@ -229,10 +277,12 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	output += '<hr/>';
 
     output += '<div class="col-xs-12" style="margin-left:0;padding-left:0">';
-    output += '  <h5>Tipologia Contributo: <span id="ctype_' + doc.id + '" class="ctype"></span></h5>';
+    output += '  <h5>Tipologia Media: <span id="ctype_' + doc.id + '" class="ctype"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Tipologia Contributo: <span id="type_' + doc.id + '" class="type"></span></h5>';
     output += '  <h5 style="margin-top:10px">Voci del Dizionario correlate: <span id="dictionary_' + doc.id + '" class="dictionary"></span></h5>';
     output += '  <h5 style="margin-top:10px">Speaker: <span id="contributors_' + doc.id + '" class="contributors"></span></h5>';
     output += '  <h5 style="margin-top:10px">Lingue: <span id="languages_' + doc.id + '" class="languages"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Data: <span id="date_' + doc.id + '" class="date"></span></h5>';
     output += '</div>';
 
     output += '</div></div>';
