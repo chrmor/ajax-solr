@@ -235,7 +235,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     output += '<div id="collapse' + doc.id + '"  data-docid="' + doc.id + '" class="panel-collapse collapse ' + openPanels + '">' +
                       '<div class="panel-body">';
 
-    output += '<p>' + doc.description_s + '</p>';
+    output += '<p>' + doc.description_t + '</p>';
 
     var generateDefaultMediaLink = false;
     if (doc.shownAt_s.indexOf('vimeo.com/') !== -1) {
@@ -279,8 +279,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     output += '<div class="col-xs-12" style="margin-left:0;padding-left:0">';
     output += '  <h5>Tipologia Media: <span id="ctype_' + doc.id + '" class="ctype"></span></h5>';
     output += '  <h5 style="margin-top:10px">Tipologia Contributo: <span id="type_' + doc.id + '" class="type"></span></h5>';
+    output += '  <h5 style="margin-top:10px">Relatori: <span id="contributors_' + doc.id + '" class="contributors"></span></h5>';
     output += '  <h5 style="margin-top:10px">Voci del Dizionario correlate: <span id="dictionary_' + doc.id + '" class="dictionary"></span></h5>';
-    output += '  <h5 style="margin-top:10px">Speaker: <span id="contributors_' + doc.id + '" class="contributors"></span></h5>';
     output += '  <h5 style="margin-top:10px">Lingue: <span id="languages_' + doc.id + '" class="languages"></span></h5>';
     output += '  <h5 style="margin-top:10px">Data: <span id="date_' + doc.id + '" class="date"></span></h5>';
     output += '</div>';
