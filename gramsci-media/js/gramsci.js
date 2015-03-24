@@ -22,7 +22,7 @@ var Manager;
     }));
 
     var fields = ['ctype_ss', 'type_s', 'subject_ss', 'contributor_ss', 'language_ss', 'date_s', 'description_t', 'dictionary_ss'];
-    var facetsNamesMapping = {'ctype_ss': 'Tipologia Media', 'type_s': 'Tipologia Contributo', 'subject_ss': 'Keyword', 'contributor_ss':'Relatori', 'language_ss':'Lingua', 'date_s':'Data', 'title_s': 'Titolo', 'description_t': 'Abstract', 'text': 'Abstract Text', 'dictionary_ss': 'Voce del dizionario' };
+    var facetsNamesMapping = {'ctype_ss': 'Tipologia media', 'type_s': 'Tipologia contributo', 'subject_ss': 'Keyword', 'contributor_ss':'Relatori', 'language_ss':'Lingua', 'date_s':'Data', 'title_s': 'Titolo', 'description_t': 'Abstract', 'text': 'Abstract text', 'dictionary_ss': 'Voce del dizionario' };
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.FacetsWidget({
