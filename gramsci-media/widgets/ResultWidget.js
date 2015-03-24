@@ -61,7 +61,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       self.manager.store.remove('fq');
       self.manager.store.addByValue('fq', facet_field + ':' + AjaxSolr.Parameter.escapeValue(facet_value));
       // We set start to 0 beacause we want to select the first page of results!!!
-	  self.start = 0;
+      self.start = 0;
       self.doRequest();
       return false;
     };
