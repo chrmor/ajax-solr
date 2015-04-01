@@ -37,7 +37,7 @@ AjaxSolr.SmallFacetsWidget = AjaxSolr.AbstractFacetWidget.extend({
         $('<a href="#" id="facet-' + facet + '" class="facets_item"></a>')
         .text(facetLabel)
         .click(this.clickHandler(facet))
-      ).append(' (' + objectedItems[i].count +  ')').append('<a target="_blank" class="small" href="http://it.wikipedia.org/wiki/' + facet + '"> <span class="glyphicon glyphicon-new-window"></span></a><br/>');
+      ).append(' (' + objectedItems[i].count +  ')').append('<br/>');
     }
   }
 });
