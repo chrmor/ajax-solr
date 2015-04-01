@@ -21,8 +21,8 @@ var Manager;
       }
     }));
 
-    var fields = ['mention_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss',  'mentions_type_ss', 'topic_ss'];
-    var facetsNamesMapping = {'mention_ss': 'Cita', 'cited_by_ss': 'Voce Dizionario', 'mentions_place_ss': 'Luoghi', 'mentions_book_ss': 'Libri', 'mentions_language_ss': 'Lingue', 'mentions_event_ss': 'Eventi', 'mentions_person_ss': 'Persone', 'annotated_in_ss': 'Annotato con Pundit', 'annotated_by_ss': 'Utenti di Pundit', 'topic_ss': 'Voce Gerratana', 'text': 'Testo della voce'};
+    var fields = ['mention_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss',  'mentions_type_ss', 'topic_ss', 'quaderno_s'];
+    var facetsNamesMapping = {'mention_ss': 'Cita', 'cited_by_ss': 'Voce Dizionario', 'mentions_place_ss': 'Luoghi', 'mentions_book_ss': 'Libri', 'mentions_language_ss': 'Lingue', 'mentions_event_ss': 'Eventi', 'mentions_person_ss': 'Persone', 'annotated_in_ss': 'Annotato con Pundit', 'annotated_by_ss': 'Utenti di Pundit', 'topic_ss': 'Voce Gerratana', 'text': 'Testo della voce', 'quaderno_s': 'Quaderno'};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -59,43 +59,43 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: [ 'mentions_person_ss'],
+      fields: [ 'mentions_person_ss', 'mentions_event_ss', 'mentions_book_ss', 'mentions_place_ss', 'mentions_language_ss'],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
-    Manager.addWidget(new AjaxSolr.AutocompleteWidget({
-      id: 'event_text',
-      target: '#event_search',
-      fields: [ 'mentions_event_ss'],
-      facetsNamesMapping: facetsNamesMapping,
-      submitOnlyIfTermSelect: true
-    }));
-    Manager.addWidget(new AjaxSolr.AutocompleteWidget({
-      id: 'book_text',
-      target: '#book_search',
-      fields: [ 'mentions_book_ss'],
-      facetsNamesMapping: facetsNamesMapping,
-      submitOnlyIfTermSelect: true
-    }));
-    Manager.addWidget(new AjaxSolr.AutocompleteWidget({
-      id: 'place_text',
-      target: '#place_search',
-      fields: [ 'mentions_place_ss'],
-      facetsNamesMapping: facetsNamesMapping,
-      submitOnlyIfTermSelect: true
-    }));
-    Manager.addWidget(new AjaxSolr.AutocompleteWidget({
-      id: 'language_text',
-      target: '#language_search',
-      fields: [ 'mentions_language_ss'],
-      facetsNamesMapping: facetsNamesMapping,
-      submitOnlyIfTermSelect: true
-    }));
+    // Manager.addWidget(new AjaxSolr.AutocompleteWidget({
+    //   id: 'event_text',
+    //   target: '#event_search',
+    //   fields: [ 'mentions_event_ss'],
+    //   facetsNamesMapping: facetsNamesMapping,
+    //   submitOnlyIfTermSelect: true
+    // }));
+    // Manager.addWidget(new AjaxSolr.AutocompleteWidget({
+//       id: 'book_text',
+//       target: '#book_search',
+//       fields: [ 'mentions_book_ss'],
+//       facetsNamesMapping: facetsNamesMapping,
+//       submitOnlyIfTermSelect: true
+//     }));
+    // Manager.addWidget(new AjaxSolr.AutocompleteWidget({
+//       id: 'place_text',
+//       target: '#place_search',
+//       fields: [ 'mentions_place_ss'],
+//       facetsNamesMapping: facetsNamesMapping,
+//       submitOnlyIfTermSelect: true
+//     }));
+    // Manager.addWidget(new AjaxSolr.AutocompleteWidget({
+//       id: 'language_text',
+//       target: '#language_search',
+//       fields: [ 'mentions_language_ss'],
+//       facetsNamesMapping: facetsNamesMapping,
+//       submitOnlyIfTermSelect: true
+//     }));
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['text', 'cited_by_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss'],
+      'facet.field': ['text', 'cited_by_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss', 'quaderno_s'],
       'facet.limit': 1000,
       'facet.mincount': 1,
       'sort': 'quaderno_f asc, nota_i asc',

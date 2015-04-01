@@ -13,17 +13,16 @@
 <body>
     <a name="top-page"></a>
 
-    <div class="jumbotron">
-      <div class="container">
-          <div class="col-md-8">
-            <div class="h5"><a href="http://gramsciproject.org">Gramsci Project</a></div>
-            <div class="h2"><em>Quaderni del carcere</em> by Antonio Gramsci.</div>
-          </div>
-          <div class="col-md-4">
-            <a class="brand" href="http://semedia.dibet.univpm.it/">
-                <img width="180" src="http://semedia.dibet.univpm.it/images/semedia/logo/semedia_logo_text.png"></img>
-            </a>
-          </div>
+    <div class="container-fluid">
+      <div class="col-sm-8 col-md-10" style="padding-left:0 !important">
+        <img src="gramsci-quaderni/images/quaderni_header_bn.jpg"/>
+      </div>
+      <div class="col-sm-4 col-md-2">
+  	  	<div style="float:right;padding:5px; text-align:right;">
+  	  		<div style="padding:5px;"><a href="http://gramsciproject.org"/>Gramsci Project Home</a></div>
+        		<div style="padding:5px;"><a href="http://futuroinricerca.miur.it/"><img class="hidden-xs" src="http://www.unimi.it/cataloghi/finanziamento_nazionali/futuroinricerca.gif"  width="70"/></a></div>
+    		</div>
+	    </div>
       </div>
     </div>
 
@@ -32,25 +31,33 @@
         <div class="container-fluid">
 
           <div class="col-md-3">
-            <p class="h3">The Gramsci Dictionary<br/><small>Select Notes related to one ore more Dictionary Entries</small></p>
-            <hr/>
+              <p class="h5">Selected Facets</p>
+              <ul id="selection"></ul>
+              <hr/>
+              <ul class="h5" id="search">
+              	<label class="control-label">Search in text:</label>
+                <input class="form-control" type="text" id="query" name="query" autocomplete="off">
+			  </ul>
             <ul class="h5" id="dic_search">
-                <label class="control-label">Search the Dictionary:</label>
+                <label class="control-label">Search in "Dizionario Gramsciano"/"Indice Gerratana":</label>
                 <input class="form-control" type="dic_text" id="dic_query" name="dic_query" autocomplete="off">
             </ul>
             <hr/>
 
-            <p class="h5">Indice Gerratana</p>
+            <p class="h5">Quaderni</p>
+            <div class="tagcloud panel-facet" id="quaderno_s"></div>
+            <hr/>
+
+            <p class="h5">Indice tematico Gerratana</p>
             <div class="tagcloud panel-facet" id="topic_ss"></div>
             <hr/>
 
-            <p class="h5">Browse the Dictionary:</p>
+            <p class="h5">Dizionario gramsciano:</p>
             <div class="tagcloud panel-facet" id="cited_by_ss"></div>
 
           </div>
 
           <div class="col-md-6">
-            <p class="h3">Gramsci's Notes</p>
             <hr/>
             <div id="result">
               <div id="navigation">
@@ -64,53 +71,43 @@
 
           <div class="col-md-3">
 
-            <p class="h5">Selected Facets</p>
-            <ul id="selection"></ul>
-            <hr/>
-
-            <p class="h5">Search in text:</p>
-            <ul id="search">
-              <input class="form-control" type="text" id="query" name="query" autocomplete="off">
-            </ul>
-            <hr/>
-
-            <p class="h3">Entities mentioned<small><br/>in your current selection (by type)</small></p>
-            <p class="h4">Persons</p>
+            <p class="h4"><small>Entities mentioned in your current selection (by type)</small></p>
             <ul id="dbp_search">
               <input class="form-control" type="dbp_text" id="dbp_query" name="dbp_query" autocomplete="off">
             </ul>
+            <p class="h5">Persons</p>
             <div class="tagcloud panel-facet" id="mentions_person_ss"></div>
             <hr/>
 
-            <p class="h4">Books</p>
-            <ul id="book_search">
+            <p class="h5">Books</p>
+     <!--       <ul id="book_search">
               <input class="form-control" type="book_text" id="book_query" name="book_query" autocomplete="off">
-            </ul>
+            </ul> -->
             <div class="tagcloud panel-facet" id="mentions_book_ss"></div>
             <hr/>
 
-            <p class="h4">Languages</p>
-            <ul id="language_search">
+            <p class="h5">Languages</p>
+     <!--       <ul id="language_search">
               <input class="form-control" type="language_text" id="language_query" name="language_query" autocomplete="off">
-            </ul>
+            </ul> -->
             <div class="tagcloud panel-facet" id="mentions_language_ss"></div>
             <hr/>
 
-            <p class="h4">Events</p>
-            <ul id="event_search">
+            <p class="h5">Events</p>
+     <!--       <ul id="event_search">
               <input class="form-control" type="event_text" id="event_query" name="event_query" autocomplete="off">
-            </ul>
+            </ul> -->
             <div class="tagcloud panel-facet" id="mentions_event_ss"></div>
             <hr/>
 
-            <p class="h4">Places</p>
-            <ul id="place_search">
+            <p class="h5">Places</p>
+      <!--      <ul id="place_search">
               <input class="form-control" type="place_text" id="place_query" name="place_query" autocomplete="off">
-            </ul>
+            </ul> -->
             <div class="tagcloud panel-facet" id="mentions_place_ss"></div>
             <hr/>
 
-            <p class="h4">Pundit annotations <small><br/>(experimental section)</small></p>
+            <p class="h5">Pundit annotations <small><br/>(experimental section)</small></p>
 
             <p class="h5">Notebooks <small> where selected notes are annotated</small></p>
             <div class="tagcloud panel-facet" id="annotated_in_ss"></div>
