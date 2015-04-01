@@ -32,11 +32,13 @@ var Manager;
       }));
     }
 
+    /*
     Manager.addWidget(new AjaxSolr.FacetsWidget({
         id: cited_by_ss,
         target: '#cited_by_ss' ,
         field: 'cited_by_ss'
     }));
+    */
     Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
       id: 'currentsearch',
       target: '#selection',
