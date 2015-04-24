@@ -22,11 +22,11 @@ AjaxSolr.SmallFacetsWidget = AjaxSolr.AbstractFacetWidget.extend({
 
     $(this.target).empty();
     var length;
-    if (objectedItems.length < 20) {
+//    if (objectedItems.length < 20) {
         length = objectedItems.length;
-    } else {
-        length = 20;
-    }
+//    } else {
+//        length = 20;
+//    }
     for (var i = 0, l = length; i < l; i++) {
       var facet;
       if (objectedItems[i] != undefined) {

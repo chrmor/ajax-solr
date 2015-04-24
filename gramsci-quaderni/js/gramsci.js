@@ -21,9 +21,9 @@ var Manager;
       }
     }));
 
-    var fields = ['topic_ss', 'quaderno_s'];
+    var fields = ['topic_ss', 'quaderno_s', 'nome_ss'];
 	var wikipedia_fields = ['mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss',  'mentions_type_ss' ];
-    var facetsNamesMapping = {'mentions_ss': 'Cita', 'cited_by_ss': 'Voce Dizionario', 'mentions_place_ss': 'Luoghi', 'mentions_book_ss': 'Libri', 'mentions_language_ss': 'Lingue', 'mentions_event_ss': 'Eventi', 'mentions_person_ss': 'Persone', 'annotated_in_ss': 'Annotato con Pundit', 'annotated_by_ss': 'Utenti di Pundit', 'topic_ss': 'Indice tematico', 'text': 'Testo della voce', 'quaderno_s': 'Quaderno'};
+    var facetsNamesMapping = {'nome_ss': 'Indice dei nomi', 'mentions_ss': 'Cita', 'cited_by_ss': 'Voce Dizionario', 'mentions_place_ss': 'Luoghi', 'mentions_book_ss': 'Libri', 'mentions_language_ss': 'Lingue', 'mentions_event_ss': 'Eventi', 'mentions_person_ss': 'Persone', 'annotated_in_ss': 'Annotato con Pundit', 'annotated_by_ss': 'Utenti di Pundit', 'topic_ss': 'Indice tematico', 'text': 'Testo della voce', 'quaderno_s': 'Quaderno'};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -66,9 +66,16 @@ var Manager;
       submitOnlyIfTermSelect: true
     }));
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
+      id: 'nomi_text',
+      target: '#nomi_search',
+      fields: [ 'nome_ss'],
+      facetsNamesMapping: facetsNamesMapping,
+      submitOnlyIfTermSelect: true
+    }));
+    Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: [ 'mentions_subject_ss', 'mentions_ss', 'mentions_person_ss', 'mentions_event_ss', 'mentions_book_ss', 'mentions_place_ss', 'mentions_language_ss', 'mentions_type_ss'],
+      fields: [ 'nome_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_person_ss', 'mentions_event_ss', 'mentions_book_ss', 'mentions_place_ss', 'mentions_language_ss', 'mentions_type_ss'],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -104,7 +111,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['text', 'cited_by_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss', 'quaderno_s'],
+      'facet.field': ['nome_ss', 'text', 'cited_by_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss', 'quaderno_s'],
       'facet.limit': 1000,
       'facet.mincount': 1,
       'sort': 'quaderno_f asc, nota_i asc',
