@@ -70,7 +70,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     docUrl = doc.uri_ss[0];
 	shownAt = doc.isShownAt_ss[0];
-    snippet += '<div class="small text-right"><a href="' + shownAt + '" target="_blank">See in <strong>GramsciProject.org</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&' + encodeURIComponent("http://conf.thepund.it/V2/clients/gramsci.js") + '"  target="_blank">Annotate with Pundit</a></divs>';
+    snippet += '<div class="small text-right"><a href="' + shownAt + '" target="_blank">See in <strong>GramsciProject.org</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&conf=' + encodeURIComponent("http://purl.org/pundit/conf/pundit-gramsci.js") + '"  target="_blank">Annotate with Pundit</a></divs>';
     var output = "";
     if (doc.label_ss != null) {
          output += '<div><h3><em>' + doc.label_ss[0] + '<em></h3>';
