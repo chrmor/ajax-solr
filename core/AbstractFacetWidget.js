@@ -29,7 +29,8 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
     AjaxSolr.extend(this, {
       start: 0,
       field: null,
-      multivalue: true
+      multivalue: true,
+      enableOrQuery: false
     }, attributes);
   },
 
@@ -118,7 +119,17 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   add: function (value) {
     return this.changeSelection(function () {
-      return this.manager.store.addByValue('fq', this.fq(value));
+      if (!this.enableOrQuery)
+        return this.manager.store.addByValue('fq', this.fq(value));
+      else {
+        var current = this.manager.store.get('fq')[0];
+        this.manager.store.remove('fq',0);
+        if (current.value != null) {
+           return this.manager.store.addByValue('fq', current.value + ' OR ' + this.fq(value));
+        }    else {
+           return this.manager.store.addByValue('fq', this.fq(value));
+        }
+      }
     });
   },
 

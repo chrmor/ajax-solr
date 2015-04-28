@@ -1,27 +1,27 @@
 (function ($) {
 
 AjaxSolr.FacetsWidget = AjaxSolr.AbstractFacetWidget.extend({
-    
+
     /**
      * Overrides the function in parent class
      * TO IMPLEMENT "ORd" facets (instead of ANDd)
 
-     
+
     add: function (value) {
       return this.changeSelection(function () {
-      
+
         var current = this.manager.store.get('fq')[0];
         this.manager.store.remove('fq',0);
         if (current.value != null) {
-           return this.manager.store.addByValue('fq', current.value + ' OR ' + this.fq(value));    
+           return this.manager.store.addByValue('fq', current.value + ' OR ' + this.fq(value));
         }    else {
-           return this.manager.store.addByValue('fq', this.fq(value));    
+           return this.manager.store.addByValue('fq', this.fq(value));
         }
-      
+
       });
     },
     */
-    
+
   afterRequest: function () {
     if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
       $(this.target).html('no items found in current selection');
@@ -50,7 +50,7 @@ AjaxSolr.FacetsWidget = AjaxSolr.AbstractFacetWidget.extend({
         .text(facetLabel)
         .click(this.clickHandler(facet))
       ).append(' (' + objectedItems[i].count +  ')').append('<br/>');
-      
+
     }
   }
 });

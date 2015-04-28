@@ -22,21 +22,25 @@ var Manager;
     }));
 
     var fields = ['topic_ss', 'quaderno_s'];
-	var wikipedia_fields = ['mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss',  'mentions_type_ss' ];
+	  var wikipedia_fields = ['mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss',  'mentions_type_ss' ];
     var facetsNamesMapping = {'mentions_ss': 'Cita', 'cited_by_ss': 'Voce Dizionario', 'mentions_place_ss': 'Luoghi', 'mentions_book_ss': 'Libri', 'mentions_language_ss': 'Lingue', 'mentions_event_ss': 'Eventi', 'mentions_person_ss': 'Persone', 'annotated_in_ss': 'Annotato con Pundit', 'annotated_by_ss': 'Utenti di Pundit', 'topic_ss': 'Indice tematico', 'text': 'Testo della voce', 'quaderno_s': 'Quaderno'};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
         id: fields[i],
         target: '#' + fields[i],
-        field: fields[i]
+        field: fields[i],
+        multivalue: false
+        //,
+        //enableOrQuery: true
       }));
     }
     for (var i = 0, l = wikipedia_fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.WikipediaSmallFacetsWidget({
         id: wikipedia_fields[i],
         target: '#' + wikipedia_fields[i],
-        field: wikipedia_fields[i]
+        field: wikipedia_fields[i],
+        enableOrQuery: true
       }));
     }
     /*

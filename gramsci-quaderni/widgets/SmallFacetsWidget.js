@@ -1,6 +1,11 @@
 (function ($) {
 
 AjaxSolr.SmallFacetsWidget = AjaxSolr.AbstractFacetWidget.extend({
+
+  constructor: function(attributes) {
+    AjaxSolr.SmallFacetsWidget.__super__.constructor.apply(this, arguments);
+  },
+
   afterRequest: function () {
     if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
       $(this.target).html('no items found in current selection');
@@ -30,7 +35,7 @@ AjaxSolr.SmallFacetsWidget = AjaxSolr.AbstractFacetWidget.extend({
     for (var i = 0, l = length; i < l; i++) {
       var facet;
       if (objectedItems[i] != undefined) {
-       facet = objectedItems[i].facet;   
+       facet = objectedItems[i].facet;
       }
       var facetLabel = facet;
       $(this.target).append(
