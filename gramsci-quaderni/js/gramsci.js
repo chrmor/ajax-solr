@@ -40,7 +40,7 @@ var Manager;
         id: wikipedia_fields[i],
         target: '#' + wikipedia_fields[i],
         field: wikipedia_fields[i],
-        enableOrQuery: true
+        // enableOrQuery: true
       }));
     }
     /*
