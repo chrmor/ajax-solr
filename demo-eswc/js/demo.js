@@ -22,8 +22,8 @@ var Manager;
     }));
 
     var fields = [];
-	  var wikipedia_fields = ['Settlement_ss','Politician_ss','OfficeHolder_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','President_ss','Person_ss'/*auto-facets-here*/];
-    var facetsNamesMapping = {'Settlement_ss':'Settlement','Politician_ss':'Politician','OfficeHolder_ss':'OfficeHolder','PopulatedPlace_ss':'PopulatedPlace','Place_ss':'Place','City_ss':'City','Agent_ss':'Agent','President_ss':'President','Person_ss':'Person'/*auto-facets-mapping-here*/};
+	  var wikipedia_fields = ['Settlement_ss','Country_ss','Politician_ss','TelevisionStation_ss','Thing_ss','OfficeHolder_ss','Agent_ss','Company_ss','President_ss','PoliticalParty_ss','Place_ss','PopulatedPlace_ss','City_ss','Broadcaster_ss','Person_ss','Organisation_ss'/*auto-facets-here*/];
+    var facetsNamesMapping = {'Settlement_ss':'Settlement','Country_ss':'Country','Politician_ss':'Politician','TelevisionStation_ss':'TelevisionStation','Thing_ss':'Thing','OfficeHolder_ss':'OfficeHolder','Agent_ss':'Agent','Company_ss':'Company','President_ss':'President','PoliticalParty_ss':'PoliticalParty','Place_ss':'Place','PopulatedPlace_ss':'PopulatedPlace','City_ss':'City','Broadcaster_ss':'Broadcaster','Person_ss':'Person','Organisation_ss':'Organisation'/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -65,7 +65,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Settlement_ss','Politician_ss','OfficeHolder_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','President_ss','Person_ss'/*auto-facets-autocomplete-here*/],
+      fields: ['Settlement_ss','Country_ss','Politician_ss','TelevisionStation_ss','Thing_ss','OfficeHolder_ss','Agent_ss','Company_ss','President_ss','PoliticalParty_ss','Place_ss','PopulatedPlace_ss','City_ss','Broadcaster_ss','Person_ss','Organisation_ss'/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -74,7 +74,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Settlement_ss','Politician_ss','OfficeHolder_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','President_ss','Person_ss'/*auto-facets-request-here*/],
+      'facet.field': ['Settlement_ss','Country_ss','Politician_ss','TelevisionStation_ss','Thing_ss','OfficeHolder_ss','Agent_ss','Company_ss','President_ss','PoliticalParty_ss','Place_ss','PopulatedPlace_ss','City_ss','Broadcaster_ss','Person_ss','Organisation_ss'/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       //'sort': 'quaderno_f asc, nota_i asc',

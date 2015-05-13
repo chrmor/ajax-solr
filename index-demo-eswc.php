@@ -18,7 +18,7 @@ $time_end = microtime_float();
 //echo "HTML file read in ".($time_end - $time_start)." milliseconds.<br/>";
 //get all _ss dinamic facets from Solr
 $time_start = microtime_float();
-$list_str = file_get_contents('http://localhost:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
+$list_str = file_get_contents('http://gramsciproject.org:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
 //Turn the list into an array...
 $facets = explode(",",$list_str);
 $time_end = microtime_float();
@@ -47,13 +47,13 @@ $time_end = microtime_float();
 
 //echo "Updating js confign file...<br/>";
 $time_start = microtime_float();
-//echo file_put_contents("../js/demo.js",$conf)." bytes written.<br/>";
+file_put_contents("demo-eswc/js/demo.js",$conf);
 $time_end = microtime_float();
 //echo "JS updated in ".($time_end - $time_start)." milliseconds.<br/>";
 
 //echo "Updating html index file...<br/>";
 $time_start = microtime_float();
-file_put_contents("index-demo-eswc.html",$html)." bytes written.<br/>";
+file_put_contents("index-demo-eswc.html",$html);
 $time_end = microtime_float();
 //echo "HTML updated in ".($time_end - $time_start)." milliseconds.<br/>";
 
