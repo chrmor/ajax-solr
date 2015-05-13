@@ -22,8 +22,8 @@ var Manager;
     }));
 
     var fields = [];
-	  var wikipedia_fields = ['Settlement_ss','PoliticalParty_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','Organisation_ss','Person_ss'/*auto-facets-here*/];
-    var facetsNamesMapping = {'Settlement_ss':'Settlement','PoliticalParty_ss':'PoliticalParty','PopulatedPlace_ss':'PopulatedPlace','Place_ss':'Place','City_ss':'City','Agent_ss':'Agent','Organisation_ss':'Organisation','Person_ss':'Person'/*auto-facets-mapping-here*/};
+	  var wikipedia_fields = ['Settlement_ss','Politician_ss','OfficeHolder_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','President_ss','Person_ss'/*auto-facets-here*/];
+    var facetsNamesMapping = {'Settlement_ss':'Settlement','Politician_ss':'Politician','OfficeHolder_ss':'OfficeHolder','PopulatedPlace_ss':'PopulatedPlace','Place_ss':'Place','City_ss':'City','Agent_ss':'Agent','President_ss':'President','Person_ss':'Person'/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -65,7 +65,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Settlement_ss','PoliticalParty_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','Organisation_ss','Person_ss'/*auto-facets-autocomplete-here*/],
+      fields: ['Settlement_ss','Politician_ss','OfficeHolder_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','President_ss','Person_ss'/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -74,7 +74,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Settlement_ss','PoliticalParty_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','Organisation_ss','Person_ss'/*auto-facets-request-here*/],
+      'facet.field': ['Settlement_ss','Politician_ss','OfficeHolder_ss','PopulatedPlace_ss','Place_ss','City_ss','Agent_ss','President_ss','Person_ss'/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       //'sort': 'quaderno_f asc, nota_i asc',
