@@ -21,8 +21,8 @@ var Manager;
       }
     }));
 
-    var fields = [];
-	  var wikipedia_fields = ['Source_s',/*auto-facets-here*/];
+    var fields = ['Source_s'];
+	  var wikipedia_fields = [/*auto-facets-here*/];
     var facetsNamesMapping = {'Source_s':'Source',/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
