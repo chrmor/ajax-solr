@@ -30,8 +30,7 @@ var Manager;
         id: fields[i],
         target: '#' + fields[i],
         field: fields[i],
-        multivalue: false
-        //,
+        multivalue: false,
         //enableOrQuery: true
       }));
     }
