@@ -189,12 +189,31 @@ font-size: 140%;
 }
 
 .ui-autocomplete {
-    z-index:10000 !important; 
+    z-index:10000 !important;
     width: 480px !important
 }
 
 .popover {
   font-size: 12px !important;
+}
+
+a,
+a:link,
+a:active,
+a:visited,
+.pagination > li > a,
+.pagination > li > a:link,
+.pagination > li > a:active,
+.pagination > li > a:visited,
+.pagination > li > span
+{
+  color: #945d42 !important;
+}
+
+a:hover,
+.pagination > li > a:hover,
+{
+  color: #714732 !important;
 }
 
 
