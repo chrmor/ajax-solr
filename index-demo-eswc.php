@@ -20,7 +20,7 @@ $time_end = microtime_float();
 $time_start = microtime_float();
 
 $list_str = file_get_contents('http://localhost:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
-//$list_str = file_get_contents('http://localhost:8080/solr-demo-eswc/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.field=tagType_ss');
+$pippo = file_get_contents('http://localhost:8080/solr-demo-eswc/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.field=tagType_ss');
 //echo PHP_VERSION . "<br/>";
 
 /*$rowList = split(']',split('\[',split('"tagType_ss":',split('"facet_fields":',$list_str)[1])[1])[1])[0];
