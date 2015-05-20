@@ -5,7 +5,7 @@ function microtime_float()
     list($usec, $sec) = explode(" ", microtime());
     return ((float)$usec + (float)$sec);
 }
-
+echo "here";
 //Get the content of the js config file...
 $time_start = microtime_float();
 $conf = file_get_contents('demo-eswc/js/conf_template.js');
