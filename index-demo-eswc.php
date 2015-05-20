@@ -25,9 +25,9 @@ $pippo = file_get_contents('http://localhost:8080/solr-demo-eswc/collection1/sel
 //echo $pippo;
 $p = split('"facet_fields":',$pippo);
 $p = split('"tagType_ss":',$p[1]);
-echo $p[1] . "<br/>";
+//echo $p[1] . "<br/>";
 $p = split(']',$p[1]);
-echo $p[0] . "<br/>";
+echo str_replace('[ ','',$p[0]);
 //echo split(']',split('\[',split('"tagType_ss":',split('"facet_fields":',$pippo)[1])[1])[1])[0];
 //$rowList = split(']',split('\[',split('"tagType_ss":',split('"facet_fields":',$pippo)[1])[1])[1])[0];
 
