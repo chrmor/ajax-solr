@@ -32,7 +32,10 @@ $list = str_replace(' ','',$list);
 $list = str_replace('"','',$list);
 $arr = split(',',$list);
 for ($j =0; $j < count($arr); $j++) {
-	echo $arr[$j];
+	if ($j&1) {
+		echo $arr[$j];
+	}
+	
 }
 
 
