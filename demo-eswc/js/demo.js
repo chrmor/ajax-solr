@@ -22,8 +22,8 @@ var Manager;
     }));
 
     var fields = ['Source_s'];
-	  var wikipedia_fields = ['PrimeMinister_ss','President_ss','OfficeHolder_ss','MilitaryConflict_ss','Event_ss','Thing_ss','Settlement_ss','PopulatedPlace_ss','Politician_ss','Place_ss','Person_ss','City_ss','Agent_ss'/*auto-facets-here*/];
-    var facetsNamesMapping = {'Source_s':'Source','PrimeMinister_ss':'PrimeMinister','President_ss':'President','OfficeHolder_ss':'OfficeHolder','MilitaryConflict_ss':'MilitaryConflict','Event_ss':'Event','Thing_ss':'Thing','Settlement_ss':'Settlement','PopulatedPlace_ss':'PopulatedPlace','Politician_ss':'Politician','Place_ss':'Place','Person_ss':'Person','City_ss':'City','Agent_ss':'Agent'/*auto-facets-mapping-here*/};
+	  var wikipedia_fields = [/*auto-facets-here*/];
+    var facetsNamesMapping = {'Source_s':'Source',/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -65,7 +65,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Source_s','PrimeMinister_ss','President_ss','OfficeHolder_ss','MilitaryConflict_ss','Event_ss','Thing_ss','Settlement_ss','PopulatedPlace_ss','Politician_ss','Place_ss','Person_ss','City_ss','Agent_ss'/*auto-facets-autocomplete-here*/],
+      fields: ['Source_s',/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -74,7 +74,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Source_s','PrimeMinister_ss','President_ss','OfficeHolder_ss','MilitaryConflict_ss','Event_ss','Thing_ss','Settlement_ss','PopulatedPlace_ss','Politician_ss','Place_ss','Person_ss','City_ss','Agent_ss'/*auto-facets-request-here*/],
+      'facet.field': ['Source_s',/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       //'sort': 'quaderno_f asc, nota_i asc',
