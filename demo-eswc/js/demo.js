@@ -21,9 +21,9 @@ var Manager;
       }
     }));
 
-    var fields = [];
+    var fields = ['Source_s'];
 	  var wikipedia_fields = [''/*auto-facets-here*/];
-    var facetsNamesMapping = {'':''/*auto-facets-mapping-here*/};
+    var facetsNamesMapping = {'Source_s':'Source','':''/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -65,7 +65,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: [''/*auto-facets-autocomplete-here*/],
+      fields: ['Source_s',''/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -74,7 +74,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': [''/*auto-facets-request-here*/],
+      'facet.field': ['Source_s',''/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       //'sort': 'quaderno_f asc, nota_i asc',

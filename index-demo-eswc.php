@@ -18,9 +18,16 @@ $time_end = microtime_float();
 //echo "HTML file read in ".($time_end - $time_start)." milliseconds.<br/>";
 //get all _ss dinamic facets from Solr
 $time_start = microtime_float();
-$list_str = file_get_contents('http://localhost:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
+
+//$list_str = file_get_contents('http://gramsciproject.org:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
+$list_str = file_get_contents('http://localhost:8080/solr-demo-eswc/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.field=tagType_ss');
+
+$list_str = str_replace(' ','',str_replace('"','',ereg_replace(",[0-9]","",split(']',split('\[',split('"tagType_ss":',split('"facet_fields":',$list_str)[1])[1])[1])[0])));
+
 //Turn the list into an array...
 $facets = explode(",",$list_str);
+$facets = array_reverse($facets);
+
 $time_end = microtime_float();
 //echo "Read facets from Solr: ".($time_end - $time_start)." milliseconds.<br/>";
 
@@ -28,6 +35,7 @@ $time_end = microtime_float();
 //for each facet in the array...
 $time_start = microtime_float();
 for ($x=0; $x < count($facets); $x++) {
+	
 	$separator = ",";
 	if ($x == count($facets)-1) {
 		$separator = "";
