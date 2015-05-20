@@ -24,10 +24,8 @@ $pippo = file_get_contents('http://localhost:8080/solr-demo-eswc/collection1/sel
 //echo PHP_VERSION . "<br/>";
 echo $pippo;
 $p = split('facet_fields',$pippo);
-if ($p === null) {
-	echo "NULL";
-}
-echo "<br/>";
+
+echo $p[0] . "<br/>";
 //echo split('"tagType_ss":',split('"facet_fields":',$pippo)[1])[1];
 echo "<br/>";
 //echo split(']',split('\[',split('"tagType_ss":',split('"facet_fields":',$pippo)[1])[1])[1])[0];
