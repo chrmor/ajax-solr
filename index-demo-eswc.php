@@ -27,7 +27,10 @@ $p = split('"facet_fields":',$pippo);
 $p = split('"tagType_ss":',$p[1]);
 //echo $p[1] . "<br/>";
 $p = split(']',$p[1]);
-echo str_replace('[','',$p[0]);
+$list = str_replace('[','',$p[0]);
+$list = str_replace(' ','',$list);
+$list = str_replace('"','',$list);
+echo $list;
 //echo split(']',split('\[',split('"tagType_ss":',split('"facet_fields":',$pippo)[1])[1])[1])[0];
 //$rowList = split(']',split('\[',split('"tagType_ss":',split('"facet_fields":',$pippo)[1])[1])[1])[0];
 
