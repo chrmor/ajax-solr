@@ -31,18 +31,20 @@ $list = str_replace('[','',$p[0]);
 $list = str_replace(' ','',$list);
 $list = str_replace('"','',$list);
 $arr = split(',',$list);
+$i = 0;
 for ($j =0; $j < count($arr); $j++) {
 	if ($j&1) {
 		
 	} else {
-		echo $arr[$j];
+		$facets[$i] = $arr[$j];
+		$i++;
 	}
 	
 }
 
 
 //Turn the list into an array...
-$facets = explode(",",$list_str);
+//$facets = explode(",",$list_str);
 $facets = array_reverse($facets);
 
 $time_end = microtime_float();
