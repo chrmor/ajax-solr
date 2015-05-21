@@ -20,7 +20,7 @@ $time_end = microtime_float();
 $time_start = microtime_float();
 
 //$list_str = file_get_contents('http://gramsciproject.org:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
-$list_str = file_get_contents('http://localhost:8080/solr-demo-eswc/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.field=tagType_ss');
+$list_str = file_get_contents('http://gramsciproject.org:8080/solr-demo-eswc/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.field=tagType_ss');
 //echo PHP_VERSION . "<br/>";
 //echo $pippo;
 $p = split('"facet_fields":',$list_str);
@@ -33,8 +33,8 @@ $list = str_replace('"','',$list);
 $arr = split(',',$list);
 $i = 0;
 for ($j =0; $j < count($arr); $j++) {
-	if ($j&1) {
-		
+	if ($j&1 || strpos($arr[$j],'Agent_ss') !== false) {
+		//Do nothing
 	} else {
 		$facets[$i] = $arr[$j];
 		$i++;

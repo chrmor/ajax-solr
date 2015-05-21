@@ -1,15 +1,77 @@
+
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ESWC Pundit Demo - How to</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../../shared/css/gramsci.css">
+  <link rel="stylesheet" type="text/css" href="../../shared/bootstrap-3.1.1-dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="../../css/awesome-bootstrap-checkbox.css">
+  <link rel="stylesheet" type="text/css" href="../css/gramsci-quaderni.css">
 </head>
+
 <body>
-	Get the bookmarklet:
-	<a href="javascript:(function(){
-                var h = document.getElementsByTagName('head')[0],
-                d = document.createElement('script');
-                d.type = 'text/javascript';
-                d.src = 'http://eswcdemo.gramsciproject.org/demo-eswc/bm/InitBookmarklet.js?'+Math.random()*4;
-                d.async = false;
-                h.appendChild(d);
-            })()">Pundit ESWC demo</a>
-</body>	
+    <a name="top-page"></a>
+    <div class="container-fluid">
+      <div>
+        <h3>Pundit demo @ the ESWC 2015		<small>A simple semantic crowdsourcing experiment</small></h3>
+		<h2>How to contribute with yuor annotations</h2>
+		<h4><a href="../../index-demo-eswc.php">Back to faceted search</a></h4>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+		<div class="panel-body">
+		<h4>Get the Pundit bookmarklet</h4>
+		Simply <strong>drag the following link</strong> to your browser bookmark bar.<br/><br/>
+		<span class="bm-draggable">
+		<a title="Bookmark this link" href="javascript:(function(){
+	                var h = document.getElementsByTagName('head')[0],
+	                d = document.createElement('script');
+	                d.type = 'text/javascript';
+	                d.src = 'http://eswcdemo.gramsciproject.org/demo-eswc/bm/InitBookmarklet.js?'+Math.random()*4;
+	                d.async = false;
+	                h.appendChild(d);
+	            })()"><button class="btn btn-default">Pundit ESWC demo</button></a>
+		</span>
+		<hr/>
+		<h4>Find something to annotate</h4>		
+		<p>In this demo we encourage you to <strong>annotate web pages (blogs, news, etc.)</strong> in the domain of <strong>computer science</strong> and science in general.</p>
+		<p>You could start from one of the suggested web sites:</p>
+
+			<li><a href="http://www.sciencedaily.com/">http://www.sciencedaily.com/</a></li>
+			<li><a href="http://www.theguardian.com/">http://www.theguardian.com/</a></li>
+			<li><a href="http://www.bbc.com/news/">http://www.bbc.com/news/</a></li>
+			<li><a href="http://europeandaily.com/">http://europeandaily.com/</a></li>
+			<li><a href="http://www.neurope.eu/">http://www.neurope.eu/</a></li>
+			
+		<br/>
+		<hr/>	
+		<h4>Load Pundit and annotate</h4>		
+		<p>Once you find something interesting and you are ready to annotate click the "Pundit ESWC demo" button in your browser bookmark bar.</p>
+		<p>While we the bookmarklet allows you to annotate virtually any web page, it is still under development and it might have technical problems loading on "complex" web pages. You could notice wrong styles or problems in the UI. If the bookmarklet is not loding properly, try to refresh the page in your browser and wait for the all page to be loaded, then give it a second try. </p>
+		<p>Whatch these short videos to see how to use Pundit.</p>
+		<h5>Video 1: Marking relevant topics or entities in the text with the help of DataTXT.</h5>
+		<h5>Video 2: Compose free triples or use the simple annotation templates.</h5>
+		</div>
+
+
+	</div>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+    <script src="gramsci-media/css/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-61479510-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
 </html>

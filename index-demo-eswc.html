@@ -17,9 +17,10 @@
     <div class="container-fluid">
       <div>
         <h1>Pundit demo @ the ESWC 2015		<small>A simple semantic crowdsourcing experiment</small></h1>
-		<h4>The <strong>faceted search</strong> you see in this page is <strong>built on the fly by users semantically annotationing </strong> web documents.</h4>
-		<h4><a href="demo-eswc/bm/">Learn how to contribute with yuor annotations.</a></h4>
-		<div style="float:right">powered by<br/><a href="http://thepund.it"><img src="demo-eswc/images/Pundit-Logo.png" width="100"/></a></div>
+			<div style="float:right"><a href="http://semedia.univpm.it"><img src="demo-eswc/images/semedia_logo.png" width="50"/><a href="http://netseven.it"><img src="demo-eswc/images/logonetseven3.png" width="100"/></a><br/>powered by <a href="http://thepund.it"><img src="demo-eswc/images/Pundit-Logo.png" width="100"/></a></div>
+		<h3>How it works? </h3>
+		<h4>This <strong>faceted browser</strong> is continuously updated extracting data from users public semantic annotations on web news and articles.</h4>
+		<h4><a href="demo-eswc/bm/index.html">Learn how to contribute with yuor annotations.</a></h4>
       </div>
     </div>
 	
@@ -29,31 +30,20 @@
         <div class="container-fluid">
 
           <div class="col-md-3">
-              <p class="h5">Selected Facets</p>
-              <ul id="selection"></ul>
-              <hr/>
-              <ul class="h5" id="search">
-              	<label class="control-label">Search in text:</label>
-                <input class="form-control" type="text" id="query" name="query" autocomplete="off">
-			  </ul>
-			  
-			  <p class="h5">Source (web sites)</p>
-			  <div class="tagcloud panel-facet" id="Source_s"></div>
-			  <hr/>
-		             <p class="h4">Annotated resources</p>
+		             <p class="h5">Search by annotated entities</p>
 		             <ul id="dbp_search">
 		               <input class="form-control" type="dbp_text" id="dbp_query" name="dbp_query" autocomplete="off">
 		             </ul>
 
 					 <!--Auto-facets-here-->
-<p class="h5">Agent</p>
-<div class="tagcloud panel-facet" id="Agent_ss"></div>
+<p class="h5">Thing</p>
+<div class="tagcloud panel-facet" id="Thing_ss"></div>
 <hr/>
 <p class="h5">Organisation</p>
 <div class="tagcloud panel-facet" id="Organisation_ss"></div>
 <hr/>
-<p class="h5">Thing</p>
-<div class="tagcloud panel-facet" id="Thing_ss"></div>
+<p class="h5">Place</p>
+<div class="tagcloud panel-facet" id="Place_ss"></div>
 <hr/>
 <p class="h5">EducationalInstitution</p>
 <div class="tagcloud panel-facet" id="EducationalInstitution_ss"></div>
@@ -61,28 +51,61 @@
 <p class="h5">University</p>
 <div class="tagcloud panel-facet" id="University_ss"></div>
 <hr/>
+<p class="h5">Work</p>
+<div class="tagcloud panel-facet" id="Work_ss"></div>
+<hr/>
+<p class="h5">Country</p>
+<div class="tagcloud panel-facet" id="Country_ss"></div>
+<hr/>
 <p class="h5">Disease</p>
 <div class="tagcloud panel-facet" id="Disease_ss"></div>
+<hr/>
+<p class="h5">PopulatedPlace</p>
+<div class="tagcloud panel-facet" id="PopulatedPlace_ss"></div>
 <hr/>
 <p class="h5">Company</p>
 <div class="tagcloud panel-facet" id="Company_ss"></div>
 <hr/>
+<p class="h5">Person</p>
+<div class="tagcloud panel-facet" id="Person_ss"></div>
+<hr/>
+<p class="h5">PeriodicalLiterature</p>
+<div class="tagcloud panel-facet" id="PeriodicalLiterature_ss"></div>
+<hr/>
+<p class="h5">WrittenWork</p>
+<div class="tagcloud panel-facet" id="WrittenWork_ss"></div>
+<hr/>
+<p class="h5">Film</p>
+<div class="tagcloud panel-facet" id="Film_ss"></div>
+<hr/>
 <p class="h5">GovernmentAgency</p>
 <div class="tagcloud panel-facet" id="GovernmentAgency_ss"></div>
+<hr/>
+<p class="h5">Magazine</p>
+<div class="tagcloud panel-facet" id="Magazine_ss"></div>
+<hr/>
+<p class="h5">MusicGenre</p>
+<div class="tagcloud panel-facet" id="MusicGenre_ss"></div>
+<hr/>
+<p class="h5">Newspaper</p>
+<div class="tagcloud panel-facet" id="Newspaper_ss"></div>
 <hr/>
 <p class="h5">Non-ProfitOrganisation</p>
 <div class="tagcloud panel-facet" id="Non-ProfitOrganisation_ss"></div>
 <hr/>
-<p class="h5">Place</p>
-<div class="tagcloud panel-facet" id="Place_ss"></div>
+<p class="h5">ProgrammingLanguage</p>
+<div class="tagcloud panel-facet" id="ProgrammingLanguage_ss"></div>
 <hr/>
-<p class="h5">Work</p>
-<div class="tagcloud panel-facet" id="Work_ss"></div>
+<p class="h5">Software</p>
+<div class="tagcloud panel-facet" id="Software_ss"></div>
+<hr/>
+<p class="h5">Website</p>
+<div class="tagcloud panel-facet" id="Website_ss"></div>
 <hr/>
 
           </div>
 
-          <div class="col-md-9">
+          <div class="col-md-6">
             <hr/>
             <div id="result">
               <div id="navigation">
@@ -93,6 +116,17 @@
               <div id="docs"></div>
             </div>
           </div>
+              <p class="h5">Selected Facets</p>
+              <ul id="selection"></ul>
+              <hr/>
+              <ul class="h5" id="search">
+              	<label class="control-label">Text search:</label>
+                <input class="form-control" type="text" id="query" name="query" autocomplete="off">
+			  </ul>
+		  <div class="col-md-3">
+			  <p class="h5">Source (web sites)</p>
+			  <div class="tagcloud panel-facet" id="Source_s"></div>
+		  </div>
 
         </div>
       </div>

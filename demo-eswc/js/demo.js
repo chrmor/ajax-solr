@@ -22,8 +22,8 @@ var Manager;
     }));
 
     var fields = ['Source_s'];
-	  var wikipedia_fields = ['Work_ss','Place_ss','Non-ProfitOrganisation_ss','GovernmentAgency_ss','Company_ss','Disease_ss','University_ss','EducationalInstitution_ss','Thing_ss','Organisation_ss','Agent_ss'/*auto-facets-here*/];
-    var facetsNamesMapping = {'Source_s':'Source','Work_ss':'Work','Place_ss':'Place','Non-ProfitOrganisation_ss':'Non-ProfitOrganisation','GovernmentAgency_ss':'GovernmentAgency','Company_ss':'Company','Disease_ss':'Disease','University_ss':'University','EducationalInstitution_ss':'EducationalInstitution','Thing_ss':'Thing','Organisation_ss':'Organisation','Agent_ss':'Agent'/*auto-facets-mapping-here*/};
+	  var wikipedia_fields = ['Website_ss','Software_ss','ProgrammingLanguage_ss','Non-ProfitOrganisation_ss','Newspaper_ss','MusicGenre_ss','Magazine_ss','GovernmentAgency_ss','Film_ss','WrittenWork_ss','PeriodicalLiterature_ss','Person_ss','Company_ss','PopulatedPlace_ss','Disease_ss','Country_ss','Work_ss','University_ss','EducationalInstitution_ss','Place_ss','Organisation_ss','Thing_ss'/*auto-facets-here*/];
+    var facetsNamesMapping = {'Source_s':'Source','Website_ss':'Website','Software_ss':'Software','ProgrammingLanguage_ss':'ProgrammingLanguage','Non-ProfitOrganisation_ss':'Non-ProfitOrganisation','Newspaper_ss':'Newspaper','MusicGenre_ss':'MusicGenre','Magazine_ss':'Magazine','GovernmentAgency_ss':'GovernmentAgency','Film_ss':'Film','WrittenWork_ss':'WrittenWork','PeriodicalLiterature_ss':'PeriodicalLiterature','Person_ss':'Person','Company_ss':'Company','PopulatedPlace_ss':'PopulatedPlace','Disease_ss':'Disease','Country_ss':'Country','Work_ss':'Work','University_ss':'University','EducationalInstitution_ss':'EducationalInstitution','Place_ss':'Place','Organisation_ss':'Organisation','Thing_ss':'Thing'/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -65,7 +65,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Source_s','Work_ss','Place_ss','Non-ProfitOrganisation_ss','GovernmentAgency_ss','Company_ss','Disease_ss','University_ss','EducationalInstitution_ss','Thing_ss','Organisation_ss','Agent_ss'/*auto-facets-autocomplete-here*/],
+      fields: ['Source_s','Website_ss','Software_ss','ProgrammingLanguage_ss','Non-ProfitOrganisation_ss','Newspaper_ss','MusicGenre_ss','Magazine_ss','GovernmentAgency_ss','Film_ss','WrittenWork_ss','PeriodicalLiterature_ss','Person_ss','Company_ss','PopulatedPlace_ss','Disease_ss','Country_ss','Work_ss','University_ss','EducationalInstitution_ss','Place_ss','Organisation_ss','Thing_ss'/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -74,7 +74,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Source_s','Work_ss','Place_ss','Non-ProfitOrganisation_ss','GovernmentAgency_ss','Company_ss','Disease_ss','University_ss','EducationalInstitution_ss','Thing_ss','Organisation_ss','Agent_ss'/*auto-facets-request-here*/],
+      'facet.field': ['Source_s','Website_ss','Software_ss','ProgrammingLanguage_ss','Non-ProfitOrganisation_ss','Newspaper_ss','MusicGenre_ss','Magazine_ss','GovernmentAgency_ss','Film_ss','WrittenWork_ss','PeriodicalLiterature_ss','Person_ss','Company_ss','PopulatedPlace_ss','Disease_ss','Country_ss','Work_ss','University_ss','EducationalInstitution_ss','Place_ss','Organisation_ss','Thing_ss'/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       //'sort': 'quaderno_f asc, nota_i asc',
