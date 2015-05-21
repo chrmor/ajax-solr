@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+<body>
+	Get the bookmarklet:
+	<a href="javascript:(function(){
+                var h = document.getElementsByTagName('head')[0],
+                d = document.createElement('script');
+                d.type = 'text/javascript';
+                d.src = 'http://eswcdemo.gramsciproject.org/demo-eswc/bm/InitBookmarklet.js?'+Math.random()*4;
+                d.async = false;
+                h.appendChild(d);
+            })()">Pundit ESWC demo</a>
+</body>	
+</html>

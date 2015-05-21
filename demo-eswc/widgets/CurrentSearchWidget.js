@@ -38,7 +38,7 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
       }
     }
     else {
-      $(this.target).html('<li>Stai visualizzando tutti i documenti. Per restringere la ricerca puoi usare le selezioni qui sotto.</li>');
+      $(this.target).html('<li>Viewing all documents. </li>');
     }
   },
 

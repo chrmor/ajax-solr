@@ -62,7 +62,7 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     }
 
     if (links.length > 0) {
-      links.unshift($('<a href="#"></a>').text('Rimuovi tutti i filtri').click(function () {
+      links.unshift($('<a href="#"></a>').text('Remove all filters').click(function () {
         self.manager.store.get('q').val('*:*');
         self.manager.store.remove('fq');
         self.doRequest();
@@ -73,13 +73,13 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     if (links.length) {
       var $target = $(this.target);
       $target.empty();
-      $(this.target).html('<li style="margin-bottom:10px">Le ricerche testuali e i menu di navigazione sono ristretti dai filtri applicati. Per tornare all’elenco completo delle voci rimuovere tutti i filtri.</li>');
+      //$(this.target).html('Applied filters');
       for (var i = 0, l = links.length; i < l; i++) {
         $target.append($('<li></li>').append(links[i]));
       }
     }
     else {
-      $(this.target).html('<li>Stai visualizzando tutti i documenti. <br/>Puoi restringere la ricerca selezionando i filtri qui sotto.</li>');
+      $(this.target).html('Viewing all documents');
     }
   },
 
