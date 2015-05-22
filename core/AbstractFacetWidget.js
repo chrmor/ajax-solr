@@ -1,3 +1,6 @@
+//XXX od not use a global variable!
+enableOr = false;
+
 (function (callback) {
   if (typeof define === 'function' && define.amd) {
     define(['core/AbstractWidget', 'core/Parameter'], callback);
@@ -119,15 +122,20 @@ AjaxSolr.AbstractFacetWidget = AjaxSolr.AbstractWidget.extend(
    */
   add: function (value) {
     return this.changeSelection(function () {
-      if (!this.enableOrQuery)
+	  //XXX od not use a global variable!
+      if (!enableOr)
         return this.manager.store.addByValue('fq', this.fq(value));
       else {
         var current = this.manager.store.get('fq')[0];
-        this.manager.store.remove('fq',0);
-        if (current.value != null) {
+		this.manager.store.remove('fq',0);
+		//If this is the first OR filter applyed
+		if (current.value==null) {
+			return this.manager.store.addByValue('fq', '*:* OR ' + this.fq(value));
+		} else if (current.value != null) {
+			if (current.value.indexOf("*:* OR ") >= 0) {
+				current.value = current.value.replace("*:* OR ","");
+			}
            return this.manager.store.addByValue('fq', current.value + ' OR ' + this.fq(value));
-        }    else {
-           return this.manager.store.addByValue('fq', this.fq(value));
         }
       }
     });

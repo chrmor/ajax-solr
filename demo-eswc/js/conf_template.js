@@ -1,3 +1,9 @@
+function toggleOrQuery() {
+  if (enableOr == true) enableOr = false;
+  else enableOr = true;
+  if (enableOr==true) alert('OR-ed filters are now ENABLED.'); else alert('OR-ed filters are now DISABLED.');
+}
+
 var Manager;
 
 (function ($) {
@@ -21,18 +27,16 @@ var Manager;
       }
     }));
 
-    var fields = ['Source_s'];
+    var fields = ['Source_s','Thing_ss'];
 	  var wikipedia_fields = [/*auto-facets-here*/];
-    var facetsNamesMapping = {'Source_s':'Source',/*auto-facets-mapping-here*/};
+    var facetsNamesMapping = {'Source_s':'Source','Thing_ss':'Unclassified entity',/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
         id: fields[i],
         target: '#' + fields[i],
         field: fields[i],
-        multivalue: false
-        //,
-        //enableOrQuery: true
+        enableOrQuery: false
       }));
     }
     for (var i = 0, l = wikipedia_fields.length; i < l; i++) {
@@ -40,7 +44,7 @@ var Manager;
         id: wikipedia_fields[i],
         target: '#' + wikipedia_fields[i],
         field: wikipedia_fields[i],
-        // enableOrQuery: true
+		enableOrQuery: false
       }));
     }
     /*
@@ -65,7 +69,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Source_s',/*auto-facets-autocomplete-here*/],
+      fields: ['Source_s','Thing_ss',/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -74,10 +78,10 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Source_s',/*auto-facets-request-here*/],
+      'facet.field': ['Source_s','Thing_ss',/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
-      //'sort': 'quaderno_f asc, nota_i asc',
+      //'sort': 'id',
       'json.nl': 'map'
     };
     for (var name in params) {

@@ -64,7 +64,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	//shownAt = doc.isShownAt_ss[0];
     snippet += '<div class="small text-right"><a href="' + doc.id + '" target="_blank">See annotated page</strong></a></div>';
     var output = "";
-    if (doc.title_s != null) {
+    if (doc.title_s != null && doc.title_s!='') {
          output += '<div><h4><em>' + doc.title_s + '<em><br/><small>  from <strong>' + doc.Source_s + '</strong></small></h4>';
     } else {
         output += '<div><h4>Unnamed element<small><br/>from <strong>' + doc.Source_s + '</strong></small></h4>';

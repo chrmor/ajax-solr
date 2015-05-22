@@ -21,6 +21,7 @@
 		<h3>How it works? </h3>
 		<h4>This <strong>faceted browser</strong> is continuously updated extracting data from users public semantic annotations on web news and articles.</h4>
 		<h4><a href="demo-eswc/bm/index.html">Learn how to contribute with yuor annotations.</a></h4>
+		<div style="float:right"><a href="#" onclick="toggleOrQuery()">Toggle OR-ed filter</a> (Alfa)</div>
       </div>
     </div>
 	
@@ -50,6 +51,7 @@
               <div id="docs"></div>
             </div>
           </div>
+		  <div class="col-md-3">
               <p class="h5">Selected Facets</p>
               <ul id="selection"></ul>
               <hr/>
@@ -57,11 +59,13 @@
               	<label class="control-label">Text search:</label>
                 <input class="form-control" type="text" id="query" name="query" autocomplete="off">
 			  </ul>
-		  <div class="col-md-3">
+			  <hr/>
+			  <p class="h5">Unclassified entities</p>
+			  <div class="tagcloud panel-facet" id="Thing_ss"></div>
+			  <hr/>
 			  <p class="h5">Source (web sites)</p>
 			  <div class="tagcloud panel-facet" id="Source_s"></div>
 		  </div>
-
         </div>
       </div>
     </div>

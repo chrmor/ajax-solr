@@ -38,17 +38,22 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
 
         if (fq[i].match(/\sOR\s/) != null) {
           var cf = '';
-          var facetsComponents = fq[i].split(' OR ');
+          
+		  
+		  var facetsComponents = fq[i].split(' OR ');
           for (var t = 0; t < facetsComponents.length; t++) {
             var f = facetsComponents[t];
             var matchedData = f.match(/(.+):(.+)/);
             if (matchedData.length >= 2) {
-              if (cf == '')
-                cf += self.facetsNamesMapping[matchedData[1]] + ' : ';
-              else if (!cf.endsWith('OR '))
-                cf += ' OR ';
-
-              cf += matchedData[2];
+//              if (cf == '')
+				if (matchedData[1]=='*')
+					cf += '* : ';
+				else 
+					cf += self.facetsNamesMapping[matchedData[1]] + ' : ';
+//              else if (!cf.endsWith('OR '))
+				cf += matchedData[2];
+				if (t < facetsComponents.length -1) 
+					cf += ' OR ';
             }
           }
 

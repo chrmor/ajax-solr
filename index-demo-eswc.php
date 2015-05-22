@@ -33,7 +33,7 @@ $list = str_replace('"','',$list);
 $arr = split(',',$list);
 $i = 0;
 for ($j =0; $j < count($arr); $j++) {
-	if ($j&1 || strpos($arr[$j],'Agent_ss') !== false) {
+	if ($j&1 || strpos($arr[$j],'Agent_ss') !== false || strpos($arr[$j],'Thing_ss') !== false) {
 		//Do nothing
 	} else {
 		$facets[$i] = $arr[$j];
@@ -71,6 +71,7 @@ for ($x=0; $x < count($facets); $x++) {
 }
 $time_end = microtime_float();
 //echo "String replaced in ".($time_end - $time_start)." milliseconds.<br/>";
+
 
 //echo "Updating js confign file...<br/>";
 $time_start = microtime_float();
