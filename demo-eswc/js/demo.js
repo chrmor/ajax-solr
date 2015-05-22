@@ -28,8 +28,8 @@ var Manager;
     }));
 
     var fields = ['Source_s','Thing_ss'];
-	  var wikipedia_fields = ['Website_ss','TradeUnion_ss','Software_ss','ProgrammingLanguage_ss','PoliticalParty_ss','Newspaper_ss','MusicalArtist_ss','MusicGenre_ss','MilitaryUnit_ss','MilitaryConflict_ss','Magazine_ss','Film_ss','Event_ss','EthnicGroup_ss','Band_ss','Award_ss','Artist_ss','AdministrativeRegion_ss','WrittenWork_ss','WorldHeritageSite_ss','PeriodicalLiterature_ss','Non-ProfitOrganisation_ss','City_ss','GovernmentAgency_ss','President_ss','Politician_ss','OfficeHolder_ss','Company_ss','Settlement_ss','Work_ss','University_ss','EducationalInstitution_ss','Disease_ss','Person_ss','Country_ss','PopulatedPlace_ss','Place_ss','Organisation_ss'/*auto-facets-here*/];
-    var facetsNamesMapping = {'Source_s':'Source','Thing_ss':'Unclassified entity','Website_ss':'Website','TradeUnion_ss':'TradeUnion','Software_ss':'Software','ProgrammingLanguage_ss':'ProgrammingLanguage','PoliticalParty_ss':'PoliticalParty','Newspaper_ss':'Newspaper','MusicalArtist_ss':'MusicalArtist','MusicGenre_ss':'MusicGenre','MilitaryUnit_ss':'MilitaryUnit','MilitaryConflict_ss':'MilitaryConflict','Magazine_ss':'Magazine','Film_ss':'Film','Event_ss':'Event','EthnicGroup_ss':'EthnicGroup','Band_ss':'Band','Award_ss':'Award','Artist_ss':'Artist','AdministrativeRegion_ss':'AdministrativeRegion','WrittenWork_ss':'WrittenWork','WorldHeritageSite_ss':'WorldHeritageSite','PeriodicalLiterature_ss':'PeriodicalLiterature','Non-ProfitOrganisation_ss':'Non-ProfitOrganisation','City_ss':'City','GovernmentAgency_ss':'GovernmentAgency','President_ss':'President','Politician_ss':'Politician','OfficeHolder_ss':'OfficeHolder','Company_ss':'Company','Settlement_ss':'Settlement','Work_ss':'Work','University_ss':'University','EducationalInstitution_ss':'EducationalInstitution','Disease_ss':'Disease','Person_ss':'Person','Country_ss':'Country','PopulatedPlace_ss':'PopulatedPlace','Place_ss':'Place','Organisation_ss':'Organisation'/*auto-facets-mapping-here*/};
+	  var wikipedia_fields = [''/*auto-facets-here*/];
+    var facetsNamesMapping = {'Source_s':'Source','Thing_ss':'Unclassified entity','':''/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -69,7 +69,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Source_s','Thing_ss','Website_ss','TradeUnion_ss','Software_ss','ProgrammingLanguage_ss','PoliticalParty_ss','Newspaper_ss','MusicalArtist_ss','MusicGenre_ss','MilitaryUnit_ss','MilitaryConflict_ss','Magazine_ss','Film_ss','Event_ss','EthnicGroup_ss','Band_ss','Award_ss','Artist_ss','AdministrativeRegion_ss','WrittenWork_ss','WorldHeritageSite_ss','PeriodicalLiterature_ss','Non-ProfitOrganisation_ss','City_ss','GovernmentAgency_ss','President_ss','Politician_ss','OfficeHolder_ss','Company_ss','Settlement_ss','Work_ss','University_ss','EducationalInstitution_ss','Disease_ss','Person_ss','Country_ss','PopulatedPlace_ss','Place_ss','Organisation_ss'/*auto-facets-autocomplete-here*/],
+      fields: ['Source_s','Thing_ss',''/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -78,7 +78,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Source_s','Thing_ss','Website_ss','TradeUnion_ss','Software_ss','ProgrammingLanguage_ss','PoliticalParty_ss','Newspaper_ss','MusicalArtist_ss','MusicGenre_ss','MilitaryUnit_ss','MilitaryConflict_ss','Magazine_ss','Film_ss','Event_ss','EthnicGroup_ss','Band_ss','Award_ss','Artist_ss','AdministrativeRegion_ss','WrittenWork_ss','WorldHeritageSite_ss','PeriodicalLiterature_ss','Non-ProfitOrganisation_ss','City_ss','GovernmentAgency_ss','President_ss','Politician_ss','OfficeHolder_ss','Company_ss','Settlement_ss','Work_ss','University_ss','EducationalInstitution_ss','Disease_ss','Person_ss','Country_ss','PopulatedPlace_ss','Place_ss','Organisation_ss'/*auto-facets-request-here*/],
+      'facet.field': ['Source_s','Thing_ss',''/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       //'sort': 'id',
