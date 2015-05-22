@@ -81,7 +81,7 @@ var Manager;
       'facet.field': ['Source_s','Thing_ss',/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
-      //'sort': 'id',
+      'sort': 'id desc',
       'json.nl': 'map'
     };
     for (var name in params) {
