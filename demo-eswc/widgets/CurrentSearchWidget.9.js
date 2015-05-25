@@ -35,8 +35,14 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
       }
       else {
         //links.push($('<a href="#"></a>').text('[x] ' + fq[i].replace("_ss","").replace("_"," ")).click(self.removeFacet(fq[i])));
-
-        if (fq[i].match(/\sOR\s/) != null) {
+		if (fq[i].substring(0, 11) === "Notebook_ss") {
+			var value = fq[i];
+			var facetName = value.substring(0, 11);
+			var json = value.substring(13, value.length - 1);
+			jo = JSON.parse(json.replace(/\\/g, ''));
+			links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + jo.name + " (by " + jo.author + ")").click(self.removeFacet(fq[i])));
+		}
+        else if (fq[i].match(/\sOR\s/) != null) {
           var cf = '';
           
 		  

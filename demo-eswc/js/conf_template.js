@@ -78,7 +78,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Notebook_ss','Source_s','Thing_ss',/*auto-facets-autocomplete-here*/],
+      fields: ['Source_s','Thing_ss',/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
