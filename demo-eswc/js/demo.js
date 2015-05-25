@@ -29,8 +29,8 @@ var Manager;
 
     var fields = ['Source_s','Thing_ss'];
 	var dataFields = ['Notebook_ss'];
-	  var wikipedia_fields = [''/*auto-facets-here*/];
-    var facetsNamesMapping = {'Source_s':'Source','Thing_ss':'Unclassified entity','':''/*auto-facets-mapping-here*/};
+	  var wikipedia_fields = ['TradeUnion_ss','ProgrammingLanguage_ss','NaturalPlace_ss','MusicGenre_ss','Mountain_ss','MilitaryUnit_ss','MemberOfParliament_ss','MeanOfTransportation_ss','Film_ss','EthnicGroup_ss','CelestialBody_ss','Building_ss','Athlete_ss','ArchitecturalStructure_ss','Aircraft_ss','Actor_ss','Scientist_ss','PoliticalParty_ss','Non-ProfitOrganisation_ss','MusicalArtist_ss','MilitaryConflict_ss','Event_ss','Award_ss','AcademicJournal_ss','WorldHeritageSite_ss','Magazine_ss','Band_ss','Artist_ss','Newspaper_ss','GovernmentAgency_ss','Website_ss','Software_ss','WrittenWork_ss','PeriodicalLiterature_ss','Disease_ss','Politician_ss','City_ss','University_ss','Company_ss','Work_ss','Person_ss','Organisation_ss','Place_ss'/*auto-facets-here*/];
+    var facetsNamesMapping = {'Source_s':'Source','Thing_ss':'Unclassified entity','TradeUnion_ss':'TradeUnion','ProgrammingLanguage_ss':'ProgrammingLanguage','NaturalPlace_ss':'NaturalPlace','MusicGenre_ss':'MusicGenre','Mountain_ss':'Mountain','MilitaryUnit_ss':'MilitaryUnit','MemberOfParliament_ss':'MemberOfParliament','MeanOfTransportation_ss':'MeanOfTransportation','Film_ss':'Film','EthnicGroup_ss':'EthnicGroup','CelestialBody_ss':'CelestialBody','Building_ss':'Building','Athlete_ss':'Athlete','ArchitecturalStructure_ss':'ArchitecturalStructure','Aircraft_ss':'Aircraft','Actor_ss':'Actor','Scientist_ss':'Scientist','PoliticalParty_ss':'PoliticalParty','Non-ProfitOrganisation_ss':'Non-ProfitOrganisation','MusicalArtist_ss':'MusicalArtist','MilitaryConflict_ss':'MilitaryConflict','Event_ss':'Event','Award_ss':'Award','AcademicJournal_ss':'AcademicJournal','WorldHeritageSite_ss':'WorldHeritageSite','Magazine_ss':'Magazine','Band_ss':'Band','Artist_ss':'Artist','Newspaper_ss':'Newspaper','GovernmentAgency_ss':'GovernmentAgency','Website_ss':'Website','Software_ss':'Software','WrittenWork_ss':'WrittenWork','PeriodicalLiterature_ss':'PeriodicalLiterature','Disease_ss':'Disease','Politician_ss':'Politician','City_ss':'City','University_ss':'University','Company_ss':'Company','Work_ss':'Work','Person_ss':'Person','Organisation_ss':'Organisation','Place_ss':'Place'/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -78,7 +78,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Source_s','Thing_ss',''/*auto-facets-autocomplete-here*/],
+      fields: ['Source_s','Thing_ss','TradeUnion_ss','ProgrammingLanguage_ss','NaturalPlace_ss','MusicGenre_ss','Mountain_ss','MilitaryUnit_ss','MemberOfParliament_ss','MeanOfTransportation_ss','Film_ss','EthnicGroup_ss','CelestialBody_ss','Building_ss','Athlete_ss','ArchitecturalStructure_ss','Aircraft_ss','Actor_ss','Scientist_ss','PoliticalParty_ss','Non-ProfitOrganisation_ss','MusicalArtist_ss','MilitaryConflict_ss','Event_ss','Award_ss','AcademicJournal_ss','WorldHeritageSite_ss','Magazine_ss','Band_ss','Artist_ss','Newspaper_ss','GovernmentAgency_ss','Website_ss','Software_ss','WrittenWork_ss','PeriodicalLiterature_ss','Disease_ss','Politician_ss','City_ss','University_ss','Company_ss','Work_ss','Person_ss','Organisation_ss','Place_ss'/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -87,7 +87,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Notebook_ss','Source_s','Thing_ss',''/*auto-facets-request-here*/],
+      'facet.field': ['Notebook_ss','Source_s','Thing_ss','TradeUnion_ss','ProgrammingLanguage_ss','NaturalPlace_ss','MusicGenre_ss','Mountain_ss','MilitaryUnit_ss','MemberOfParliament_ss','MeanOfTransportation_ss','Film_ss','EthnicGroup_ss','CelestialBody_ss','Building_ss','Athlete_ss','ArchitecturalStructure_ss','Aircraft_ss','Actor_ss','Scientist_ss','PoliticalParty_ss','Non-ProfitOrganisation_ss','MusicalArtist_ss','MilitaryConflict_ss','Event_ss','Award_ss','AcademicJournal_ss','WorldHeritageSite_ss','Magazine_ss','Band_ss','Artist_ss','Newspaper_ss','GovernmentAgency_ss','Website_ss','Software_ss','WrittenWork_ss','PeriodicalLiterature_ss','Disease_ss','Politician_ss','City_ss','University_ss','Company_ss','Work_ss','Person_ss','Organisation_ss','Place_ss'/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       'sort': 'id desc',
