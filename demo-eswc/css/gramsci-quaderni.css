@@ -1,0 +1,4 @@
+.panel-facet {
+    max-height: 85px;
+    overflow-y: scroll;
+}

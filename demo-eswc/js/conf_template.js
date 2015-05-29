@@ -91,7 +91,8 @@ var Manager;
       'facet.limit': 1000,
       'facet.mincount': 1,
       'sort': 'id desc',
-      'json.nl': 'map'
+      'json.nl': 'map',
+      'rows': 60
     };
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);

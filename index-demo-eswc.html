@@ -20,7 +20,7 @@
 			<div style="float:right"><a href="http://semedia.univpm.it"><img src="demo-eswc/images/semedia_logo.png" width="50"/><a href="http://netseven.it"><img src="demo-eswc/images/logonetseven3.png" width="100"/></a><br/>powered by <a href="http://thepund.it"><img src="demo-eswc/images/Pundit-Logo.png" width="100"/></a></div>
 		<h3>How it works? </h3>
 		<h4>This <strong>faceted browser</strong> is continuously updated extracting data from users public semantic annotations on web news and articles.</h4>
-		<h4><a href="demo-eswc/bm/index.html">Learn how to contribute with yuor annotations.</a></h4>
+		<h4><a href="demo-eswc/bm/index.html">Learn how to contribute with your annotations.</a></h4>
 		<!--<div style="float:right"><a href="#" onclick="toggleOrQuery()">Toggle OR-ed filter</a> (Alfa)</div> -->
       </div>
     </div>
@@ -61,6 +61,9 @@
 <p class="h5">Politician</p>
 <div class="tagcloud panel-facet" id="Politician_ss"></div>
 <hr/>
+<p class="h5">Software</p>
+<div class="tagcloud panel-facet" id="Software_ss"></div>
+<hr/>
 <p class="h5">Disease</p>
 <div class="tagcloud panel-facet" id="Disease_ss"></div>
 <hr/>
@@ -70,14 +73,11 @@
 <p class="h5">WrittenWork</p>
 <div class="tagcloud panel-facet" id="WrittenWork_ss"></div>
 <hr/>
-<p class="h5">Software</p>
-<div class="tagcloud panel-facet" id="Software_ss"></div>
+<p class="h5">GovernmentAgency</p>
+<div class="tagcloud panel-facet" id="GovernmentAgency_ss"></div>
 <hr/>
 <p class="h5">Website</p>
 <div class="tagcloud panel-facet" id="Website_ss"></div>
-<hr/>
-<p class="h5">GovernmentAgency</p>
-<div class="tagcloud panel-facet" id="GovernmentAgency_ss"></div>
 <hr/>
 <p class="h5">Newspaper</p>
 <div class="tagcloud panel-facet" id="Newspaper_ss"></div>
@@ -88,8 +88,14 @@
 <p class="h5">Band</p>
 <div class="tagcloud panel-facet" id="Band_ss"></div>
 <hr/>
+<p class="h5">CelestialBody</p>
+<div class="tagcloud panel-facet" id="CelestialBody_ss"></div>
+<hr/>
 <p class="h5">Magazine</p>
 <div class="tagcloud panel-facet" id="Magazine_ss"></div>
+<hr/>
+<p class="h5">Scientist</p>
+<div class="tagcloud panel-facet" id="Scientist_ss"></div>
 <hr/>
 <p class="h5">WorldHeritageSite</p>
 <div class="tagcloud panel-facet" id="WorldHeritageSite_ss"></div>
@@ -97,8 +103,14 @@
 <p class="h5">AcademicJournal</p>
 <div class="tagcloud panel-facet" id="AcademicJournal_ss"></div>
 <hr/>
+<p class="h5">ArchitecturalStructure</p>
+<div class="tagcloud panel-facet" id="ArchitecturalStructure_ss"></div>
+<hr/>
 <p class="h5">Award</p>
 <div class="tagcloud panel-facet" id="Award_ss"></div>
+<hr/>
+<p class="h5">Building</p>
+<div class="tagcloud panel-facet" id="Building_ss"></div>
 <hr/>
 <p class="h5">Event</p>
 <div class="tagcloud panel-facet" id="Event_ss"></div>
@@ -106,8 +118,14 @@
 <p class="h5">MilitaryConflict</p>
 <div class="tagcloud panel-facet" id="MilitaryConflict_ss"></div>
 <hr/>
+<p class="h5">Mountain</p>
+<div class="tagcloud panel-facet" id="Mountain_ss"></div>
+<hr/>
 <p class="h5">MusicalArtist</p>
 <div class="tagcloud panel-facet" id="MusicalArtist_ss"></div>
+<hr/>
+<p class="h5">NaturalPlace</p>
+<div class="tagcloud panel-facet" id="NaturalPlace_ss"></div>
 <hr/>
 <p class="h5">Non-ProfitOrganisation</p>
 <div class="tagcloud panel-facet" id="Non-ProfitOrganisation_ss"></div>
@@ -115,32 +133,35 @@
 <p class="h5">PoliticalParty</p>
 <div class="tagcloud panel-facet" id="PoliticalParty_ss"></div>
 <hr/>
-<p class="h5">Scientist</p>
-<div class="tagcloud panel-facet" id="Scientist_ss"></div>
-<hr/>
 <p class="h5">Actor</p>
 <div class="tagcloud panel-facet" id="Actor_ss"></div>
 <hr/>
 <p class="h5">Aircraft</p>
 <div class="tagcloud panel-facet" id="Aircraft_ss"></div>
 <hr/>
-<p class="h5">ArchitecturalStructure</p>
-<div class="tagcloud panel-facet" id="ArchitecturalStructure_ss"></div>
+<p class="h5">AnatomicalStructure</p>
+<div class="tagcloud panel-facet" id="AnatomicalStructure_ss"></div>
 <hr/>
 <p class="h5">Athlete</p>
 <div class="tagcloud panel-facet" id="Athlete_ss"></div>
 <hr/>
-<p class="h5">Building</p>
-<div class="tagcloud panel-facet" id="Building_ss"></div>
+<p class="h5">ChemicalCompound</p>
+<div class="tagcloud panel-facet" id="ChemicalCompound_ss"></div>
 <hr/>
-<p class="h5">CelestialBody</p>
-<div class="tagcloud panel-facet" id="CelestialBody_ss"></div>
+<p class="h5">ChemicalSubstance</p>
+<div class="tagcloud panel-facet" id="ChemicalSubstance_ss"></div>
 <hr/>
 <p class="h5">EthnicGroup</p>
 <div class="tagcloud panel-facet" id="EthnicGroup_ss"></div>
 <hr/>
 <p class="h5">Film</p>
 <div class="tagcloud panel-facet" id="Film_ss"></div>
+<hr/>
+<p class="h5">Galaxy</p>
+<div class="tagcloud panel-facet" id="Galaxy_ss"></div>
+<hr/>
+<p class="h5">Library</p>
+<div class="tagcloud panel-facet" id="Library_ss"></div>
 <hr/>
 <p class="h5">MeanOfTransportation</p>
 <div class="tagcloud panel-facet" id="MeanOfTransportation_ss"></div>
@@ -151,14 +172,8 @@
 <p class="h5">MilitaryUnit</p>
 <div class="tagcloud panel-facet" id="MilitaryUnit_ss"></div>
 <hr/>
-<p class="h5">Mountain</p>
-<div class="tagcloud panel-facet" id="Mountain_ss"></div>
-<hr/>
 <p class="h5">MusicGenre</p>
 <div class="tagcloud panel-facet" id="MusicGenre_ss"></div>
-<hr/>
-<p class="h5">NaturalPlace</p>
-<div class="tagcloud panel-facet" id="NaturalPlace_ss"></div>
 <hr/>
 <p class="h5">ProgrammingLanguage</p>
 <div class="tagcloud panel-facet" id="ProgrammingLanguage_ss"></div>
