@@ -5,22 +5,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>ESWC Demo: Data crowdsourcing with Pundit 2.0</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="shared/css/gramsci.css">
+    <link rel="stylesheet" type="text/css" href="demo-eswc/css/eswcdemo.css">
+  <!-- ><link rel="stylesheet" type="text/css" href="shared/css/gramsci.css"> -->
   <link rel="stylesheet" type="text/css" href="shared/bootstrap-3.1.1-dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="shared/css/awesome-bootstrap-checkbox.css">
-  <link rel="stylesheet" type="text/css" href="demo-eswc/css/gramsci-quaderni.css">
+
 </head>
 
 <body>
     <a name="top-page"></a>
     <div class="container-fluid">
       <div>
-        <h1>Pundit demo @ the ESWC 2015		<small>A simple semantic crowdsourcing experiment</small></h1>
+        <h1>Pundit demo @ the ESWC 2015		<small>Semantic data crowdsourcing</small></h1>
 			<div style="float:right"><a href="http://semedia.univpm.it"><img src="demo-eswc/images/semedia_logo.png" width="50"/><a href="http://netseven.it"><img src="demo-eswc/images/logonetseven3.png" width="100"/></a><br/>powered by <a href="http://thepund.it"><img src="demo-eswc/images/Pundit-Logo.png" width="100"/></a></div>
-		<h3>How it works? </h3>
-		<h4>This <strong>faceted browser</strong> is continuously updated extracting data from users public semantic annotations on web news and articles.</h4>
-		<h4><a href="demo-eswc/bm/index.html">Learn how to contribute with yuor annotations.</a></h4>
+		<h3>How does it work? </h3>
+		<h4>The demonstrative <strong>faceted navigation</strong> in this page is collaboratively built by users annotating entities (persons, places, etc.) in online articles and news.</h4><h4>You can contribute to this demo by using Pundit to mark main topics in online articles. <a href="demo-eswc/bm/index.html">Learn how in 5 minutes.</a></h4>
 		<!--<div style="float:right"><a href="#" onclick="toggleOrQuery()">Toggle OR-ed filter</a> (Alfa)</div> -->
       </div>
     </div>
@@ -63,8 +63,18 @@
 			  <p class="h5">Source (web sites)<br/><small>The list of web sites from where the annotations come from.</small></p>
 			  <div class="tagcloud panel-facet" id="Source_s"></div>
 			  <hr/>
-			  <p class="h5">Unclassified entities<br/><small>Entities with no specific type (things).</small></p>
+			  <p class="h5">Unclassified entities (Things)<br/><small>Entities with no specific type (things).</small></p>
 			  <div class="tagcloud panel-facet" id="Thing_ss"></div>
+			  <hr/>
+			  <h3>Annotated Events</h3>
+			  <p class="h5">Date<br/><small>The date the event occured.</small></p>
+			  <div class="tagcloud panel-facet" id="Date_template_ss"></div>
+			  <p class="h5">Place<br/><small>where the event took palce.</small></p>
+			  <div class="tagcloud panel-facet" id="Place_template_ss"></div>
+			  <p class="h5">Actor<br/><small>Main person involved.</small></p>
+			  <div class="tagcloud panel-facet" id="Person_template_ss"></div>
+			  <p class="h5">Topic<br/><small>Main topic of the event.</small></p>
+			  <div class="tagcloud panel-facet" id="Topic_template_ss"></div>
 			  <hr/>
 			  <p class="h5">Notebooks and annotators<br/><small>Collections of Pundit annotations involving the selected resources. Browse them in Ask.thepPund.it</small></p>
 			  <div class="tagcloud panel-facet" id="Notebook_ss"></div>
@@ -72,6 +82,11 @@
         </div>
       </div>
     </div>
+	<div class="panel panel-footer">
+		<div class="panel-body">
+			<p><h4>Contacts:</p><p>christian.morbidoni@gmail.com</h4></p>
+		</div>
+	</div>	
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>

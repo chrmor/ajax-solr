@@ -27,10 +27,10 @@ var Manager;
       }
     }));
 
-    var fields = ['Source_s','Thing_ss'];
+    var fields = ['Date_template_ss','Place_template_ss','Person_template_ss','Topic_template_ss','Date_ss','Source_s','Thing_ss'];
 	var dataFields = ['Notebook_ss'];
 	  var wikipedia_fields = [/*auto-facets-here*/];
-    var facetsNamesMapping = {'Source_s':'Source','Thing_ss':'Unclassified entity',/*auto-facets-mapping-here*/};
+    var facetsNamesMapping = {'Date_template_ss':'Event date','Place_template_ss':'Event place','Person_template_ss':'Event actor','Topic_template_ss':'Event topic','Date_ss':'Date','Source_s':'Source','Thing_ss':'Unclassified entity',/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -87,11 +87,12 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Notebook_ss','Source_s','Thing_ss',/*auto-facets-request-here*/],
+      'facet.field': ['Date_template_ss','Place_template_ss','Person_template_ss','Topic_template_ss','Date_ss','Notebook_ss','Source_s','Thing_ss',/*auto-facets-request-here*/],
       'facet.limit': 1000,
       'facet.mincount': 1,
       'sort': 'id desc',
-      'json.nl': 'map'
+      'json.nl': 'map',
+      'rows': 60
     };
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
