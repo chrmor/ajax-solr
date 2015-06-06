@@ -1,3 +1,8 @@
+
+#query {
+    width: 100% !important;
+}
+
 .highlight {
     background-color: #FFFF88;
 }
@@ -40,4 +45,12 @@
 
 .hightlight-color-9 {
     background-color: #d9a3ff;
+}
+
+#dx-col a, #dx-col a:link, #dx-col a:visited, #dx-col a:active {
+    color: #787878 !important;
+}
+
+#dx-col p.h5 {
+    color: #606060 !important;
 }

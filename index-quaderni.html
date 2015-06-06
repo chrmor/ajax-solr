@@ -32,29 +32,33 @@
         <div class="container-fluid">
 
           <div class="col-md-3">
-              <p class="h5">Selected Facets</p>
+              <p class="h5">Facets selezionate</p>
               <ul id="selection"></ul>
               <hr/>
-              <ul class="h5" id="search">
-              	<label class="control-label">Search in text:</label>
-                <input class="form-control" type="text" id="query" name="query" autocomplete="off">
-			  </ul>
 
             <p class="h5">Quaderni</p>
             <div class="tagcloud panel-facet" id="quaderno_s"></div>
+
+            <ul class="h5" id="note_search">
+              <label class="control-label">Cerca la nota:</label>
+              <input class="form-control" type="note_text" id="note_query" name="note_query" autocomplete="off">
+            </ul>
+
+            <ul class="h5" id="search">
+              <label class="control-label">Cerca parola o frase nei Quaderni:</label>
+              <input class="form-control" type="dic_text" id="query" name="query" autocomplete="off">
+            </ul>
             <hr/>
 
-            <p class="h5">Indice tematico</p>
             <ul class="h5" id="dic_search">
-                <label class="control-label">Search:</label>
+                <label class="control-label">Cerca nell'indice tematico:</label>
                 <input class="form-control" type="dic_text" id="dic_query" name="dic_query" autocomplete="off">
             </ul>
             <div class="tagcloud panel-facet" id="topic_ss"></div>
             <hr/>
 
-            <p class="h5">Indice dei nomi</p>
             <ul class="h5" id="nomi_search">
-                <label class="control-label">Search:</label>
+                <label class="control-label">Cerca nei nomi:</label>
                 <input class="form-control" type="nomi_text" id="nomi_query" name="nomi_query" autocomplete="off">
             </ul>
             <div class="tagcloud panel-facet" id="nome_ss"></div>
@@ -74,40 +78,42 @@
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-3" id="dx-col">
 
+            <!-- removed
             <p class="h4"><small>Entities mentioned in your current selection (by type)</small></p>
             <ul id="dbp_search">
               <input class="form-control" type="dbp_text" id="dbp_query" name="dbp_query" autocomplete="off">
             </ul>
+            -->
             <!--
             <p class="h5">Persons</p>
             <div class="tagcloud panel-facet" id="mentions_person_ss"></div>
             <hr/>
             -->
 
-            <p class="h5">Books</p>
+            <p class="h5">Libri</p>
      <!--       <ul id="book_search">
               <input class="form-control" type="book_text" id="book_query" name="book_query" autocomplete="off">
             </ul> -->
             <div class="tagcloud panel-facet" id="mentions_book_ss"></div>
             <hr/>
 
-            <p class="h5">Languages</p>
+            <p class="h5">Lingue</p>
      <!--       <ul id="language_search">
               <input class="form-control" type="language_text" id="language_query" name="language_query" autocomplete="off">
             </ul> -->
             <div class="tagcloud panel-facet" id="mentions_language_ss"></div>
             <hr/>
 
-            <p class="h5">Events</p>
+            <p class="h5">Eventi</p>
      <!--       <ul id="event_search">
               <input class="form-control" type="event_text" id="event_query" name="event_query" autocomplete="off">
             </ul> -->
             <div class="tagcloud panel-facet" id="mentions_event_ss"></div>
             <hr/>
 
-            <p class="h5">Places</p>
+            <p class="h5">Luoghi</p>
       <!--      <ul id="place_search">
               <input class="form-control" type="place_text" id="place_query" name="place_query" autocomplete="off">
             </ul> -->
@@ -154,16 +160,13 @@
     <script src="gramsci-quaderni/widgets/ResultWidget.js"></script>
     <script src="widgets/jquery/PagerWidget.js"></script>
     <script src="core/AbstractFacetWidget.js"></script>
-    <script src="gramsci-quaderni/widgets/TagcloudWidget.js"></script>
     <script src="gramsci-quaderni/widgets/FacetsWidget.js"></script>
     <script src="gramsci-quaderni/widgets/SmallFacetsWidget.js"></script>
-	  <script src="gramsci-quaderni/widgets/WikipediaSmallFacetsWidget.js"></script>
+	  <script src="widgets/WikipediaSmallFacetsWidget.js"></script>
     <script src="gramsci-quaderni/widgets/CurrentSearchWidget.9.js"></script>
     <script src="core/AbstractTextWidget.js"></script>
     <script src="shared/js/unorm.js"></script>
-    <script src="gramsci-quaderni/widgets/AutocompleteWidget.js"></script>
-    <script src="gramsci-quaderni/widgets/CountryCodeWidget.js"></script>
-    <script src="gramsci-quaderni/widgets/CalendarWidget.js"></script>
+    <script src="widgets/AutocompleteWidget.js"></script>
     <script src="shared/js/jquery.highlight.js"></script>
     <script src="gramsci-quaderni/js/gramsci.js"></script>
     <script>

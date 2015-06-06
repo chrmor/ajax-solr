@@ -17,13 +17,24 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
 
     var q = this.manager.store.get('q').val();
     if (q != '*:*') {
-        var facetName = self.facetsNamesMapping[q.split(":")[0]];
-        var facetValue = q.split(":")[1];
-      links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + facetValue).click(function () {
-        self.manager.store.get('q').val('*:*');
-        self.doRequest();
-        return false;
-      }));
+        var facetName  = '';
+        var facetValue = '';
+        if (q.indexOf(":") !== -1) {
+          facetName = self.facetsNamesMapping[q.split(":")[0]];
+          facetValue = q.split(":")[1];
+          links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + facetValue).click(function () {
+            self.manager.store.get('q').val('*:*');
+            self.doRequest();
+            return false;
+          }));
+        } else {
+          facetValue = q;
+          links.push($('<a href="#"></a>').text('[x] ' + q).click(function () {
+            self.manager.store.get('q').val('*:*');
+            self.doRequest();
+            return false;
+          }));
+        }
     }
 
     var fq = this.manager.store.values('fq');

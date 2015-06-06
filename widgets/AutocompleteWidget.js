@@ -19,7 +19,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
     // sort autocomplete values b
     var sortValues = function(a, b) {
       var aVal = parseInt(a.counter);
-      var bVal = parseInt(b.counter);                  
+      var bVal = parseInt(b.counter);
       var diff = bVal - aVal;
       if (diff == 0) {
         if (a.label < b.label)
@@ -30,7 +30,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
           return 0;
       } else {
         return diff;
-      }      
+      }
     };
 
     var callback = function (response) {
@@ -38,7 +38,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
       for (var i = 0; i < self.fields.length; i++) {
         var field = self.fields[i];
         for (var facet in response.facet_counts.facet_fields[field]) {
-          label = self.facetsNamesMapping[field];    
+          label = self.facetsNamesMapping[field];
           if (label == undefined) {
               label = field;
           } else {
@@ -78,7 +78,7 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
               var tokens = re.split('*');
               regExPattern = new RegExp("^" + tokens[0].replace(/\*/g, '') + ".*" + tokens[1].replace(/\*/g, ''), "i");
             } else {
-              if (self.autocompleteOnlyOnStartWith) {                
+              if (self.autocompleteOnlyOnStartWith) {
                 regExPattern = new RegExp("^" + nre, "i");
               } else {
                 regExPattern = new RegExp(nre, "i");
@@ -118,12 +118,11 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
             if (value.indexOf(' ') != -1) {
               value = value.replace(/\s{2,}/g, ' ');
             }
-        
+
             if (value) {
               var result = false;
-              var type = $(this).attr('type');              
+              var type = $(this).attr('type');
               if (type === 'dic_text') {
-                //var qf = ('text:' +  AjaxSolr.Parameter.escapeValue(value)).normalize("NFD");
                 var qf = 'text:' +  value.normalize("NFD");
                 result = self.set(qf);
               } else {
