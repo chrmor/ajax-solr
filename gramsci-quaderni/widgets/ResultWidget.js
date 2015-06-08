@@ -71,6 +71,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     var abstractText = '';
     var allText = ''; '<span class="allText-' + doc.id + '">' + doc.text[0] + '<span>';
 
+    /*
     if (doc.text[0].length > 600) {
         start = doc.text[0].substring(0, 600);
         lastSpaceBar = start.lastIndexOf(" ");
@@ -78,8 +79,9 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         abstractText = '<div id="abstractText-' + doc.id + '">' + start + '...</div>';
         allText = '<div id="allText-' + doc.id + '" class="allText-' + doc.id + ' hidden">' + doc.text[0] + '</div>';
     } else {
+    */
       allText = '<div id="allText-' + doc.id + '">' + doc.text[0] + '</div>';
-    }
+    //}
 
     if (abstractText !== '') {
       snippet += abstractText + allText;
@@ -94,7 +96,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     if (abstractText !== '') {
       snippet += '<div class="small text-right" style="margin-top:10px"><span id="allTextLink-' + doc.id + '"><a href="#" id="lnkSeeAllText-' + doc.id +'" onClick="seeAllText(' + doc.id + ');">See all text</a> - </span><a href="' + shownAt + '" target="_blank">See in <strong>GramsciProject.org</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&conf=' + encodeURIComponent("http://purl.org/pundit/conf/pundit-gramsci.js") + '"  target="_blank">Annotate with Pundit</a></divs>';
     } else {
-      snippet += '<div class="small text-right"><a href="' + shownAt + '" target="_blank">See in <strong>GramsciProject.org</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&conf=' + encodeURIComponent("http://purl.org/pundit/conf/pundit-gramsci.js") + '"  target="_blank">Annotate with Pundit</a></divs>';
+      snippet += '<div class="small text-right" style="margin-top:10px"><a href="' + shownAt + '" target="_blank">Visualizza in <strong>GramsciProject.org</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&conf=' + encodeURIComponent("http://purl.org/pundit/conf/pundit-gramsci.js") + '"  target="_blank">Annota con Pundit</a></divs>';
     }
 
     var output =  '<div class="panel panel-default"><a id="a-' + doc.id + '" name="a-' + doc.id + '"></a>' +
@@ -103,7 +105,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
                         '<a data-toggle="collapse" data-parent="#accordion" href="#collapse' + doc.id + '">';
 
     if (doc.label_ss != null) {
-        output += doc.label_ss;
+        output += doc.label_ss + ' - ' + doc.title_s;
     } else {
         output += 'Unnamed element';
     }
@@ -144,6 +146,9 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   hightlightText: function(doc) {
     // highlight searched text
     var txtSearched = this.manager.store.values('fq');
+    if (txtSearched == null || txtSearched.length <= 0)
+      txtSearched = this.manager.store.values('q');
+
     if (txtSearched.length > 0) {
       for (var i = 0; i < txtSearched.length; i++) {
         var fTextSearched = txtSearched[i];
