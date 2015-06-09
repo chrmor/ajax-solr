@@ -3,7 +3,7 @@ var Manager;
 (function ($) {
 
   $(function () {
-    Manager = new AjaxSolr.Manager({
+    Manager = new AjaxSolr.ApiManager({
       solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-media/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
@@ -56,15 +56,6 @@ var Manager;
     Manager.store.addByValue('q', query);
     Manager.store.addByValue('q.op', 'AND');
 
-    // API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE...
-    if (location.hash.indexOf('title:') != -1) {
-      var title = location.hash.split('#title:')[1];
-      var decoded_title = decodeURIComponent(title);
-      query = 'title_s:' + AjaxSolr.Parameter.escapeValue(decoded_title).replace(new RegExp('%2C', 'g'), ',');
-      Manager.store.addByValue('fq', query);
-      location.hash = "";
-    }
-
     var params = {
       facet: true,
       'facet.field': [ 'ctype_ss', 'type_s', 'subject_ss', 'contributor_ss', 'dictionary_ss', 'language_ss', 'date_s', 'title_s', 'description_t', 'shownAt_s', 'text'],
@@ -78,6 +69,9 @@ var Manager;
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
+
+    // Process URI
+    Manager.processURI(location, params['facet.field']);
 
     Manager.doRequest();
   });
