@@ -3,7 +3,7 @@ var Manager;
 (function ($) {
 
   $(function () {
-    Manager = new AjaxSolr.Manager({
+    Manager = new AjaxSolr.ApiManager ({
       solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-dictionary/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
@@ -53,8 +53,8 @@ var Manager;
     }));
     Manager.init();
     var query = "*:*";
-	Manager.store.addByValue('q', query);
-	Manager.store.addByValue('q.op', 'AND');
+  	Manager.store.addByValue('q', query);
+  	Manager.store.addByValue('q.op', 'AND');
 
 
   	// API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE...
@@ -74,10 +74,14 @@ var Manager;
       'rows': 50
 
     };
+
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
-	Manager.doRequest();
+
+    Manager.processURI(location, params['facet.field']);
+
+    Manager.doRequest();
 
   });
 
