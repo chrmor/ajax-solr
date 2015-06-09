@@ -141,11 +141,14 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     if (!scrolled) {
       var doc = this.manager.response.response.docs[0];
-      var $targetElement = $('#a-' + doc.id);
-      if (!isOnScreen($targetElement) ) {
-        $('html, body').animate({
-          scrollTop: $targetElement.offset().top - 10
-        }, 300);
+      if (typeof(doc) !== 'undefined')
+      {
+        var $targetElement = $('#a-' + doc.id);
+        if (!isOnScreen($targetElement) ) {
+          $('html, body').animate({
+            scrollTop: $targetElement.offset().top - 10
+          }, 300);
+        }
       }
     }
 

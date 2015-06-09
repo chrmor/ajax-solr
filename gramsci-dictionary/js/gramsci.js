@@ -56,14 +56,6 @@ var Manager;
   	Manager.store.addByValue('q', query);
   	Manager.store.addByValue('q.op', 'AND');
 
-
-  	// API: USE TEH FRAGMENT TO SHOW A SINGLE PAGE...
-  	if (location.hash.indexOf('title:') != -1) {
-      query = 'label_s:' + AjaxSolr.Parameter.escapeValue(decodeURI(location.hash.split(':')[1].replace(new RegExp('\\+', 'g'),' ')).replace(new RegExp('%2C', 'g'),','));
-      Manager.store.addByValue('fq', query);
-  		location.hash = "";
-    }
-
     var params = {
       facet: true,
       'facet.field': [ 'topic_ss', 'type_ss', 'norm_length_s', 'cites_quaderno_ss', 'label_s', 'author_s', 'text', 'media_ss'],
