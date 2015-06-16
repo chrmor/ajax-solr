@@ -29,8 +29,8 @@ var Manager;
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
         id: fields[i],
         target: '#' + fields[i],
-        field: fields[i],
-        multivalue: false,
+        field: fields[i]
+        //multivalue: false
         //enableOrQuery: true
       }));
     }
@@ -38,7 +38,7 @@ var Manager;
       Manager.addWidget(new AjaxSolr.WikipediaSmallFacetsWidget({
         id: wikipedia_fields[i],
         target: '#' + wikipedia_fields[i],
-        field: wikipedia_fields[i],
+        field: wikipedia_fields[i]
         // enableOrQuery: true
       }));
     }
