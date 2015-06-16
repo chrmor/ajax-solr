@@ -3,7 +3,7 @@ var Manager;
 (function ($) {
 
   $(function () {
-    Manager = new AjaxSolr.Manager({
+    Manager = new AjaxSolr.ApiManager({
       solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-quaderni/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
