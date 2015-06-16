@@ -128,9 +128,14 @@ var Manager;
       'json.nl': 'map',
       'rows': 50
     };
+
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
+
+    // Process URI
+    Manager.processURI(location, params['facet.field']);
+
 
     Manager.doRequest();
   });
