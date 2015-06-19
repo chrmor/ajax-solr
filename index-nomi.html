@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Indice dei Nomi by Antonio Gramsci</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="shared/css/gramsci.css">
+  <link rel="stylesheet" type="text/css" href="shared/bootstrap-3.1.1-dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="gramsci-nomi/css/gramsci-nomi.css">
+</head>
+
+<body>
+    <a name="top-page"></a>
+
+    <div class="container-fluid">
+      <div class="col-sm-8 col-md-10" style="padding-left:0 !important">
+        <img src="gramsci-nomi/images/nomi_header_bn.jpg"/>
+      </div>
+      <div class="col-sm-4 col-md-2">
+  	  	<div style="float:right;padding:5px; text-align:right;">
+  	  		<div style="padding:5px;"><a href="http://gramsciproject.org"/>Gramsci Project Home</a></div>
+        		<div style="padding:5px;"><a href="http://futuroinricerca.miur.it/"><img class="hidden-xs" src="http://www.unimi.it/cataloghi/finanziamento_nazionali/futuroinricerca.gif"  width="70"/></a></div>
+    		</div>
+	    </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="container-fluid">
+
+          <div class="col-md-3">
+              <p class="h5">Facets selezionate</p>
+              <ul id="selection"></ul>
+              <hr/>
+
+              <ul class="h5" id="nome_search">
+                <label class="control-label">Cerca Nome nei Quaderni:</label>
+                <input class="form-control" type="nome_text" id="nome_query" name="nome_query" autocomplete="off">
+              </ul>
+
+              <hr/>
+
+              <p class="h5">Quaderni</p>
+              <div class="tagcloud panel-facet" id="quaderno_ss"></div>
+          </div>
+
+          <div class="col-md-9">
+
+            <hr/>
+
+            <div id="result">
+              <div id="navigation">
+                <ul id="pager" class="pagination"></ul>
+                <div id="pager-header"></div>
+              </div>
+              <hr/>
+
+              <div id="docs"></div>
+
+            </div>
+          </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+    <script src="shared/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+    <script src="core/Core.js"></script>
+    <script src="core/AbstractManager.js"></script>
+    <script src="managers/Manager.jquery.js"></script>
+    <script src="shared/js/ApiManager.js"></script>
+    <script src="core/Parameter.js"></script>
+    <script src="core/ParameterStore.js"></script>
+    <script src="core/AbstractWidget.js"></script>
+    <script src="gramsci-nomi/widgets/ResultWidget.js"></script>
+    <script src="widgets/jquery/PagerWidget.js"></script>
+    <script src="core/AbstractFacetWidget.js"></script>
+    <script src="gramsci-nomi/widgets/FacetsWidget.js"></script>
+    <script src="gramsci-nomi/widgets/SmallFacetsWidget.js"></script>
+	  <script src="widgets/WikipediaSmallFacetsWidget.js"></script>
+    <script src="gramsci-nomi/widgets/CurrentSearchWidget.9.js"></script>
+    <script src="core/AbstractTextWidget.js"></script>
+    <script src="shared/js/unorm.js"></script>
+    <script src="widgets/AutocompleteWidget.js"></script>
+    <script src="shared/js/jquery.highlight.js"></script>
+    <script src="gramsci-nomi/js/gramsci.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-61479510-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
+</html>
