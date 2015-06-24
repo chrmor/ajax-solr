@@ -1,0 +1,56 @@
+
+#query {
+    width: 100% !important;
+}
+
+.highlight {
+    background-color: #FFFF88;
+}
+
+.hightlight-color-0 {
+    background-color: #fff330;
+}
+
+.hightlight-color-1 {
+    background-color: #ffd305;
+}
+
+.hightlight-color-2 {
+    background-color: #ddff76;
+}
+
+.hightlight-color-3 {
+    background-color: #9dff76;
+}
+
+.hightlight-color-4 {
+    background-color: #76ff9d;
+}
+
+.hightlight-color-5 {
+    background-color: #76ffdd;
+}
+
+.hightlight-color-6 {
+    background-color: #77ddff;
+}
+
+.hightlight-color-7 {
+    background-color: #a1b9ff;
+}
+
+.hightlight-color-8 {
+    background-color: #b3a1ff;
+}
+
+.hightlight-color-9 {
+    background-color: #d9a3ff;
+}
+
+#dx-col a, #dx-col a:link, #dx-col a:visited, #dx-col a:active {
+    color: #787878 !important;
+}
+
+#dx-col p.h5 {
+    color: #606060 !important;
+}
