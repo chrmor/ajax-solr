@@ -12,7 +12,7 @@ function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix) {
 
 	
 	//$list_str = file_get_contents('http://gramsciproject.org:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
-	$list_str = file_get_contents('http://gramsciproject.org:8080/solr-gramsci-auto/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.field=' . $tagFacet);
+	$list_str = file_get_contents('http://localhost:8080/solr-gramsci-auto/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.field=' . $tagFacet);
 	//echo PHP_VERSION . "<br/>";
 	$p = split('"facet_fields":',$list_str);
 	$p = split('"'. $tagFacet .'":',$p[1]);
