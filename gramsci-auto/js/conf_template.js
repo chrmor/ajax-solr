@@ -10,7 +10,8 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://gramsciproject.org:8080/solr-demo-eswc/'
+      //solrUrl: 'http://localhost:8983/solr/'
+	  solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-auto/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
@@ -27,10 +28,10 @@ var Manager;
       }
     }));
 
-    var fields = ['Date_template_ss','Place_template_ss','Person_template_ss','Topic_template_ss','Date_ss','Source_s','Thing_ss'];
-	var dataFields = ['Notebook_ss'];
-	  var wikipedia_fields = [''/*auto-facets-here*/];
-    var facetsNamesMapping = {'Date_template_ss':'Event date','Place_template_ss':'Event place','Person_template_ss':'Event actor','Topic_template_ss':'Event topic','Date_ss':'Date','Source_s':'Source','Thing_ss':'Unclassified entity','':''/*auto-facets-mapping-here*/};
+    var fields = [];
+	var dataFields = [];
+	var auto_fields = [/*auto-facets-here*/];
+    var facetsNamesMapping = {/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -40,11 +41,11 @@ var Manager;
         enableOrQuery: false
       }));
     }
-    for (var i = 0, l = wikipedia_fields.length; i < l; i++) {
+    for (var i = 0, l = auto_fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.WikipediaSmallFacetsWidget({
-        id: wikipedia_fields[i],
-        target: '#' + wikipedia_fields[i],
-        field: wikipedia_fields[i],
+        id: auto_fields[i],
+        target: '#' + auto_fields[i],
+        field: auto_fields[i],
 		enableOrQuery: false
       }));
     }
@@ -78,7 +79,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['Source_s','Thing_ss',''/*auto-facets-autocomplete-here*/],
+      fields: [/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -87,9 +88,10 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['Date_template_ss','Place_template_ss','Person_template_ss','Topic_template_ss','Date_ss','Notebook_ss','Source_s','Thing_ss',''/*auto-facets-request-here*/],
+	  'fq': 'type_s:document',	
+      'facet.field': [/*auto-facets-request-here*/],
       'facet.limit': 1000,
-      'facet.mincount': 1,
+	  'facet.mincount': 1,
       'sort': 'id desc',
       'json.nl': 'map',
       'rows': 60
