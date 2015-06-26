@@ -91,7 +91,7 @@ var Manager;
 	  'fq': 'type_s:document',	
       'facet.field': [/*auto-facets-request-here*/],
       'facet.limit': 1000,
-	  'facet.mincount': 3,
+	  'facet.mincount': 1,
       'sort': 'id desc',
       'json.nl': 'map',
       'rows': 60
