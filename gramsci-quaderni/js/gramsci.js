@@ -121,7 +121,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['nome_ss', 'text', 'cited_by_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss', 'quaderno_s'],
+      'facet.field': ['label_ss', 'nome_ss', 'text', 'cited_by_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss', 'quaderno_s'],
       'facet.limit': 1000,
       'facet.mincount': 1,
       'sort': 'quaderno_f asc, nota_i asc',

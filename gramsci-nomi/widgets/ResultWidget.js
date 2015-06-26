@@ -1,3 +1,22 @@
+
+function sortResults(obj, prop, asc) {
+    var sobj = obj.sort(function(a, b) {
+        var a = JSON.parse(a);
+        var b = JSON.parse(b);
+        if (asc) return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        else return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+    });
+    return sobj;
+}
+
+function sortResultsByJson(obj, prop, asc) {
+    var sobj = obj.sort(function(a, b) {
+        if (asc) return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        else return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+    });
+    return sobj;
+}
+
 (function ($) {
 
 AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
@@ -95,13 +114,22 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<p>' + snippet + '</p>';
 
-    output += '<div class="col-lg-6">';
+    output += '<div class="col-lg-3">';
 
     if (typeof(doc.quaderno_count_ss) !== 'undefined')
     {
-      for (var i = 0; i < doc.quaderno_count_ss.length; i++) {
+      var data  = doc.quaderno_count_ss;
+      var nData = data.length;
+
+      output += '<strong>Quaderni:</strong>';
+      output += '<div class="gramsci-quaderni" style="margin-bottom:10px">';
+
+      if (nData > 1)
+        data = sortResults(data, 'count', false);
+
+      for (var i = 0; i < nData; i++) {
         try {
-          var jsonData = $.parseJSON(doc.quaderno_count_ss[i]);
+          var jsonData = $.parseJSON(data[i]);
           var lnkData  = '{"facets_selector":{"quaderno_s":"' + jsonData['value'] + '","nome_ss":"' + doc.nome_s + '"}}';
 
           lnkData = encodeURI(lnkData);
@@ -111,11 +139,63 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           continue;
         }
       }
+
+      output += '</div>';
     }
 
     output += '</div>'
 
-    output += '<div class="col-lg-6">';
+    output += '<div class="col-lg-9">';
+
+    if (typeof(doc.quaderno_grafie_ss) !== 'undefined')
+    {
+      output += '<strong>Grafie:</strong>';
+      output += '<div class="gramsci-grafie" style="margin-bottom:5px">';
+
+      var data  = doc.quaderno_grafie_ss;
+      var nData = data.length;
+
+      var groupedData = {};
+
+      for (var i = 0; i < nData; i++) {
+        var jsonData = $.parseJSON(data[i]);
+        var dValue = jsonData['value'];
+        if (groupedData[dValue] === undefined) {
+          groupedData[dValue] = [];
+          groupedData[dValue].push(jsonData);
+        } else {
+          groupedData[dValue].push(jsonData);
+        }
+      }
+
+      for (var iKey in Object.keys(groupedData)) {
+        var key  = Object.keys(groupedData)[iKey];
+        var data = groupedData[key];
+        var nGraphData = data.length;
+
+        if (nGraphData > 1)
+          data = sortResultsByJson(data, 'count', false);
+
+        output += key + '<ul style="padding-left:18px;margin-bottom:10px">';
+
+        for (var t = 0; t < nGraphData; t++) {
+          var cGraphData = data[t];
+
+          var note  = cGraphData['label'];
+          var title = cGraphData['title'];
+          var count = cGraphData['count'];
+
+          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '"}}';
+          lnkData = encodeURI(lnkData);
+
+          output +=   '<li><a href="/index-quaderni.html#' + lnkData + '">' + note + ' - ' + title + ' (' + count + ')</a></li>';
+        }
+
+        output += '</ul>';
+      }
+
+      output += '</div>';
+    }
 
     output += '</div>'
 
