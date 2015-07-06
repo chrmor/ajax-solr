@@ -121,7 +121,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       var data  = doc.quaderno_count_ss;
       var nData = data.length;
 
-      output += '<strong>Quaderni:</strong>';
+      output += '<p>I riferimenti a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
       output += '<div class="gramsci-quaderni" style="margin-bottom:10px">';
 
       if (nData > 1)
@@ -134,7 +134,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
           lnkData = encodeURI(lnkData);
 
-          output += '<a href="/index-quaderni.html#' + lnkData + '">' + jsonData['value'] + ' (' + jsonData['count'] + ')</a><br/>';
+          output += '<a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + jsonData['value'] + ' (' + jsonData['count'] + ')</a><br/>';
         } catch (err) {
           continue;
         }
@@ -149,7 +149,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     if (typeof(doc.quaderno_grafie_ss) !== 'undefined')
     {
-      output += '<strong>Grafie:</strong>';
+      output += '<p>Diverse grafie del nome utilizzate da Gramsci:</p>';
       output += '<div class="gramsci-grafie" style="margin-bottom:5px">';
 
       var data  = doc.quaderno_grafie_ss;
@@ -176,7 +176,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         if (nGraphData > 1)
           data = sortResultsByJson(data, 'count', false);
 
-        output += key + '<ul style="padding-left:18px;margin-bottom:10px">';
+        output += '“' + key + '”<ul style="padding-left:18px;margin-bottom:10px">';
 
         for (var t = 0; t < nGraphData; t++) {
           var cGraphData = data[t];
@@ -188,7 +188,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var lnkData  = '{"facets_selector":{"label_ss":"' + note + '"}}';
           lnkData = encodeURI(lnkData);
 
-          output +=   '<li><a href="/index-quaderni.html#' + lnkData + '">' + note + ' - ' + title + ' (' + count + ')</a></li>';
+          output +=   '<li><a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' (' + count + ')</a></li>';
         }
 
         output += '</ul>';

@@ -79,8 +79,8 @@ $time_end = microtime_float();
 $time_start = microtime_float();
 
 
-addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,3,'type_');
-addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,5,'cat_');
+addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,1,'type_');
+addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,1,'cat_');
 
 //echo "Updating js confign file...<br/>";
 $time_start = microtime_float();
