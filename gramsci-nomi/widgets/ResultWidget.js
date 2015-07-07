@@ -114,13 +114,49 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '<p>' + snippet + '</p>';
 
+	if (typeof(doc.dizionario_s) !== 'undefined') {
+		var lnkData  = '{"facets_selector":{"label_s":"' + doc.dizionario_s + '"}}';
+		lnkData = encodeURI(lnkData);
+		output += '<p>' + '<a href="/index.html#' + lnkData + '" target="_blank">Vai alla voce del Dizionario Gramsciano' + ' “' + doc.dizionario_s +  '”.</a></p>';
+	}
+	
+	if (typeof(doc.media_ss) !== 'undefined') {
+		var lnkData  = '{"facets_selector":{"dictionary_ss":"' + doc.dizionario_s + '"}}';
+		lnkData = encodeURI(lnkData);
+		output += '<p>' + '<a href="/index-media.html#' + lnkData + '" target="_blank">Vai ai media collegati.</a></p>';
+	}
+	
+	if (typeof(doc.treccani_ss) !== 'undefined') {
+		output += '<p>' + '<a href="' + doc.treccani_ss + '" target="_blank">Vai alla voce Treccani corrispondente.</a></p>';
+	}
+
     output += '<div class="col-lg-3">';
+
+	
 
     if (typeof(doc.quaderno_count_ss) !== 'undefined')
     {
       var data  = doc.quaderno_count_ss;
       var nData = data.length;
 
+	  var lnkData  = '{"facets_selector":{"nome_ss":"' + doc.nome_s + '"}}';
+	  lnkData = encodeURI(lnkData);
+	  var totalCount = doc.total_count_i;
+	  var totalCountLabel;
+	  if (totalCount == 1) {
+		  totalCountLabel = 'volta';
+	  } else {
+	  	  totalCountLabel = 'volte';
+	  }
+	  var noteCount = doc.note_count_i;
+	  var noteCountLabel;
+	  if (noteCount == 1) {
+		  noteCountLabel = 'nota';
+	  } else {
+	  	  noteCountLabel = 'note';
+	  }
+	  
+	  output += '<p>Il nome è presente ' + totalCount + ' ' + totalCountLabel + ' nei Quaderni in ' + '<a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + noteCount + ' ' + noteCountLabel + '</a>.</p>';
       output += '<p>I riferimenti a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
       output += '<div class="gramsci-quaderni" style="margin-bottom:10px">';
 
@@ -153,10 +189,10 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       output += '<div class="gramsci-grafie" style="margin-bottom:5px">';
 
       var data  = doc.quaderno_grafie_ss;
-      var nData = data.length;
+	  var nData = data.length;
 
       var groupedData = {};
-
+	  
       for (var i = 0; i < nData; i++) {
         var jsonData = $.parseJSON(data[i]);
         var dValue = jsonData['value'];
@@ -168,15 +204,27 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         }
       }
 
+	  var grafie_count_groupedData = {};
+	  var grafie_count_data  = doc.grafie_count_ss;
+
+	  for (var i = 0; i < grafie_count_data.length; i++) {
+	  	var jsonData = $.parseJSON(grafie_count_data[i]);
+		var dValue = jsonData['value'];
+		var dCount = jsonData['count'];
+        grafie_count_groupedData[dValue] = dCount;
+        
+	  }
+
       for (var iKey in Object.keys(groupedData)) {
         var key  = Object.keys(groupedData)[iKey];
         var data = groupedData[key];
+		var grafia_count = grafie_count_groupedData[key];
         var nGraphData = data.length;
 
         if (nGraphData > 1)
           data = sortResultsByJson(data, 'count', false);
 
-        output += '“' + key + '”<ul style="padding-left:18px;margin-bottom:10px">';
+        output += '“' + key + '” (' + grafia_count + ')<ul style="padding-left:18px;margin-bottom:10px">';
 
         for (var t = 0; t < nGraphData; t++) {
           var cGraphData = data[t];
