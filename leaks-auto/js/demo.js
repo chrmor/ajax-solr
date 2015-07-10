@@ -30,8 +30,8 @@ var Manager;
 
     var fields = ['day_s','from_s','to_ss'];
 	var dataFields = [];
-	var auto_fields = ['type_Website_ss','type_Place_ss','type_Software_ss','type_Person_ss','type_City_ss','type_Country_ss','type_Company_ss','cat_Member_states_of_the_Union_for_the_Mediterranean_ss','cat_Member_states_of_the_European_Union_ss','cat_Liberal_democracies_ss','cat_Countries_in_Europe_ss','cat_Città_benemerite_del_Risorgimento_italiano_ss','cat_Republics_ss','cat_Primary_dealers_ss','cat_Investment_banks_ss','cat_Member_states_of_the_United_Nations_ss','cat_Global_systemically_important_banks_ss','cat_Companies_listed_on_the_New_York_Stock_Exchange_ss','cat_Living_people_ss'/*auto-facets-here*/];
-    var facetsNamesMapping = {'day_s':"Sent on day",'from_s':'From','to_ss':'To','type_Website_ss':'Website','type_Place_ss':'Place','type_Software_ss':'Software','type_Person_ss':'Person','type_City_ss':'City','type_Country_ss':'Country','type_Company_ss':'Company','cat_Member_states_of_the_Union_for_the_Mediterranean_ss':'Member states of the Union for the Mediterranean','cat_Member_states_of_the_European_Union_ss':'Member states of the European Union','cat_Liberal_democracies_ss':'Liberal democracies','cat_Countries_in_Europe_ss':'Countries in Europe','cat_Città_benemerite_del_Risorgimento_italiano_ss':'Città benemerite del Risorgimento italiano','cat_Republics_ss':'Republics','cat_Primary_dealers_ss':'Primary dealers','cat_Investment_banks_ss':'Investment banks','cat_Member_states_of_the_United_Nations_ss':'Member states of the United Nations','cat_Global_systemically_important_banks_ss':'Global systemically important banks','cat_Companies_listed_on_the_New_York_Stock_Exchange_ss':'Companies listed on the New York Stock Exchange','cat_Living_people_ss':'Living people'/*auto-facets-mapping-here*/};
+	var auto_fields = [/*auto-facets-here*/];
+    var facetsNamesMapping = {'day_s':"Sent on day",'from_s':'From','to_ss':'To',/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -79,7 +79,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: ['type_Website_ss','type_Place_ss','type_Software_ss','type_Person_ss','type_City_ss','type_Country_ss','type_Company_ss','cat_Member_states_of_the_Union_for_the_Mediterranean_ss','cat_Member_states_of_the_European_Union_ss','cat_Liberal_democracies_ss','cat_Countries_in_Europe_ss','cat_Città_benemerite_del_Risorgimento_italiano_ss','cat_Republics_ss','cat_Primary_dealers_ss','cat_Investment_banks_ss','cat_Member_states_of_the_United_Nations_ss','cat_Global_systemically_important_banks_ss','cat_Companies_listed_on_the_New_York_Stock_Exchange_ss','cat_Living_people_ss'/*auto-facets-autocomplete-here*/],
+      fields: [/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -89,7 +89,7 @@ var Manager;
     var params = {
       facet: true,
 	  'fq': 'type_s:document',	
-      'facet.field': ['day_s','from_s','to_ss','type_Website_ss','type_Place_ss','type_Software_ss','type_Person_ss','type_City_ss','type_Country_ss','type_Company_ss','cat_Member_states_of_the_Union_for_the_Mediterranean_ss','cat_Member_states_of_the_European_Union_ss','cat_Liberal_democracies_ss','cat_Countries_in_Europe_ss','cat_Città_benemerite_del_Risorgimento_italiano_ss','cat_Republics_ss','cat_Primary_dealers_ss','cat_Investment_banks_ss','cat_Member_states_of_the_United_Nations_ss','cat_Global_systemically_important_banks_ss','cat_Companies_listed_on_the_New_York_Stock_Exchange_ss','cat_Living_people_ss'/*auto-facets-request-here*/],
+      'facet.field': ['day_s','from_s','to_ss',/*auto-facets-request-here*/],
       'facet.limit': 1000,
 	  'facet.mincount': 1,
       'sort': 'date_s desc',
