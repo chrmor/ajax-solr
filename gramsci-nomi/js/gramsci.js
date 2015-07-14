@@ -49,6 +49,11 @@ var Manager;
       submitOnlyIfTermSelect: true
     }));
 
+    Manager.addWidget(new AjaxSolr.SortWidget({
+      id: 'sort',
+      target: '#sort'
+    }));
+
     Manager.init();
     Manager.store.addByValue('q', '*:*');
 
@@ -57,7 +62,7 @@ var Manager;
       'facet.field': ['nome_s', 'quaderno_ss', 'quaderno_count_ss'],
       'facet.limit': 100,
       'facet.mincount': 1,
-      'sort': 'nome_s asc',
+      'sort': 'total_count_i desc',
       'json.nl': 'map',
       'rows': 50
     };
