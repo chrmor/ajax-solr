@@ -42,6 +42,15 @@
               </ul>
 
               <hr/>
+			  <ul class="h5" id="sort">
+				 <label class="control-label">Ordina per:</label>
+				 <select>
+				   <option value="nome_s asc">Ordine alfabetico</option>
+				   <option value="total_count_i desc">Numero di occorrenze totali del nome</option>
+				   <option value="note_count_i desc">Numero di note in cui il nome appare</option>
+				 </select>
+		  	  </ul>
+		  	  <hr/>
 
               <p class="h5">Quaderni</p>
               <div class="tagcloud panel-facet" id="quaderno_ss"></div>
@@ -82,6 +91,7 @@
 	  <script src="widgets/WikipediaSmallFacetsWidget.js"></script>
     <script src="gramsci-nomi/widgets/CurrentSearchWidget.9.js"></script>
     <script src="core/AbstractTextWidget.js"></script>
+    <script src="widgets/SortWidget.js"></script>
     <script src="shared/js/unorm.js"></script>
     <script src="widgets/AutocompleteWidget.js"></script>
     <script src="shared/js/jquery.highlight.js"></script>
