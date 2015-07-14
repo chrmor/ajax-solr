@@ -24,8 +24,8 @@ var Manager;
       }
     }));
 
-    var fields = ['nome_s', 'quaderno_ss', 'quaderno_count_ss'];
-    var facetsNamesMapping = {'nome_s': 'Indice dei nomi', 'quaderno_ss': 'Quaderno'};
+    var fields = ['quaderno_struct_ss'];
+    var facetsNamesMapping = {'quaderno_struct_ss': 'Quaderno'};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -59,7 +59,7 @@ var Manager;
 
     var params = {
       facet: true,
-      'facet.field': ['nome_s', 'quaderno_ss', 'quaderno_count_ss'],
+      'facet.field': ['nome_s', 'quaderno_ss', 'quaderno_count_ss', 'quaderno_struct_ss'],
       'facet.limit': 100,
       'facet.mincount': 1,
       'sort': 'total_count_i desc',
