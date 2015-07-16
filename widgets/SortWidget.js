@@ -14,14 +14,14 @@ AjaxSolr.SortWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   afterRequest: function () {
-	var self = this;
-	var currentSort = this.manager.store.values('sort');  
+    var self = this;
+    var currentSort = this.manager.store.values('sort');
     $(this.target).find('select').val(currentSort);
-	$(this.target).find('select').bind('change',function() {
-		var newSorting = $(this).val();
-		self.manager.store.removeByValue('sort',self.manager.store.values('sort')[0]);
-		self.manager.store.addByValue('sort',newSorting);
-		self.doRequest();
+    $(this.target).find('select').bind('change',function() {
+    var newSorting = $(this).val();
+    self.manager.store.removeByValue('sort',self.manager.store.values('sort')[0]);
+    self.manager.store.addByValue('sort',newSorting);
+    self.doRequest();
 	});
   }
 });
