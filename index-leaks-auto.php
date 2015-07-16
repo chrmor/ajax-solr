@@ -62,7 +62,6 @@ function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBl
 	//for each facet in the array...
 	$time_start = microtime_float();
 	
-	echo $numberOfFacetsLimit . "<br/>";
 	
 	for ($x=0; $x < count($facets); $x++) {
 	
