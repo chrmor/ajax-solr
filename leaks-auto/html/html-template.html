@@ -36,6 +36,8 @@
 		               <input class="form-control" type="dbp_text" id="dbp_query" name="dbp_query" autocomplete="off">
 		             </ul>
 					 <hr/>
+					 <h4>DBpedia types</h4>
+	   			  	 <hr/>
 					 <!--auto-type-facets-here-->
 
           </div>
@@ -56,18 +58,23 @@
               <ul id="selection"></ul>
               <hr/>
               <ul class="h5" id="search">
-              	<label class="control-label">Text search:</label>
-                <input class="form-control" type="text" id="query" name="query" autocomplete="off">
+              	<label class="control-label">Search mail subject:</label>
+                <input class="form-control" type="subjectsearch" id="subjectsearch" name="subjectsearch" autocomplete="on">
 			  </ul>
 			  <hr/>
 			  <p class="h5">Sent on day<br/></p>
 			  <div class="tagcloud panel-facet" id="day_s"></div>
+			  <hr/>
+			  <p class="h5">Subject (mail threads)<br/></p>
+			  <div class="tagcloud panel-facet" id="subject_s"></div>
 			  <hr/>
 			  <p class="h5">From<br/></p>
 			  <div class="tagcloud panel-facet" id="from_s"></div>
 			  <hr/>
 			  <p class="h5">To<br/></p>
 			  <div class="tagcloud panel-facet" id="to_ss"></div>
+			  <hr/>
+			  <h4>Wikpedia Categories</h4>
 			  <hr/>
 			  <!--auto-cat-facets-here-->
 			  

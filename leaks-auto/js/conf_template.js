@@ -28,10 +28,10 @@ var Manager;
       }
     }));
 
-    var fields = ['day_s','from_s','to_ss'];
+    var fields = ['subject_s','day_s','from_s','to_ss'];
 	var dataFields = [];
 	var auto_fields = [/*auto-facets-here*/];
-    var facetsNamesMapping = {'day_s':"Sent on day",'from_s':'From','to_ss':'To',/*auto-facets-mapping-here*/};
+    var facetsNamesMapping = {'subject_s':'Subject','day_s':"Sent on day",'from_s':'From','to_ss':'To',/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -70,9 +70,9 @@ var Manager;
       facetsNamesMapping: facetsNamesMapping
     }));
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
-      id: 'text',
+      id: 'subjectsearch',
       target: '#search',
-      fields: [ 'title_s'],
+      fields: [ 'subject_s'],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -89,12 +89,12 @@ var Manager;
     var params = {
       facet: true,
 	  'fq': 'type_s:document',	
-      'facet.field': ['day_s','from_s','to_ss',/*auto-facets-request-here*/],
+      'facet.field': ['subject_s', 'day_s','from_s','to_ss',/*auto-facets-request-here*/],
       'facet.limit': 1000,
 	  'facet.mincount': 1,
       'sort': 'date_s desc',
       'json.nl': 'map',
-      'rows': 60
+      'rows': 100
     };
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);

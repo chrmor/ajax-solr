@@ -10,6 +10,26 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     }, attributes);
   },
 
+  parseJSONFacetValue: function (value) {
+      var facetValue = '';
+	  //JSON Facet
+	  //XXX This is very specific for this browser
+	  //TODO: find a way to make in a generic behaviour
+	  var newValue = value.substring(1,value.length-1).replace(new RegExp('\\\\', 'g'),'')
+	  if (newValue.lastIndexOf('{',0) === 0) {
+	  	var jsondata = $.parseJSON(newValue);
+		if (jsondata['value'] !== 'undefined') {
+			facetValue += jsondata['value'];
+		}
+		if (jsondata['title'] !== 'undefined') {
+			facetValue += ', ' + jsondata['title'];
+		}
+	  } else {
+	  	facetValue = value;
+	  }
+	  return facetValue;
+  },
+
   afterRequest: function () {
 
     var self = this;
@@ -68,8 +88,11 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
         } else {
 			//XXX: type_s filter is always present but invisible!
 			if (fq[i].split(":")[0]!="type_s") {
-              var facetName = self.facetsNamesMapping[fq[i].split(":")[0]];
-		  	  links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + fq[i].split(":")[1]).click(self.removeFacet(fq[i])));
+	  		  var facet = fq[i].split(":")[0];
+	          var facetName = self.facetsNamesMapping[facet];
+	  		  var value = fq[i].replace(facet + ':','');
+	  		  value = self.parseJSONFacetValue(value);
+		  	  links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + value).click(self.removeFacet(fq[i])));
 		  	}
           
         }

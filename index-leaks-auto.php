@@ -6,45 +6,64 @@ function microtime_float()
     return ((float)$usec + (float)$sec);
 }
 
-function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix) {
+function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit) {
 	
 	global $conf, $html;
 
 	
-	//$list_str = file_get_contents('http://gramsciproject.org:8080/solr-demo-eswc/select?q=*:*&wt=csv&rows=0&fl=*_ss');
+	$solrServer = "http://localhost:8080/solr-leaks-auto/";
+	//$solrServer = "http://gramsciproject.org:8080/solr-leaks-auto/";
+	$solrQuery = $solrServer . 'collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.mincount=' . $minCount . '&facet.field=' . $tagFacet;
+	//echo $solrQuery . '<br/>';
 	$list_str =		
-	//file_get_contents('http://localhost:8983/solr/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.mincount=' . $minCount . '&facet.field=' . $tagFacet);
-	file_get_contents('http://localhost:8080/solr-leaks-auto/collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.mincount=' . $minCount . '&facet.field=' . $tagFacet);
-	//echo PHP_VERSION . "<br/>";
+	file_get_contents($solrQuery);
+	
 	$p = split('"facet_fields":',$list_str);
 	$p = split('"'. $tagFacet .'":',$p[1]);
-	//echo $p[1] . "<br/>";
+	
 	$p = split(']',$p[1]);
 	$list = str_replace('[','',$p[0]);
 	$list = str_replace(' ','',$list);
-	//$list = str_replace('"','',$list);
-	//$list = str_replace('\'','',$list);
+	
 	$arr = split('"',$list);
 	$i = 0;
 	for ($j =0; $j < count($arr); $j++) {
 		//echo $arr[$j] . "<br/>";
 		if ($j&1) {
-			$facets[$i] = $arr[$j];
+			if (!in_array($arr[$j],$facetsBlackList) && !in_array($arr[$j],$highPriorityFacets)) {
+				//echo $arr[$j] . '<br/>';
+				$facets[$i] = $arr[$j];	
+			}
+			
 			$i++;
 		} 
 	}
 
+	//Add the high priority facets at the beginning...
+	$highPriorityFacets = array_reverse($highPriorityFacets);
+	foreach ($highPriorityFacets as $highPriorityFacet) {
+		array_unshift($facets,$highPriorityFacet);
+	}
 
-	//Turn the list into an array...
-	//$facets = explode(",",$list_str);
+
+	//Facets will be written in the html template from bottom to top, so we reverse the order...
 	$facets = array_reverse($facets);
-
+	
+	$length = count($facets);
+	if ($length > $numberOfFacetsLimit) {
+		$facets = array_slice($facets,$length-$numberOfFacetsLimit);
+	}
+	
+	
 	$time_end = microtime_float();
 	//echo "Read facets from Solr: ".($time_end - $time_start)." milliseconds.<br/>";
 
 	//sort($facets);
 	//for each facet in the array...
 	$time_start = microtime_float();
+	
+	echo $numberOfFacetsLimit . "<br/>";
+	
 	for ($x=0; $x < count($facets); $x++) {
 	
 		$separator = ",";
@@ -78,9 +97,15 @@ $time_end = microtime_float();
 //get all _ss dinamic facets from Solr
 $time_start = microtime_float();
 
+$facetsBlackList = array("type_Album_ss","type_Agent_ss","type_MusicalArtist_ss");
+$highPriorityFacets = array("type_Politician_ss","type_PoliticalParty_ss","type_OfficeHolder_ss");
+$numberOfFacetsLimit = 50;
+addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,2,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
 
-addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,5,'type_');
-addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,5,'cat_');
+$facetsBlackList = array("cat_Città_benemerite_del_Risorgimento_italiano_ss","cat_Città_medaglie_d’oro_al_valor_militare_ss","cat_Formati_di_file_ss");
+$highPriorityFacets = array();
+$numberOfFacetsLimit = 50;
+addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,3,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
 
 //echo "Updating js confign file...<br/>";
 $time_start = microtime_float();
