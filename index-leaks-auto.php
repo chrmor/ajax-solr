@@ -83,6 +83,11 @@ function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBl
 	//echo "String replaced in ".($time_end - $time_start)." milliseconds.<br/>";
 }
 
+$facetscount=8;
+if (isset($_GET['facetscount'])) {
+    $facetscount = $_GET['facetscount'];
+}
+
 //Get the content of the js config file...
 $time_start = microtime_float();
 $conf = file_get_contents('leaks-auto/js/conf_template.js');
@@ -99,12 +104,12 @@ $time_start = microtime_float();
 $facetsBlackList = array("type_Album_ss","type_Agent_ss","type_MusicalArtist_ss");
 $highPriorityFacets = array("type_Politician_ss","type_PoliticalParty_ss","type_OfficeHolder_ss");
 $numberOfFacetsLimit = 50;
-addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,2,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
+addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,$facetscount,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
 
 $facetsBlackList = array("cat_Città_benemerite_del_Risorgimento_italiano_ss","cat_Città_medaglie_d’oro_al_valor_militare_ss","cat_Formati_di_file_ss");
 $highPriorityFacets = array();
 $numberOfFacetsLimit = 50;
-addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,3,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
+addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,$facetscount,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
 
 //echo "Updating js confign file...<br/>";
 $time_start = microtime_float();
