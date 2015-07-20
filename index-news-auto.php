@@ -1,7 +1,7 @@
 <?php 
 
-$folder = "leaks-auto";
-$htmlFile = "index-leaks-auto.html";
+$folder = "news-auto";
+$htmlFile = "index-news-auto.html";
 
 function microtime_float()
 {
@@ -9,13 +9,13 @@ function microtime_float()
     return ((float)$usec + (float)$sec);
 }
 
-function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit) {
+function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, $arrangeHierarchichal) {
 	
 	global $conf, $html;
 
 	
-	//$solrServer = "http://localhost:8080/solr-leaks-auto/";
-	$solrServer = "http://gramsciproject.org:8080/solr-leaks-auto/";
+	//$solrServer = "http://localhost:8080/solr-news-auto/";
+	$solrServer = "http://gramsciproject.org:8080/solr-news-auto/";
 	$solrQuery = $solrServer . 'collection1/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.mincount=' . $minCount . '&facet.field=' . $tagFacet;
 	//echo $solrQuery . '<br/>';
 	$list_str =		
@@ -64,7 +64,8 @@ function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBl
 	//sort($facets);
 	//for each facet in the array...
 	$time_start = microtime_float();
-	
+	$paths = array();
+	$pathsLabels = array();
 	
 	for ($x=0; $x < count($facets); $x++) {
 	
@@ -79,11 +80,62 @@ function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBl
 		$conf = str_replace("/*auto-facets-here*/", "'".$facet."'".$separator."/*auto-facets-here*/", $conf);
 		$conf = str_replace("/*auto-facets-autocomplete-here*/", "'".$facet."'".$separator."/*auto-facets-autocomplete-here*/", $conf);	
 		$conf = str_replace("/*auto-facets-request-here*/", "'".$facet."'".$separator."/*auto-facets-request-here*/", $conf);	
-		//insert the proper code into the html index file
-		$html = str_replace($placeHolder, $placeHolder . "\n<p class=\"h5\">".$facetLabel."</p>\n<div class=\"tagcloud panel-facet\" id=\"".$facet."\"></div>\n<hr/>",$html);
+		
+		
+		//$path = split('-SUBCLASS-',$facetLabel);
+		if ($arrangeHierarchichal) {
+				array_push($paths, $facetLabel);
+				$pieces = split('-SUBCLASS-',$facetLabel);
+				$label = $pieces[count($pieces)-1];
+				$pathsLabels[$label] = $facet;
+		} else {
+			//insert the proper code into the html index file
+			$html = str_replace($placeHolder, $placeHolder . "\n<p class=\"h5\">".$facetLabel."</p>\n<div class=\"tagcloud panel-facet\" id=\"".$facet."\"></div>\n<hr/>",$html);
+		}
+		
+		
+		
 	}
 	$time_end = microtime_float();
 	//echo "String replaced in ".($time_end - $time_start)." milliseconds.<br/>";
+	
+	if ($arrangeHierarchichal) {
+		sort($paths);
+		$array = array();
+		foreach ($paths as $path) {
+		  //$path = trim($path, '-SUBCLASS-');
+		  $list = split('-SUBCLASS-', $path);
+		  $n = count($list);
+
+		  $arrayRef = &$array; // start from the root
+		  for ($i = 0; $i < $n; $i++) {
+		    $key = $list[$i];
+		    $arrayRef = &$arrayRef[$key]; // index into the next level
+		  }
+		}
+		//insert the proper code into the html index file
+		$html = str_replace($placeHolder, $placeHolder . buildUL($array, '', $pathsLabels),$html);
+	}
+	
+}
+
+function buildUL($array, $prefix, $pathsLabels) {
+  $ui = "";
+  $ui .= "\n<ul class=\"list-group\">\n";
+  foreach ($array as $key => $value) {
+    //$ui .= "<blockquote>";
+	$ui .= "<li class=\"list-group-item\"><p class=\"h5\">" . $key ."</p>";
+	if ($pathsLabels[$key] != null) {
+			$ui .= "<div class=\"tagcloud panel-facet\" id=\"".$pathsLabels[$key]."\"></div>";
+	}
+    
+    // if the value is another array, recursively build the list
+    if (is_array($value))
+      $ui .= buildUL($value, "", $pathsLabels) . "</li>";
+    //$ui .= "</blockquote>\n";
+  }
+  $ui .= "</ul>\n";
+  return $ui;
 }
 
 $facetscount=8;
@@ -104,15 +156,15 @@ $time_end = microtime_float();
 //get all _ss dinamic facets from Solr
 $time_start = microtime_float();
 
-$facetsBlackList = array("type_Album_ss","type_Agent_ss","type_MusicalArtist_ss");
-$highPriorityFacets = array("type_Politician_ss","type_PoliticalParty_ss","type_OfficeHolder_ss");
-$numberOfFacetsLimit = 50;
-addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,$facetscount,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
-
-$facetsBlackList = array("cat_Città_benemerite_del_Risorgimento_italiano_ss","cat_Città_medaglie_d’oro_al_valor_militare_ss","cat_Formati_di_file_ss");
+$facetsBlackList = array();
 $highPriorityFacets = array();
 $numberOfFacetsLimit = 50;
-addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,$facetscount,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit);
+addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,$facetscount,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, true);
+
+$facetsBlackList = array();
+$highPriorityFacets = array();
+$numberOfFacetsLimit = 50;
+addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,$facetscount,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, false);
 
 //echo "Updating js confign file...<br/>";
 $time_start = microtime_float();
