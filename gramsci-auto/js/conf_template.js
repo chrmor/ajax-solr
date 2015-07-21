@@ -10,8 +10,8 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://localhost:8983/solr/'
-	  //solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-auto/'
+      //solrUrl: 'http://localhost:8983/solr/'
+	  solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-auto/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
