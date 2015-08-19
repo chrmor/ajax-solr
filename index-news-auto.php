@@ -14,8 +14,8 @@ function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBl
 	global $conf, $html;
 
 	
-	//$solrServer = "http://localhost:8080/solr-leaks-auto/news/";
-	$solrServer = "http://gramsciproject.org:8080/solr-leaks-auto/";
+	$solrServer = "http://localhost:8080/solr-leaks-auto/";
+	//$solrServer = "http://gramsciproject.org:8080/solr-leaks-auto/";
 	$solrQuery = $solrServer . 'news/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.mincount=' . $minCount . '&facet.field=' . $tagFacet;
 	//echo $solrQuery . '<br/>';
 	$list_str =		
