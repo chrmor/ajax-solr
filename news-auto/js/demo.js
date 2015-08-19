@@ -11,7 +11,7 @@ var Manager;
   $(function () {
     Manager = new AjaxSolr.Manager({
       //solrUrl: 'http://localhost:8983/solr/'
-	  solrUrl: 'http://gramsciproject.org:8080/solr-news-auto/'
+	  solrUrl: 'http://gramsciproject.org:8080/solr-leaks-auto/news/'
 	  //solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-auto/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
@@ -31,8 +31,8 @@ var Manager;
 
     var fields = [];
 	var dataFields = [];
-	var auto_fields = [/*auto-facets-here*/];
-    var facetsNamesMapping = {/*auto-facets-mapping-here*/};
+	var auto_fields = ['type_Place-SUBCLASS-PopulatedPlace_ss','type_EthnicGroup_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-GovernmentAgency_ss','type_Disease_ss','type_ChemicalSubstance-SUBCLASS-ChemicalCompound_ss','type_Agent-SUBCLASS-Person-SUBCLASS-Scientist_ss','type_Agent-SUBCLASS-Person-SUBCLASS-Astronaut_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-Company_ss','type_Place_ss','type_Place-SUBCLASS-PopulatedPlace-SUBCLASS-Country_ss','type_Agent-SUBCLASS-Person_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-EducationalInstitution-SUBCLASS-University_ss','cat_Oak_Ridge_Associated_Universities_ss','cat_Liberal_democracies_ss','cat_Former_Spanish_colonies_ss','cat_Association_of_Public_and_Land-Grant_Universities_ss','cat_Republics_ss','cat_Association_of_American_Universities_ss','cat_National_Association_of_Independent_Colleges_and_Universities_members_ss','cat_Member_states_of_the_United_Nations_ss','cat_Living_people_ss'/*auto-facets-here*/];
+    var facetsNamesMapping = {'type_Place-SUBCLASS-PopulatedPlace_ss':'Place-SUBCLASS-PopulatedPlace','type_EthnicGroup_ss':'EthnicGroup','type_Agent-SUBCLASS-Organisation-SUBCLASS-GovernmentAgency_ss':'Agent-SUBCLASS-Organisation-SUBCLASS-GovernmentAgency','type_Disease_ss':'Disease','type_ChemicalSubstance-SUBCLASS-ChemicalCompound_ss':'ChemicalSubstance-SUBCLASS-ChemicalCompound','type_Agent-SUBCLASS-Person-SUBCLASS-Scientist_ss':'Agent-SUBCLASS-Person-SUBCLASS-Scientist','type_Agent-SUBCLASS-Person-SUBCLASS-Astronaut_ss':'Agent-SUBCLASS-Person-SUBCLASS-Astronaut','type_Agent-SUBCLASS-Organisation-SUBCLASS-Company_ss':'Agent-SUBCLASS-Organisation-SUBCLASS-Company','type_Place_ss':'Place','type_Place-SUBCLASS-PopulatedPlace-SUBCLASS-Country_ss':'Place-SUBCLASS-PopulatedPlace-SUBCLASS-Country','type_Agent-SUBCLASS-Person_ss':'Agent-SUBCLASS-Person','type_Agent-SUBCLASS-Organisation-SUBCLASS-EducationalInstitution-SUBCLASS-University_ss':'Agent-SUBCLASS-Organisation-SUBCLASS-EducationalInstitution-SUBCLASS-University','cat_Oak_Ridge_Associated_Universities_ss':'Oak Ridge Associated Universities','cat_Liberal_democracies_ss':'Liberal democracies','cat_Former_Spanish_colonies_ss':'Former Spanish colonies','cat_Association_of_Public_and_Land-Grant_Universities_ss':'Association of Public and Land-Grant Universities','cat_Republics_ss':'Republics','cat_Association_of_American_Universities_ss':'Association of American Universities','cat_National_Association_of_Independent_Colleges_and_Universities_members_ss':'National Association of Independent Colleges and Universities members','cat_Member_states_of_the_United_Nations_ss':'Member states of the United Nations','cat_Living_people_ss':'Living people'/*auto-facets-mapping-here*/};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -80,7 +80,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: [/*auto-facets-autocomplete-here*/],
+      fields: ['type_Place-SUBCLASS-PopulatedPlace_ss','type_EthnicGroup_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-GovernmentAgency_ss','type_Disease_ss','type_ChemicalSubstance-SUBCLASS-ChemicalCompound_ss','type_Agent-SUBCLASS-Person-SUBCLASS-Scientist_ss','type_Agent-SUBCLASS-Person-SUBCLASS-Astronaut_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-Company_ss','type_Place_ss','type_Place-SUBCLASS-PopulatedPlace-SUBCLASS-Country_ss','type_Agent-SUBCLASS-Person_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-EducationalInstitution-SUBCLASS-University_ss','cat_Oak_Ridge_Associated_Universities_ss','cat_Liberal_democracies_ss','cat_Former_Spanish_colonies_ss','cat_Association_of_Public_and_Land-Grant_Universities_ss','cat_Republics_ss','cat_Association_of_American_Universities_ss','cat_National_Association_of_Independent_Colleges_and_Universities_members_ss','cat_Member_states_of_the_United_Nations_ss','cat_Living_people_ss'/*auto-facets-autocomplete-here*/],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
@@ -90,7 +90,7 @@ var Manager;
     var params = {
       facet: true,
 	  'fq': 'type_s:document',	
-      'facet.field': ['date_ss',/*auto-facets-request-here*/],
+      'facet.field': ['date_ss','type_Place-SUBCLASS-PopulatedPlace_ss','type_EthnicGroup_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-GovernmentAgency_ss','type_Disease_ss','type_ChemicalSubstance-SUBCLASS-ChemicalCompound_ss','type_Agent-SUBCLASS-Person-SUBCLASS-Scientist_ss','type_Agent-SUBCLASS-Person-SUBCLASS-Astronaut_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-Company_ss','type_Place_ss','type_Place-SUBCLASS-PopulatedPlace-SUBCLASS-Country_ss','type_Agent-SUBCLASS-Person_ss','type_Agent-SUBCLASS-Organisation-SUBCLASS-EducationalInstitution-SUBCLASS-University_ss','cat_Oak_Ridge_Associated_Universities_ss','cat_Liberal_democracies_ss','cat_Former_Spanish_colonies_ss','cat_Association_of_Public_and_Land-Grant_Universities_ss','cat_Republics_ss','cat_Association_of_American_Universities_ss','cat_National_Association_of_Independent_Colleges_and_Universities_members_ss','cat_Member_states_of_the_United_Nations_ss','cat_Living_people_ss'/*auto-facets-request-here*/],
       'facet.limit': 1000,
 	  'facet.mincount': 1,
       'sort': 'date_s desc',

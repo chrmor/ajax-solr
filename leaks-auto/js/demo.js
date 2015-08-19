@@ -11,7 +11,7 @@ var Manager;
   $(function () {
     Manager = new AjaxSolr.Manager({
       //solrUrl: 'http://localhost:8983/solr/'
-	  solrUrl: 'http://gramsciproject.org:8080/solr-leaks-auto/'
+	  solrUrl: 'http://gramsciproject.org:8080/solr-leaks-auto/leaks/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
