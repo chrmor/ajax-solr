@@ -4,6 +4,7 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.ApiManager({
+	  //solrUrl: 'http://localhost:8983/solr/'
       solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-quaderni/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
@@ -64,7 +65,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'text',
       target: '#search',
-      fields: ['text', 'title_s'],
+      fields: ['description_s', 'title_s'],
       facetsNamesMapping: facetsNamesMapping,
       // submitOnlyIfTermSelect: true
     }));
