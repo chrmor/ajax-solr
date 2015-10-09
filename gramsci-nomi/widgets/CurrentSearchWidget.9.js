@@ -16,8 +16,8 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
 	  //JSON Facet
 	  //XXX This is very specific for this browser
 	  //TODO: find a way to make in a generic behaviour
-	  value = value.substring(1,value.length-1).replace(new RegExp('\\\\', 'g'),'')
-	  if (value.lastIndexOf('{',0) === 0) {
+	  if (value.indexOf('{') != -1) {
+		value = value.substring(1,value.length-1).replace(new RegExp('\\\\', 'g'),'')
 	  	var jsondata = $.parseJSON(value);
 		if (jsondata['value'] !== 'undefined') {
 			facetValue += jsondata['value'];
