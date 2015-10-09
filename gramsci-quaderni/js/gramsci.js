@@ -55,6 +55,7 @@ var Manager;
       target: '#selection',
       facetsNamesMapping: facetsNamesMapping
     }));
+	/*
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'note',
       target: '#note_search',
@@ -62,6 +63,7 @@ var Manager;
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));
+	*/
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'text',
       target: '#search',
