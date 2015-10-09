@@ -22,9 +22,9 @@ var Manager;
       }
     }));
 
-    var fields = ['topic_ss', 'quaderno_s', 'nome_ss', 'title_s'];
+    var fields = ['topic_ss', 'quaderno_struct_ss', 'nome_ss', 'title_s'];
 	  var wikipedia_fields = ['mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss',  'mentions_type_ss', 'title_s' ];
-    var facetsNamesMapping = {'nome_ss': 'Indice dei nomi', 'mentions_ss': 'Cita', 'cited_by_ss': 'Voce Dizionario', 'mentions_place_ss': 'Luoghi', 'mentions_book_ss': 'Libri', 'mentions_language_ss': 'Lingue', 'mentions_event_ss': 'Eventi', 'mentions_person_ss': 'Persone', 'annotated_in_ss': 'Annotato con Pundit', 'annotated_by_ss': 'Utenti di Pundit', 'topic_ss': 'Indice tematico', 'text': 'Testo della voce', 'quaderno_s': 'Quaderno', 'title_s': 'Titolo della nota', 'label_ss': 'Nota'};
+    var facetsNamesMapping = {'nome_ss': 'Indice dei nomi', 'mentions_ss': 'Cita', 'cited_by_ss': 'Voce Dizionario', 'mentions_place_ss': 'Luoghi', 'mentions_book_ss': 'Libri', 'mentions_language_ss': 'Lingue', 'mentions_event_ss': 'Eventi', 'mentions_person_ss': 'Persone', 'annotated_in_ss': 'Annotato con Pundit', 'annotated_by_ss': 'Utenti di Pundit', 'topic_ss': 'Indice tematico', 'text': 'Testo della voce', 'quaderno_struct_ss': 'Quaderno', 'title_s': 'Titolo della nota', 'label_ss': 'Nota'};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
@@ -124,7 +124,7 @@ var Manager;
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': ['label_ss', 'nome_ss', 'text', 'cited_by_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss', 'quaderno_s'],
+      'facet.field': ['label_ss', 'nome_ss', 'text', 'cited_by_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss', 'annotated_in_ss', 'annotated_by_ss', 'mentions_type_ss', 'topic_ss', 'quaderno_struct_ss'],
       'facet.limit': 1000,
       'facet.mincount': 1,
       'sort': 'quaderno_f asc, nota_i asc',

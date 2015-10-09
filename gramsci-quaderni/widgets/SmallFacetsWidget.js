@@ -37,7 +37,23 @@ AjaxSolr.SmallFacetsWidget = AjaxSolr.AbstractFacetWidget.extend({
       if (objectedItems[i] != undefined) {
        facet = objectedItems[i].facet;
       }
-      var facetLabel = facet;
+      
+      var facetLabel = '';
+	  //JSON Facet
+	  //XXX This is very specific for this browser
+	  //TODO: find a way to make in a generic behaviour
+	  if (facet.lastIndexOf('{',0) === 0) {
+	  	var jsondata = $.parseJSON(facet);
+		if (jsondata['value'] !== 'undefined') {
+			facetLabel += jsondata['value'];
+		}
+		if (jsondata['title'] !== 'undefined') {
+			facetLabel += ', ' + jsondata['title'];
+		}
+	  } else {
+	  	facetLabel = facet;
+	  }
+	  
       $(this.target).append(
         $('<a href="#" id="facet-' + facet + '" class="facets_item"></a>')
         .text(facetLabel)
