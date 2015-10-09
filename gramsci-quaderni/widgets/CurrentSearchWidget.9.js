@@ -10,6 +10,27 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     }, attributes);
   },
 
+
+  parseJSONFacetValue: function (value) {
+      var facetValue = '';
+	  //JSON Facet
+	  //XXX This is very specific for this browser
+	  //TODO: find a way to make in a generic behaviour
+	  if (value.indexOf('{') != -1) {
+		value = value.substring(1,value.length-1).replace(new RegExp('\\\\', 'g'),'')
+	  	var jsondata = $.parseJSON(value);
+		if (jsondata['value'] !== 'undefined') {
+			facetValue += jsondata['value'];
+		}
+		if (jsondata['title'] !== 'undefined') {
+			facetValue += ', ' + jsondata['title'];
+		}
+	  } else {
+	  	facetValue = value;
+	  }
+	  return facetValue;
+  },
+
   afterRequest: function () {
 
     var self = this;
@@ -22,6 +43,7 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
         if (q.indexOf(":") !== -1) {
           facetName = self.facetsNamesMapping[q.split(":")[0]];
           facetValue = q.split(":")[1];
+		  facetValue = self.parseJSONFacetValue(facetValue);
           links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + facetValue).click(function () {
             self.manager.store.get('q').val('*:*');
             self.doRequest();
@@ -42,6 +64,7 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
       if (fq[i].match(/[\[\{]\S+ TO \S+[\]\}]/)) {
         var field = fq[i].match(/^\w+:/)[0];
         var value = fq[i].substr(field.length + 1, 10);
+		value = self.parseJSONFacetValue(value);
         links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + value).click(self.removeFacet(fq[i])));
       }
       else {
@@ -66,8 +89,11 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
           if (cf != '')
             links.push($('<a href="#"></a>').text('[x] ' + cf).click(self.removeFacet(fq[i])));
         } else {
-          var facetName = self.facetsNamesMapping[fq[i].split(":")[0]];
-          links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + fq[i].split(":")[1]).click(self.removeFacet(fq[i])));
+			var facet = fq[i].split(":")[0];
+          var facetName = self.facetsNamesMapping[facet];
+		  var value = fq[i].replace(facet + ':','');
+		  value = self.parseJSONFacetValue(value);
+          links.push($('<a href="#"></a>').text('[x] ' + facetName + " : " + value).click(self.removeFacet(fq[i])));
         }
       }
     }
