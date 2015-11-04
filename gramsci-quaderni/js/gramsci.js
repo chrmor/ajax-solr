@@ -21,6 +21,16 @@ var Manager;
         $('#pager-header').html($('<span style="margin:3pt"></span>').text('Stai visualizzando da ' + Math.min(total, offset + 1) + ' a ' + Math.min(total, offset + perPage) + ' di ' + total + ' risultati'));
       }
     }));
+    Manager.addWidget(new AjaxSolr.PagerWidget({
+      id: 'bottom_pager',
+      target: '#bottom_pager',
+      prevLabel: '&lt;',
+      nextLabel: '&gt;',
+      innerWindow: 1,
+      renderHeader: function (perPage, offset, total) {
+        $('#bottom_pager-header').html($('<span style="margin:3pt"></span>').text(''));
+      }
+    }));
 
     var fields = ['topic_ss', 'quaderno_struct_ss', 'nome_ss', 'title_s'];
 	  var wikipedia_fields = ['mentions_subject_ss', 'mentions_ss', 'mentions_place_ss', 'mentions_book_ss', 'mentions_language_ss', 'mentions_event_ss', 'mentions_person_ss',  'mentions_type_ss', 'title_s' ];
