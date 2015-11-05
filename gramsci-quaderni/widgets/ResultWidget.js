@@ -96,7 +96,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     if (abstractText !== '') {
       snippet += '<div class="small text-right" style="margin-top:10px"><span id="allTextLink-' + doc.id + '"><a href="#" id="lnkSeeAllText-' + doc.id +'" onClick="seeAllText(' + doc.id + ');">See all text</a> - </span><a href="' + shownAt + '" target="_blank">See in <strong>GramsciProject.org</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&conf=' + encodeURIComponent("http://purl.org/pundit/conf/pundit-gramsci.js") + '"  target="_blank">Annotate with Pundit</a></divs>';
     } else {
-      snippet += '<div class="small text-right" style="margin-top:10px"><a href="' + shownAt + '" target="_blank">Visualizza in <strong>GramsciProject.org</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&conf=' + encodeURIComponent("http://purl.org/pundit/conf/pundit-gramsci.js") + '"  target="_blank">Annota con Pundit</a></divs>';
+      snippet += '<div class="small text-right" style="margin-top:10px"><a href="' + shownAt + '" target="_blank">Visualizza nella <strong>BoxView</strong></a> - <a href="http://feed.thepund.it/?b=' + encodeURIComponent(shownAt) +'.html&conf=' + encodeURIComponent("http://purl.org/pundit/conf/pundit-gramsci.js") + '"  target="_blank">Annota con Pundit</a></divs>';
     }
 
     var output =  '<div class="panel panel-default"><a id="a-' + doc.id + '" name="a-' + doc.id + '"></a>' +
