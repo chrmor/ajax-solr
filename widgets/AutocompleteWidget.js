@@ -7,7 +7,8 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
     AjaxSolr.extend(this, {
       facetsNamesMapping: null,
       submitOnlyIfTermSelect: false,
-      autocompleteOnlyOnStartWith: false
+      autocompleteOnlyOnStartWith: false,
+	  removeCommas: false
     }, attributes);
   },
 
@@ -50,10 +51,15 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
 		  }	else {
 			  suffix = '';
 		  }
-          
+          var value;
+		  if (self.removeCommas) {
+			  value = facet.replace(",","");
+		  } else {
+			  value = facet;
+		  }
           list.push({
             field: field,
-            value: facet,
+            value: value,
             counter: response.facet_counts.facet_fields[field][facet],
 			label: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') ' + suffix
           });
