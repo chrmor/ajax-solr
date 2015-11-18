@@ -37,18 +37,25 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
       var list = [];
       for (var i = 0; i < self.fields.length; i++) {
         var field = self.fields[i];
+		var suffix;
         for (var facet in response.facet_counts.facet_fields[field]) {
-          label = self.facetsNamesMapping[field];
-          if (label == undefined) {
-              label = field;
-          } else {
-              label = label;
-          }
+		  if (self.facetsNamesMapping[field] != undefined) {
+	          label = self.facetsNamesMapping[field];
+	          if (label == undefined) {
+	              label = field;
+	          } else {
+	              label = label;
+	          }
+			  suffix = '- ' + label;
+		  }	else {
+			  suffix = '';
+		  }
+          
           list.push({
             field: field,
             value: facet,
             counter: response.facet_counts.facet_fields[field][facet],
-            label: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + label
+			label: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') ' + suffix
           });
         }
       }
@@ -120,15 +127,23 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
             }
 
             if (value) {
-              var result = false;
+				var field = self.fields[0];	
+				if (field) {
+	                var qf = field + ':' +  value.normalize("NFD");
+	                result = self.set(qf);					
+				}
+
+              /*
+			  var result = false;
               var type = $(this).attr('type');
-              if (type === 'dic_text') {
+              
+			  if (type === 'dic_text') {
                 var qf = 'text:' +  value.normalize("NFD");
                 result = self.set(qf);
               } else {
                 result = self.set(value);
               }
-
+			  */
               if (result)
                 self.doRequest();
             }
