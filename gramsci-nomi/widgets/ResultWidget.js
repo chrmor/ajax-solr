@@ -114,6 +114,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
   template: function (doc, forceOpenAccordion) {
     var snippet = '';
+	
+	if (doc.description_s != undefined) {
+		snippet = '"' + doc.description_s + '" <b>[Enciclopedia Treccani]</b>';
+	}
+	
     var start;
     var lastSpaceBar;
 
@@ -142,6 +147,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
                 '<div class="panel-body">';
 
     output += '<p>' + snippet + '</p>';
+	if (typeof(doc.treccani_ss) !== 'undefined') {
+		output += '<p>' + '<a href="' + doc.treccani_ss + '" target="_blank">Vai alla voce Treccani corrispondente.</a></p>';
+	}
+
+	
 
 	if (typeof(doc.dizionario_s) !== 'undefined') {
 		var lnkData  = '{"facets_selector":{"label_s":"' + doc.dizionario_s + '"}}';
@@ -153,10 +163,6 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 		var lnkData  = '{"facets_selector":{"dictionary_ss":"' + doc.dizionario_s + '"}}';
 		lnkData = encodeURI(lnkData);
 		output += '<p>' + '<a href="/index-media.html#' + lnkData + '" target="_blank">Vai ai media collegati.</a></p>';
-	}
-
-	if (typeof(doc.treccani_ss) !== 'undefined') {
-		output += '<p>' + '<a href="' + doc.treccani_ss + '" target="_blank">Vai alla voce Treccani corrispondente.</a></p>';
 	}
 
     output += '<div class="col-lg-3">';
