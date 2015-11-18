@@ -165,7 +165,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 		output += '<p>' + '<a href="/index-media.html#' + lnkData + '" target="_blank">Vai ai media collegati.</a></p>';
 	}
 
-    output += '<div class="col-lg-3">';
+    output += '<div class="col-lg-4">';
 
 
 
@@ -206,7 +206,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
           lnkData = encodeURI(lnkData);
 
-          output += '<a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + jsonData['value'] + ' (' + jsonData['count'] + ')</a><br/>';
+          output += '<a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + jsonData['value'] + ' - ' + jsonData['qtitle'] + ' <b>(' + jsonData['count'] + ')</b></a><br/>';
         } catch (err) {
           continue;
         }
@@ -217,7 +217,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '</div>'
 
-    output += '<div class="col-lg-9">';
+    output += '<div class="col-lg-8">';
 
     if (typeof(doc.quaderno_grafie_ss) !== 'undefined')
     {
@@ -259,7 +259,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         if (nGraphData > 1)
           data = sortResultsByJson(data, 'count', false);
 
-        output += '“' + key + '” (' + grafia_count + ')';
+        output += '“' + key + '” <b>(' + grafia_count + ')</b>';
 
         output += '<div class="panel-facet" style="margin-bottom:15px">';
         output += '<ul style="padding-left:18px">';
@@ -274,7 +274,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var lnkData  = '{"facets_selector":{"label_ss":"' + note + '"}}';
           lnkData = encodeURI(lnkData);
 
-          output +=   '<li><a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' (' + count + ')</a></li>';
+          output +=   '<li><a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
         }
 
         output += '</ul>';
