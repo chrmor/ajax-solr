@@ -46,7 +46,8 @@ var Manager;
       target: '#nome_search',
       fields: ['nome_s'],
       facetsNamesMapping: facetsNamesMapping,
-      submitOnlyIfTermSelect: true
+      submitOnlyIfTermSelect: true,
+	  removeCommas: true
     }));
 
     Manager.addWidget(new AjaxSolr.SortWidget({
