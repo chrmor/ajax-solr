@@ -258,8 +258,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
         if (nGraphData > 1)
           data = sortResultsByJson(data, 'count', false);
-
-        output += '“' + key + '” <b>(' + grafia_count + ')</b>';
+		
+		
+		var lnkGrafiaAll  = '{"facets_selector":{"grafia_ss":"' + key + '","text":"\\"' + key + '\\""}}';
+		lnkGrafiaAll = encodeURI(lnkGrafiaAll);
+        output += '“' + key + '” <a href="/index-quaderni.html#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
 
         output += '<div class="panel-facet" style="margin-bottom:15px">';
         output += '<ul style="padding-left:18px">';
