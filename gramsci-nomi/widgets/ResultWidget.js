@@ -250,8 +250,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         grafie_count_groupedData[dValue] = dCount;
   	  }
 
-      for (var iKey in Object.keys(groupedData)) {
-        var key  = Object.keys(groupedData)[iKey];
+      for (var iKey in Object.keys(grafie_count_groupedData)) {
+        var key  = Object.keys(grafie_count_groupedData)[iKey];
         var data = groupedData[key];
   	    var grafia_count = grafie_count_groupedData[key];
         var nGraphData = data.length;

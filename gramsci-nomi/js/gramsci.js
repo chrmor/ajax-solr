@@ -25,7 +25,7 @@ var Manager;
     }));
 
     var fields = ['quaderno_struct_ss'];
-    var facetsNamesMapping = {'quaderno_struct_ss': 'Quaderno'};
+    var facetsNamesMapping = {'nome_s': 'Nome', 'quaderno_struct_ss': 'Quaderno'};
 
     for (var i = 0, l = fields.length; i < l; i++) {
       Manager.addWidget(new AjaxSolr.SmallFacetsWidget({
