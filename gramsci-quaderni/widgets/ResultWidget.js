@@ -154,6 +154,10 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         var fTextSearched = txtSearched[i];
         if (fTextSearched.indexOf('text:') === 0) {
           var txt = fTextSearched.split(':')[1];
+		  //support for precise searches in the form "text:"some text""
+		  if (txt.endsWith('"') && txt.startsWith('"')) {
+			  txt = txt.substring(1,txt.length-1);
+		  }
           var $allText = $('div#allText-' + doc.id);
           $allText.highlight(txt, {element: 'span', className: 'highlight highlight-' + doc.id + ' hightlight-color-' + i});
           $allText.removeClass('hidden');
