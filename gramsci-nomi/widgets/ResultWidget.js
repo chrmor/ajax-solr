@@ -249,9 +249,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   	   	var dCount = jsonData['count'];
         grafie_count_groupedData[dValue] = dCount;
   	  }
+	  
+	  var sortedGrafia = Object.keys(grafie_count_groupedData).sort(function(a,b){return grafie_count_groupedData[b]-grafie_count_groupedData[a]})
 
-      for (var iKey in Object.keys(grafie_count_groupedData)) {
-        var key  = Object.keys(grafie_count_groupedData)[iKey];
+      for (var iKey in Object.keys(sortedGrafia)) {
+        var key  = sortedGrafia[iKey];
         var data = groupedData[key];
   	    var grafia_count = grafie_count_groupedData[key];
         var nGraphData = data.length;
