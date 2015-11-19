@@ -152,7 +152,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     if (txtSearched.length > 0) {
       for (var i = 0; i < txtSearched.length; i++) {
         var fTextSearched = txtSearched[i];
-        if (fTextSearched.indexOf('text:') === 0) {
+        if (fTextSearched.indexOf('fulltext_t:') === 0) {
           var txt = fTextSearched.split(':')[1];
 		  //support for precise searches in the form "text:"some text""
 		  if (txt.endsWith('"') && txt.startsWith('"')) {
