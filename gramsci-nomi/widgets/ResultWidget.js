@@ -271,7 +271,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var title = cGraphData['title'];
           var count = cGraphData['count'];
 
-          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '"}}';
+          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","text":"\\"' + key + '\\""}}';
           lnkData = encodeURI(lnkData);
 
           output +=   '<li><a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
