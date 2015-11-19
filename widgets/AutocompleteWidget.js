@@ -51,15 +51,9 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
 		  }	else {
 			  suffix = '';
 		  }
-          var value;
-		  if (self.removeCommas) {
-			  value = facet.replace(",","");
-		  } else {
-			  value = facet;
-		  }
           list.push({
             field: field,
-            value: value,
+            value: facet,
             counter: response.facet_counts.facet_fields[field][facet],
 			label: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') ' + suffix
           });
@@ -99,7 +93,11 @@ AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
             }
 
             var a  = $.grep(list, function(item, index) {
-              return regExPattern.test(item.value.normalize());
+				var result = regExPattern.test(item.value.normalize());
+			  	if (!result && self.removeCommas) {
+			  		result = regExPattern.test(item.value.replace(',','').normalize());
+			  	}
+              	return result;
             });
 
             a.sort(sortValues);
