@@ -30,10 +30,17 @@ AjaxSolr.ApiManager = AjaxSolr.Manager.extend({
 
                     if (facetsList.indexOf(facet) > -1) {
                         var query = facet + ':' + AjaxSolr.Parameter.escapeValue(qValue).replace(new RegExp('%2C', 'g'), ',');
-                        this.store.addByValue('fq', query)
+                        this.store.addByValue('fq', query);
                         location.hash = '';
                     }
                 }
+            } else if (jsonData.hasOwnProperty('facet_query_solr')) {
+				var fqs = jsonData.facet_query_solr.split(' AND ');
+				for (var i in fqs) {
+					this.store.addByValue('fq', fqs[i]);
+				}
+                
+                location.hash = '';
             }
         }
     }
