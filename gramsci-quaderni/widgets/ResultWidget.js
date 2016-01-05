@@ -152,18 +152,23 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     if (txtSearched.length > 0) {
       for (var i = 0; i < txtSearched.length; i++) {
         var fTextSearched = txtSearched[i];
-        if (fTextSearched.indexOf('fulltext_t:') === 0) {
-          var txt = fTextSearched.split(':')[1];
-		  //support for precise searches in the form "text:"some text""
-		  if (txt.endsWith('"') && txt.startsWith('"')) {
-			  txt = txt.substring(1,txt.length-1);
-		  }
-          var $allText = $('div#allText-' + doc.id);
-          $allText.highlight(txt, {element: 'span', className: 'highlight highlight-' + doc.id + ' hightlight-color-' + i});
-          $allText.removeClass('hidden');
-          $('#abstractText-' + doc.id).addClass('hidden');
-          $('#allTextLink-' + doc.id).addClass('hidden');
-        }
+		
+		var words = fTextSearched.split(' OR ');
+		for (var j = 0; j < words.length; j++) {
+	        if (words[j].indexOf('fulltext_t:') === 0) {
+	          var txt = words[j].split(':')[1];
+			  //support for precise searches in the form "text:"some text""
+			  if (txt.endsWith('"') && txt.startsWith('"')) {
+				  txt = txt.substring(1,txt.length-1);
+			  }
+	          var $allText = $('div#allText-' + doc.id);
+	          $allText.highlight(txt, {element: 'span', className: 'highlight highlight-' + doc.id + ' hightlight-color-' + i});
+	          $allText.removeClass('hidden');
+	          $('#abstractText-' + doc.id).addClass('hidden');
+	          $('#allTextLink-' + doc.id).addClass('hidden');
+	        }	
+		}
+		
       };
     }
   },
