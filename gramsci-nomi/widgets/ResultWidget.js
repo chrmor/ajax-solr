@@ -262,7 +262,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           data = sortResultsByJson(data, 'count', false);
 		
 		
-		var lnkGrafiaAll  = '{"facets_selector":{"grafia_ss":"' + key + '","text":"\\"' + key + '\\""}}';
+		var lnkGrafiaAll  = '{"facets_selector":{"grafia_ss":"' + key + '","fulltext_t":"\\"' + key + '\\""}}';
 		lnkGrafiaAll = encodeURI(lnkGrafiaAll);
         output += '“' + key + '” <a href="/index-quaderni.html#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
 
@@ -276,7 +276,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var title = cGraphData['title'];
           var count = cGraphData['count'];
 
-          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","text":"\\"' + key + '\\""}}';
+          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","fulltext_t":"\\"' + key + '\\""}}';
           lnkData = encodeURI(lnkData);
 
           output +=   '<li><a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
