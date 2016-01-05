@@ -142,6 +142,40 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         openPanel = '';
     }
 
+
+	if (typeof(doc.quaderno_grafie_ss) !== 'undefined') {
+		
+        var data  = doc.quaderno_grafie_ss;
+    	  var nData = data.length;
+
+        var groupedData = {};
+
+        for (var i = 0; i < nData; i++) {
+          var jsonData = $.parseJSON(data[i]);
+          var dValue = jsonData['value'];
+          if (groupedData[dValue] === undefined) {
+            groupedData[dValue] = [];
+            groupedData[dValue].push(jsonData);
+          } else {
+            groupedData[dValue].push(jsonData);
+          }
+        }
+
+    	  var grafie_count_groupedData = {};
+    	  var grafie_count_data  = doc.grafie_count_ss;
+
+    	  for (var i = 0; i < grafie_count_data.length; i++) {
+    	  	var jsonData = $.parseJSON(grafie_count_data[i]);
+      		var dValue = jsonData['value'];
+    	   	var dCount = jsonData['count'];
+          grafie_count_groupedData[dValue] = dCount;
+    	  }
+	  
+  	  var sortedGrafia = Object.keys(grafie_count_groupedData).sort(function(a,b){return grafie_count_groupedData[b]-grafie_count_groupedData[a]})
+		
+	}
+
+
     // Panel body
     output += '<div id="collapse' + doc.id + '"  data-docid="' + doc.id + '" class="panel-collapse collapse ' + openPanels + '">' +
                 '<div class="panel-body">';
@@ -202,7 +236,12 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       for (var i = 0; i < nData; i++) {
         try {
           var jsonData = $.parseJSON(data[i]);
-          var lnkData  = '{"facets_selector":{"quaderno_s":"' + jsonData['value'] + '","nome_ss":"' + doc.nome_s + '"}}';
+		  var pieces = new Array();
+	      for (var iKey in Object.keys(sortedGrafia)) {
+	        pieces[iKey] = 'fulltext_t:\\"' + sortedGrafia[iKey] + '\\"';
+		  }
+		  var lnkData = '{"facet_query_solr":"' + pieces.join(' OR ') +' AND quaderno_s:\\"' + jsonData['value'] + '\\" AND nome_ss:\\"' + doc.nome_s + '\\""}';
+          //var lnkData = '{"facets_selector":{"quaderno_s":"' + jsonData['value'] + '","nome_ss":"' + doc.nome_s + '"}}';
 
           lnkData = encodeURI(lnkData);
 
@@ -223,34 +262,6 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     {
       output += '<p>Diverse grafie del nome utilizzate da Gramsci:</p>';
       output += '<div class="gramsci-grafie" style="margin-bottom:5px">';
-
-      var data  = doc.quaderno_grafie_ss;
-  	  var nData = data.length;
-
-      var groupedData = {};
-
-      for (var i = 0; i < nData; i++) {
-        var jsonData = $.parseJSON(data[i]);
-        var dValue = jsonData['value'];
-        if (groupedData[dValue] === undefined) {
-          groupedData[dValue] = [];
-          groupedData[dValue].push(jsonData);
-        } else {
-          groupedData[dValue].push(jsonData);
-        }
-      }
-
-  	  var grafie_count_groupedData = {};
-  	  var grafie_count_data  = doc.grafie_count_ss;
-
-  	  for (var i = 0; i < grafie_count_data.length; i++) {
-  	  	var jsonData = $.parseJSON(grafie_count_data[i]);
-    		var dValue = jsonData['value'];
-  	   	var dCount = jsonData['count'];
-        grafie_count_groupedData[dValue] = dCount;
-  	  }
-	  
-	  var sortedGrafia = Object.keys(grafie_count_groupedData).sort(function(a,b){return grafie_count_groupedData[b]-grafie_count_groupedData[a]})
 
       for (var iKey in Object.keys(sortedGrafia)) {
         var key  = sortedGrafia[iKey];
@@ -309,14 +320,23 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     if (txtSearched.length > 0) {
       for (var i = 0; i < txtSearched.length; i++) {
         var fTextSearched = txtSearched[i];
-        if (fTextSearched.indexOf('text:') === 0) {
-          var txt = fTextSearched.split(':')[1];
-          var $allText = $('div#allText-' + doc.id);
-          $allText.highlight(txt, {element: 'span', className: 'highlight highlight-' + doc.id + ' hightlight-color-' + i});
-          $allText.removeClass('hidden');
-          $('#abstractText-' + doc.id).addClass('hidden');
-          $('#allTextLink-' + doc.id).addClass('hidden');
-        }
+		
+		var words = fTextSearched.split(' OR ');
+		for (var j = 0; j < words.length; j++) {
+	        if (words[j].indexOf('fulltext_t:') === 0) {
+	          var txt = words[j].split(':')[1];
+			  //support for precise searches in the form "text:"some text""
+			  if (txt.endsWith('"') && txt.startsWith('"')) {
+				  txt = txt.substring(1,txt.length-1);
+			  }
+	          var $allText = $('div#allText-' + doc.id);
+	          $allText.highlight(txt, {element: 'span', className: 'highlight highlight-' + doc.id + ' hightlight-color-' + i});
+	          $allText.removeClass('hidden');
+	          $('#abstractText-' + doc.id).addClass('hidden');
+	          $('#allTextLink-' + doc.id).addClass('hidden');
+	        }	
+		}
+		
       };
     }
   },
