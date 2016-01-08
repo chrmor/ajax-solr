@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<!--
   <link rel="stylesheet" href="http://dev.thepund.it/download/client/last-beta/pundit2.css" type="text/css">
-
+  -->
 	
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,16 +14,144 @@
   <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="gramsci-quaderni/css/gramsci-quaderni.css">
   <link rel="stylesheet" type="text/css" media="screen" href="http://dl.gramsciproject.org/css/muruca.css"/>
+  <link rel=stylesheet href=http://demo-cloud.as.thepund.it/pundit2/build/css/pundit-examples.css>
+  <link rel=stylesheet href=http://demo-cloud.as.thepund.it/pundit2/build/css/2b21e3f8.pundit.css>
+  <link rel=stylesheet href=http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css>
   
 </head>
 
 <body>
+	
+	<script src=http://demo-cloud.as.thepund.it/pundit2/build/scripts/6caf7295.libs.js></script>
+	<script src=http://demo-cloud.as.thepund.it/pundit2/build/scripts/7840faf8.pundit2.js></script>
+	<style>.pnd-cons {
+	        background: #fc0;
+	    }
+	</style>
+	<script>
+	angular.module('Pundit2').config(['$controllerProvider', function($controllerProvider) {
+      // this option might be handy for migrating old apps, but please don't use it
+      // in new ones!
+      $controllerProvider.allowGlobals();
+    }]);
+	var punditConfig = {
+	    debugAllModules: false,
+		annotationServerBaseURL: 'http://as.thepund.it:8080/annotationserver/',
+	    modules: {
+	        "Annotation": { debug: false },
+	        "Consolidation": { debug: true },
+	        "TextFragmentAnnotator": { debug: true, addIcon: false },
+	        "ImageAnnotator": { debug: true },
+	        "XpointersHelper": { debug: true },
+	        "ItemsExchange": { debug: true}
+	    }
 
-    <script src="http://purl.org/pundit/conf/pundit-gramsci.js" type="text/javascript" ></script>
-    <div data-ng-app="Pundit2" class="pnd-wrp ng-scope"></div>
-    <script src="http://dev.thepund.it/download/client/last-beta/libs.js" type="text/javascript" ></script>
-    <script src="http://dev.thepund.it/download/client/last-beta/pundit2.js" type="text/javascript" ></script>
+	};
+	var ConsolidationDemoCtrl = function($scope, $q, Consolidation, Annotation, AnnotationsExchange,
+	    TextFragmentAnnotator, ItemsExchange, Item) {
 
+	    $scope.$watch(function() {
+	        return ItemsExchange.getItems();
+	    }, function(newItems, oldItems) {
+	        $scope.allItems = newItems;
+	        $scope.allItemsJSON = JSON.stringify(newItems, null, "  ");
+	    }, true);
+
+ 
+	    $scope.dwload = function(uris) {
+			
+		    //var uris = Consolidation.getAvailableTargets();
+			//var uris = new Array();
+			//uris[0] = "http://dl.gramsciproject.org/quaderno/1/nota/1";
+		    console.log('Available targets', uris);
+
+			var cont = 0;
+		    var annPromise = AnnotationsExchange.searchByUri(uris);
+		    annPromise.then(function(ids) {
+		        console.log('Found '+ids.length+' annotations on the current page.', ids);
+
+		        var annPromises = [];
+		        for (var i=0; i<ids.length; i++) {
+		            var a = new Annotation(ids[i]);
+		            annPromises.push(a);
+		        }
+		        $q.all(annPromises).then(function(ret) {
+		            console.log("Retrieved annotations details searching by URIs", ret);
+					$scope.go()
+		        });
+
+		    }, function() {
+		        // TODO: cant search for annotations? OUCH
+		    });
+		
+	    };
+
+
+	    $scope.consolidate = function(xpointers) {
+			var items = new Array();
+			for (var i = 0; i < xpointers.length; i++) {
+		        var item = {
+		            uri: xpointers[i],
+		            label: "Item Label",
+		            description: "Item description",
+		            type: ["http://purl.org/pundit/ont/ao#fragment-text"]
+		        };
+				var structItem = new Item(xpointers[i], item);	
+				items.push(structItem);
+			}
+	        Consolidation.consolidate(items);
+	    };
+
+	    $scope.go = function() {
+			
+	        console.log('## Will pass items to consolidate: '+ ItemsExchange.getItems().length);
+			//items[0] = ItemsExchange.getItemByUri("http://dl.gramsciproject.org/quaderno/1/nota/1#xpointer(start-point(string-range(//DIV[@about='http://dl.gramsciproject.org/quaderno/1/nota/1']/DIV[1]/TEXT[1]/P[1]/text()[3],'',184))/range-to(string-range(//DIV[@about='http://dl.gramsciproject.org/quaderno/1/nota/1']/DIV[1]/TEXT[1]/P[1]/text()[3],'',195)))");	
+	        Consolidation.consolidate(ItemsExchange.getItems());
+	    };
+
+	    $scope.wipe = function() {
+	        console.log('## Wiping consolidated annotations');
+	        Consolidation.wipe();
+	    };
+
+	    $scope.high = function(uri) {
+	        TextFragmentAnnotator.highlightByUri(uri);
+	    };
+
+	    $scope.reset = function(uri) {
+	        TextFragmentAnnotator.clearHighlightByUri(uri);
+	    };
+
+	    $scope.isConsolidated = function(item) {
+	        return Consolidation.isConsolidated(item);
+	    };
+
+	}</script>
+	
+	<div data-ng-app=Pundit2 class="pundit2 pnd-wrp">
+		<div id="consolidatehook" ng-controller=ConsolidationDemoCtrl class="container clearfix">
+			<button class="btn btn-info" ng-click=go()>go</button>
+			<button class="btn btn-danger" ng-click=wipe()>wipe</button>
+			<!--<button class="btn btn-danger" ng-click="dwload('http://dl.gramsciproject.org/quaderno/1/nota/2')">sych</button>-->
+			<!--
+			<div class=row>
+				<div class=col-sm-6>
+					<span ng-repeat="item in allItems">
+						<button class=btn 
+							ng-class="{'btn-warning': isConsolidated(item), 'btn-success': item.isProperty()}" 
+							ng-mouseout=reset(item.uri) ng-mouseover=high(item.uri)>{{item.label}}
+						</button>
+					</span>
+				</div>
+				<div class=col-sm-6>
+					Items from a public annotation:<pre>{{allItemsJSON}}</pre>
+				</div>
+			</div>
+			-->
+		</div>
+	</div>
+	
+	
     <a name="top-page"></a>
 
     <div class="container-fluid">
