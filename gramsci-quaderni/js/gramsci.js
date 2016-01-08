@@ -98,7 +98,7 @@ var Manager;
     Manager.addWidget(new AjaxSolr.AutocompleteWidget({
       id: 'dbp_text',
       target: '#dbp_search',
-      fields: [ 'fulltext_t', 'nome_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_person_ss', 'mentions_event_ss', 'mentions_book_ss', 'mentions_place_ss', 'mentions_language_ss', 'mentions_type_ss'],
+      fields: [ 'fulltext_t', 'nome_ss', 'nome_xpointer_ss', 'mentions_subject_ss', 'mentions_ss', 'mentions_person_ss', 'mentions_event_ss', 'mentions_book_ss', 'mentions_place_ss', 'mentions_language_ss', 'mentions_type_ss'],
       facetsNamesMapping: facetsNamesMapping,
       submitOnlyIfTermSelect: true
     }));

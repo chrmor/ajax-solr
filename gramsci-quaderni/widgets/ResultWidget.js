@@ -41,6 +41,10 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     $(this.target).append('<div class="panel-group" id="accordion"></div>');
 
     var accordion = $('#accordion');
+	var allXpointers = new Array();
+    if (typeof angular != 'undefined') {
+ 		 angular.element('#consolidatehook').scope().wipe();
+    }
     for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
       var doc = this.manager.response.response.docs[i];
 
@@ -61,7 +65,51 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       }
 
       this.hightlightText(doc);
+	  
+	  //Support for consolidation of annotations via Pundit. This is executed only if angular is activated
+	  if (typeof angular != 'undefined') {
+		  var fqs = this.manager.store.values('fq');
+		  for (var j = 0; j<fqs.length; j++) {
+			  if (fqs[j].indexOf('nome_ss') == 0) {
+				  var nome = fqs[j].split('nome_ss')[1].replace(':','').replace('"','').replace('"','');	
+				  if (doc.nome_xpointer_ss !== undefined) {
+					  for (var k = 0; k < doc.nome_xpointer_ss.length ; k++) {
+						  var json = $.parseJSON(doc.nome_xpointer_ss[k]);
+						  n = json.value;
+						  if (n == nome) {
+							  xpointers = json.xpointers.split("; ");
+							  for (var co = 0; co < xpointers.length; co++) {
+							  	  allXpointers.push(xpointers[co]);
+								  /*
+								  if (allXpointers.length > 10) {
+							   		 angular.element('#consolidatehook').scope().dwload(allXpointers);
+							 		 allXpointers = new Array();
+								  }
+								  */
+							  }
+							  
+						  }
+					  
+					  }
+					  
+
+				  }
+			  }
+		  }	
+	  }
+	  
     }
+	/*
+  	if (allXpointers.length > 0) {
+ 		angular.element('#consolidatehook').scope().dwload(allXpointers);
+		allXpointers = new Array();
+  	}
+	*/
+	if (typeof angular != 'undefined') {
+			angular.element('#consolidatehook').scope().consolidate(allXpointers);
+	}
+	
+	
   },
 
   template: function (doc, forceOpenAccordion) {
