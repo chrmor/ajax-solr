@@ -2,6 +2,8 @@
 
 AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   start: 0,
+  showAnnotations: true,
+  punditlive: false,
 
   beforeRequest: function () {
     $(this.target).html($('<img>').attr('src', 'gramsci-quaderni/images/ajax-loader.gif'));
@@ -41,10 +43,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
     $(this.target).append('<div class="panel-group" id="accordion"></div>');
 
     var accordion = $('#accordion');
-	var allXpointers = new Array();
-    if (typeof angular != 'undefined') {
- 		 angular.element('#consolidatehook').scope().wipe();
-    }
+	
+	/*CONSOLIDATION OF NNOTATIONS*/
+	if (this.showAnnotations) {
+		var allXpointers = new Array();
+	    if (typeof angular != 'undefined') {
+	 		 angular.element('#consolidatehook').scope().wipe();
+	    }	
+	}
+	
+	
+	
     for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
       var doc = this.manager.response.response.docs[i];
 
@@ -66,8 +75,9 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
       this.hightlightText(doc);
 	  
+	  /*CONSOLIDATION OF NNOTATIONS*/
 	  //Support for consolidation of annotations via Pundit. This is executed only if angular is activated
-	  if (typeof angular != 'undefined') {
+	  if (this.showAnnotations && typeof angular != 'undefined') {
 		  var fqs = this.manager.store.values('fq');
 		  for (var j = 0; j<fqs.length; j++) {
 			  if (fqs[j].indexOf('nome_ss') == 0) {
@@ -80,18 +90,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 							  xpointers = json.xpointers.split("; ");
 							  for (var co = 0; co < xpointers.length; co++) {
 							  	  allXpointers.push(xpointers[co]);
-								  /*
-								  if (allXpointers.length > 10) {
-							   		 angular.element('#consolidatehook').scope().dwload(allXpointers);
-							 		 allXpointers = new Array();
-								  }
-								  */
+								  if (this.punditLive) {
+									  if (allXpointers.length > 10) {
+								   		 angular.element('#consolidatehook').scope().dwload(allXpointers);
+								 		 allXpointers = new Array();
+									  }	
+								  }								  
 							  }
 							  
 						  }
 					  
 					  }
-					  
 
 				  }
 			  }
@@ -99,13 +108,15 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	  }
 	  
     }
-	/*
-  	if (allXpointers.length > 0) {
- 		angular.element('#consolidatehook').scope().dwload(allXpointers);
-		allXpointers = new Array();
-  	}
-	*/
-	if (typeof angular != 'undefined') {
+	/*CONSOLIDATION OF NNOTATIONS*/
+	if (this.showAnnotations && this.punditLive) {
+	  	if (allXpointers.length > 0) {
+	 		angular.element('#consolidatehook').scope().dwload(allXpointers);
+			allXpointers = new Array();
+	  	}	
+	}
+  	/*CONSOLIDATION OF NNOTATIONS*/
+	if (this.showAnnotations && !this.punditLive && typeof angular != 'undefined') {
 			angular.element('#consolidatehook').scope().consolidate(allXpointers);
 	}
 	
