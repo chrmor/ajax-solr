@@ -226,7 +226,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   	  	  noteCountLabel = 'note';
   	  }
 
-  	  output += '<p>Il nome è presente ' + totalCount + ' ' + totalCountLabel + ' nei Quaderni in ' + '<a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + noteCount + ' ' + noteCountLabel + '</a>.</p>';
+  	  output += '<p>Il nome è presente ' + totalCount + ' ' + totalCountLabel + ' nei Quaderni in ' + '<a href="http://quaderni.gramsciproject.org#' + lnkData + '" target="_blank">' + noteCount + ' ' + noteCountLabel + '</a>.</p>';
       output += '<p>I riferimenti a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
       output += '<div class="gramsci-quaderni panel-facet" style="margin-bottom:10px">';
 
@@ -236,16 +236,16 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       for (var i = 0; i < nData; i++) {
         try {
           var jsonData = $.parseJSON(data[i]);
-		  var pieces = new Array();
-	      for (var iKey in Object.keys(sortedGrafia)) {
-	        pieces[iKey] = 'fulltext_t:\\"' + sortedGrafia[iKey] + '\\"';
-		  }
-		  var lnkData = '{"facet_query_solr":"' + pieces.join(' OR ') +' AND quaderno_s:\\"' + jsonData['value'] + '\\" AND nome_ss:\\"' + doc.nome_s + '\\""}';
-          //var lnkData = '{"facets_selector":{"quaderno_s":"' + jsonData['value'] + '","nome_ss":"' + doc.nome_s + '"}}';
+		  //var pieces = new Array();
+	      //for (var iKey in Object.keys(sortedGrafia)) {
+	       // pieces[iKey] = 'fulltext_t:\\"' + sortedGrafia[iKey] + '\\"';
+		  //}
+		  //var lnkData = '{"facet_query_solr":"' + pieces.join(' OR ') +' AND quaderno_s:\\"' + jsonData['value'] + '\\" AND nome_ss:\\"' + doc.nome_s + '\\""}';
+          var lnkData = '{"facets_selector":{"quaderno_s":"' + jsonData['value'] + '","nome_ss":"' + doc.nome_s + '"}}';
 
           lnkData = encodeURI(lnkData);
 
-          output += '<a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + jsonData['value'] + ' - ' + jsonData['qtitle'] + ' <b>(' + jsonData['count'] + ')</b></a><br/>';
+          output += '<a href="http://quaderni.gramsciproject.org#' + lnkData + '" target="_blank">' + jsonData['value'] + ' - ' + jsonData['qtitle'] + ' <b>(' + jsonData['count'] + ')</b></a><br/>';
         } catch (err) {
           continue;
         }
@@ -275,7 +275,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 		
 		var lnkGrafiaAll  = '{"facets_selector":{"grafia_ss":"' + key + '","fulltext_t":"\\"' + key + '\\""}}';
 		lnkGrafiaAll = encodeURI(lnkGrafiaAll);
-        output += '“' + key + '” <a href="/index-quaderni.html#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
+        output += '“' + key + '” <a href="http://quaderni.gramsciproject.org#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
 
         output += '<div class="panel-facet" style="margin-bottom:15px">';
         output += '<ul style="padding-left:18px">';
@@ -290,7 +290,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","fulltext_t":"\\"' + key + '\\""}}';
           lnkData = encodeURI(lnkData);
 
-          output +=   '<li><a href="/index-quaderni.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
+          output +=   '<li><a href="http://quaderni.gramsciproject.org#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
         }
 
         output += '</ul>';
