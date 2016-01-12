@@ -117,6 +117,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	
 	if (doc.description_s != undefined) {
 		snippet = '"' + doc.description_s + '" <b>[Enciclopedia Treccani]</b>';
+	} else if (doc.comment_s != undefined) {
+		snippet = doc.comment_s;
 	}
 	
     var start;
