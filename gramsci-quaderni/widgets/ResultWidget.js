@@ -80,13 +80,21 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	  if (this.showAnnotations && typeof angular != 'undefined') {
 		  var fqs = this.manager.store.values('fq');
 		  for (var j = 0; j<fqs.length; j++) {
+			  //If the the facet nome_ss is selected...
 			  if (fqs[j].indexOf('nome_ss') == 0) {
 				  var nome = fqs[j].split('nome_ss')[1].replace(':','').replace('"','').replace('"','');	
-				  if (doc.nome_xpointer_ss !== undefined) {
-					  for (var k = 0; k < doc.nome_xpointer_ss.length ; k++) {
-						  var json = $.parseJSON(doc.nome_xpointer_ss[k]);
-						  n = json.value;
-						  if (n == nome) {
+				  for (var k = 0; k<fqs.length; k++) {
+					  if (fqs[k].indexOf('grafia_ss') == 0) {
+					  	var grafia = fqs[k].split('grafia_ss')[1].replace(':','').replace('"','').replace('"','');	
+					  }	
+				  }
+				  
+				  if (doc.grafie_xpointer_ss !== undefined) {
+					  for (var k = 0; k < doc.grafie_xpointer_ss.length ; k++) {
+						  var json = $.parseJSON(doc.grafie_xpointer_ss[k]);
+						  n = json.nome;
+						  g = json.value;
+						  if (n == nome && (grafia == undefined || grafia == g)) {
 							  xpointers = json.xpointers.split("; ");
 							  for (var co = 0; co < xpointers.length; co++) {
 							  	  allXpointers.push(xpointers[co]);
