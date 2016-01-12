@@ -273,7 +273,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           data = sortResultsByJson(data, 'count', false);
 		
 		
-		var lnkGrafiaAll  = '{"facets_selector":{"grafia_ss":"' + key + '","fulltext_t":"\\"' + key + '\\""}}';
+		var lnkGrafiaAll  = '{"facets_selector":{"grafia_ss":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
 		lnkGrafiaAll = encodeURI(lnkGrafiaAll);
         output += '“' + key + '” <a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
 
@@ -287,7 +287,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var title = cGraphData['title'];
           var count = cGraphData['count'];
 
-          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","fulltext_t":"\\"' + key + '\\""}}';
+          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","grafia_ss":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
           lnkData = encodeURI(lnkData);
 
           output +=   '<li><a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
