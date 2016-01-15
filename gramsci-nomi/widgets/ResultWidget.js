@@ -267,6 +267,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
       for (var iKey in Object.keys(sortedGrafia)) {
         var key  = sortedGrafia[iKey];
+		if (groupedData[key] == undefined) {
+			console.debug("WARNING: Gragia " + key + 'no found! - ' + doc.uri_ss);
+			continue;
+		}
+		
         var data = groupedData[key];
   	    var grafia_count = grafie_count_groupedData[key];
         var nGraphData = data.length;
