@@ -261,14 +261,14 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 		}
 		output += '<div class="col-lg-' + cols + '">';
 		output += '<p>Diverse <b>grafie del nome</b> utilizzate da Gramsci:</p>';
-		output += this.writeAnnotationStats(sorted_annotations,total_annotations, struct_data, doc, 'grafia_ss');
+		output += this.writeAnnotationStats(sorted_annotations,total_annotations, struct_data, doc, 'grafia_ss', true);
         output += '</div>' 
     }
 
     if (typeof(doc.quaderno_aggettivi_ss) !== 'undefined')    {
 		output += '<div class="col-lg-4">';
-		output += '<p><b>Aggettivazioni del nome</b> utilizzate da Gramsci:</p>';
-		output += this.writeAnnotationStats(sorted_annotations_agg,total_annotations_agg, struct_data_agg, doc, 'aggettivo_ss');
+		output += '<p>Parole derivate dal nome utilizzate da Gramsci:</p>';
+		output += this.writeAnnotationStats(sorted_annotations_agg,total_annotations_agg, struct_data_agg, doc, 'aggettivo_ss', false);
         output += '</div>' 
     }
 	
@@ -312,7 +312,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	
   },
 
-  writeAnnotationStats: function(sorted_annotations,total_annotations, struct_data, doc, facet_out) {
+  writeAnnotationStats: function(sorted_annotations,total_annotations, struct_data, doc, facet_out, setQueryNome) {
       var output = '<div class="gramsci-grafie" style="margin-bottom:5px">';
 
       for (var iKey in Object.keys(sorted_annotations)) {
@@ -329,7 +329,10 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         if (nGraphData > 1)
           data = sortResultsByJson(data, 'count', false);
 		
-		var lnkGrafiaAll  = '{"facets_selector":{"' + facet_out + '":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
+		if (setQueryNome) queryNome = ',"nome_ss":"' + doc.nome_s + '"';
+		else queryNome = '';
+		
+		var lnkGrafiaAll  = '{"facets_selector":{"' + facet_out + '":"' + key + '"' + queryNome + '}}';
 		lnkGrafiaAll = encodeURI(lnkGrafiaAll);
         output += '“' + key + '” <a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
 
@@ -343,7 +346,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var title = cGraphData['title'];
           var count = cGraphData['count'];
 
-          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","' + facet_out + '":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
+          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","' + facet_out + '":"' + key + '"' + queryNome + '}}';
           lnkData = encodeURI(lnkData);
 
           output +=   '<li><a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
