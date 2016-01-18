@@ -144,39 +144,34 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         openPanel = '';
     }
 
-
+    
 	if (typeof(doc.quaderno_grafie_ss) !== 'undefined') {
-		
-        var data  = doc.quaderno_grafie_ss;
-    	  var nData = data.length;
-
-        var groupedData = {};
-
-        for (var i = 0; i < nData; i++) {
-          var jsonData = $.parseJSON(data[i]);
-          var dValue = jsonData['value'];
-          if (groupedData[dValue] === undefined) {
-            groupedData[dValue] = [];
-            groupedData[dValue].push(jsonData);
-          } else {
-            groupedData[dValue].push(jsonData);
-          }
-        }
-
-    	  var grafie_count_groupedData = {};
-    	  var grafie_count_data  = doc.grafie_count_ss;
-
-    	  for (var i = 0; i < grafie_count_data.length; i++) {
-    	  	var jsonData = $.parseJSON(grafie_count_data[i]);
-      		var dValue = jsonData['value'];
-    	   	var dCount = jsonData['count'];
-          grafie_count_groupedData[dValue] = dCount;
-    	  }
-	  
-  	  var sortedGrafia = Object.keys(grafie_count_groupedData).sort(function(a,b){return grafie_count_groupedData[b]-grafie_count_groupedData[a]})
+		//quaderno_grafie_ss example: 
+		//{"value": "Croce", "title": "Antonino Lovecchio, Filosofia della prassi e filosofia dello spirito", "label": "Q 4, 28", "count":"3"}		
+		var struct_data = this.getStructData(doc.quaderno_grafie_ss);
 		
 	}
 
+    if (typeof(doc.grafie_count_ss) !== 'undefined') {
+		// grafie_count_ss example: {B. Croce: "55", Croce: "1050", Benedetto Croce: "11", B. CROCE: "1"}
+		var total_annotations = this.getTotalData(doc.grafie_count_ss);
+	  
+		// sorted_annotations example: ["Croce", "B. Croce", "Benedetto Croce", "B. CROCE"]
+		var sorted_annotations = Object.keys(total_annotations).sort(function(a,b){return total_annotations[b]-total_annotations[a]})
+		
+	}
+	
+	if (typeof(doc.quaderno_aggettivi_ss) !== 'undefined') {
+		var struct_data_agg = this.getStructData(doc.quaderno_aggettivi_ss);
+	}
+    if (typeof(doc.aggettivi_count_ss) !== 'undefined') {
+		// grafie_count_ss example: {B. Croce: "55", Croce: "1050", Benedetto Croce: "11", B. CROCE: "1"}
+		var total_annotations_agg = this.getTotalData(doc.aggettivi_count_ss);
+	  
+		// sorted_annotations example: ["Croce", "B. Croce", "Benedetto Croce", "B. CROCE"]
+		var sorted_annotations_agg = Object.keys(total_annotations_agg).sort(function(a,b){return total_annotations_agg[b]-total_annotations_agg[a]})
+		
+	}
 
     // Panel body
     output += '<div id="collapse' + doc.id + '"  data-docid="' + doc.id + '" class="panel-collapse collapse ' + openPanels + '">' +
@@ -239,8 +234,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
         try {
           var jsonData = $.parseJSON(data[i]);
 		  //var pieces = new Array();
-	      //for (var iKey in Object.keys(sortedGrafia)) {
-	       // pieces[iKey] = 'fulltext_t:\\"' + sortedGrafia[iKey] + '\\"';
+	      //for (var iKey in Object.keys(sorted_annotations)) {
+	       // pieces[iKey] = 'fulltext_t:\\"' + sorted_annotations[iKey] + '\\"';
 		  //}
 		  //var lnkData = '{"facet_query_solr":"' + pieces.join(' OR ') +' AND quaderno_s:\\"' + jsonData['value'] + '\\" AND nome_ss:\\"' + doc.nome_s + '\\""}';
           var lnkData = '{"facets_selector":{"quaderno_s":"' + jsonData['value'] + '","nome_ss":"' + doc.nome_s + '"}}';
@@ -258,29 +253,83 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     output += '</div>'
 
-    output += '<div class="col-lg-8">';
+    if (typeof(doc.quaderno_grafie_ss) !== 'undefined')    {
+		if (typeof(doc.quaderno_aggettivi_ss) === 'undefined') {
+			cols = 8;
+		} else {
+			cols = 4;
+		}
+		output += '<div class="col-lg-' + cols + '">';
+		output += '<p>Diverse <b>grafie del nome</b> utilizzate da Gramsci:</p>';
+		output += this.writeAnnotationStats(sorted_annotations,total_annotations, struct_data, doc, 'grafia_ss');
+        output += '</div>' 
+    }
 
-    if (typeof(doc.quaderno_grafie_ss) !== 'undefined')
-    {
-      output += '<p>Diverse grafie del nome utilizzate da Gramsci:</p>';
-      output += '<div class="gramsci-grafie" style="margin-bottom:5px">';
+    if (typeof(doc.quaderno_aggettivi_ss) !== 'undefined')    {
+		output += '<div class="col-lg-4">';
+		output += '<p><b>Aggettivazioni del nome</b> utilizzate da Gramsci:</p>';
+		output += this.writeAnnotationStats(sorted_annotations_agg,total_annotations_agg, struct_data_agg, doc, 'aggettivo_ss');
+        output += '</div>' 
+    }
+	
+    output +=   '</div>' +
+              '</div>'
 
-      for (var iKey in Object.keys(sortedGrafia)) {
-        var key  = sortedGrafia[iKey];
-		if (groupedData[key] == undefined) {
+    // close accordion div
+    output += '</div></div>';
+
+    return output;
+  },
+
+  getTotalData: function(total_data) {
+  	
+	var total_annotations = {};
+
+	for (var i = 0; i < total_data.length; i++) {
+		var jsonData = $.parseJSON(total_data[i]);
+		var dValue = jsonData['value'];
+		var dCount = jsonData['count'];
+		total_annotations[dValue] = dCount;
+	}
+	return total_annotations;
+  },
+
+  getStructData: function(data) {
+  	
+	var nData = data.length;
+	var struct_data = {};
+	for (var i = 0; i < nData; i++) {
+		var jsonData = $.parseJSON(data[i]);
+		var dValue = jsonData['value'];
+		if (struct_data[dValue] === undefined) {
+			struct_data[dValue] = [];
+			struct_data[dValue].push(jsonData);
+		} else {
+			struct_data[dValue].push(jsonData);
+		}
+	}
+	return struct_data;
+	
+  },
+
+  writeAnnotationStats: function(sorted_annotations,total_annotations, struct_data, doc, facet_out) {
+      var output = '<div class="gramsci-grafie" style="margin-bottom:5px">';
+
+      for (var iKey in Object.keys(sorted_annotations)) {
+        var key  = sorted_annotations[iKey];
+		if (struct_data[key] == undefined) {
 			console.debug("WARNING: Gragia " + key + 'no found! - ' + doc.uri_ss);
 			continue;
 		}
 		
-        var data = groupedData[key];
-  	    var grafia_count = grafie_count_groupedData[key];
+        var data = struct_data[key];
+  	    var grafia_count = total_annotations[key];
         var nGraphData = data.length;
 
         if (nGraphData > 1)
           data = sortResultsByJson(data, 'count', false);
 		
-		
-		var lnkGrafiaAll  = '{"facets_selector":{"grafia_ss":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
+		var lnkGrafiaAll  = '{"facets_selector":{"' + facet_out + '":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
 		lnkGrafiaAll = encodeURI(lnkGrafiaAll);
         output += '“' + key + '” <a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
 
@@ -294,7 +343,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var title = cGraphData['title'];
           var count = cGraphData['count'];
 
-          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","grafia_ss":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
+          var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","' + facet_out + '":"' + key + '","nome_ss":"' + doc.nome_s + '"}}';
           lnkData = encodeURI(lnkData);
 
           output +=   '<li><a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a></li>';
@@ -305,17 +354,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       }
 
       output += '</div>';
-    }
-
-    output += '</div>'
-
-    output +=   '</div>' +
-              '</div>'
-
-    // close accordion div
-    output += '</div></div>';
-
-    return output;
+	  
+	  return output;
   },
 
   hightlightText: function(doc) {
