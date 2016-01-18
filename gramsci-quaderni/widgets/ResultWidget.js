@@ -112,6 +112,33 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
 				  }
 			  }
+			  
+			  if (fqs[j].indexOf('aggettivo_ss') == 0) {
+				  var aggettivo = fqs[j].split('aggettivo_ss')[1].replace(':','').replace('"','').replace('"','');	
+				  
+				  if (doc.aggettivi_xpointer_ss !== undefined) {
+					  for (var k = 0; k < doc.aggettivi_xpointer_ss.length ; k++) {
+						  var json = $.parseJSON(doc.aggettivi_xpointer_ss[k]);
+						  g = json.value;
+						  if (aggettivo == g) {
+							  xpointers = json.xpointers.split("; ");
+							  for (var co = 0; co < xpointers.length; co++) {
+							  	  allXpointers.push(xpointers[co]);
+								  if (this.punditLive) {
+									  if (allXpointers.length > 10) {
+								   		 angular.element('#consolidatehook').scope().dwload(allXpointers);
+								 		 allXpointers = new Array();
+									  }	
+								  }								  
+							  }
+							  
+						  }
+					  
+					  }
+
+				  }
+			  }
+			  
 		  }	
 	  }
 	  
