@@ -196,8 +196,6 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 		output += '<p>' + '<a href="/index-media.html#' + lnkData + '" target="_blank">Vai ai media collegati.</a></p>';
 	}
 
-    output += '<div class="col-lg-12">';
-
     if (typeof(doc.quaderno_count_ss) !== 'undefined')
     {
       var data  = doc.quaderno_count_ss;
@@ -220,9 +218,10 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   	  } else {
   	  	  noteCountLabel = 'note';
   	  }
-
+	  output += '<div class="col-lg-12">';
   	  output += '<hr/><p>Il nome è presente ' + '<a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + totalCount + ' ' + totalCountLabel + '</a> nei Quaderni in ' + noteCount + ' ' + noteCountLabel + '.</p>';
-      output += '<hr/></div><div class="col-lg-4">';
+      output += '<hr/></div>';
+	  output += '<div class="col-lg-4">';
 	  output += '<p>I <b>riferimenti</b> a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
       output += '<div class="gramsci-quaderni panel-facet" style="margin-bottom:10px">';
 
@@ -248,9 +247,14 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
       }
 
       output += '</div>';
+	  output += '</div>'
+    
+	} else {
+		output += '<div class="col-lg-8">';
+    	output += '<p>Non esistono riferimenti diretti di Gramsci a questo nome.</p>';
+		output += '</div>';
+	
     }
-
-    output += '</div>'
 
     if (typeof(doc.quaderno_grafie_ss) !== 'undefined')    {
 		if (typeof(doc.quaderno_aggettivi_ss) === 'undefined') {
