@@ -223,7 +223,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   	  	  noteCountLabel = 'note';
   	  }
 
-  	  output += '<p>Il nome è presente ' + totalCount + ' ' + totalCountLabel + ' nei Quaderni in ' + '<a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + noteCount + ' ' + noteCountLabel + '</a>.</p>';
+  	  output += '<p>Il nome è presente ' + '<a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + totalCount + ' ' + totalCountLabel + '</a> nei Quaderni in ' + noteCount + ' ' + noteCountLabel + '.</p>';
       output += '<p>I <b>riferimenti</b> a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
       output += '<div class="gramsci-quaderni panel-facet" style="margin-bottom:10px">';
 
