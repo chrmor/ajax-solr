@@ -224,7 +224,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   	  }
 
   	  output += '<p>Il nome è presente ' + totalCount + ' ' + totalCountLabel + ' nei Quaderni in ' + '<a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + noteCount + ' ' + noteCountLabel + '</a>.</p>';
-      output += '<p>I riferimenti a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
+      output += '<p>I <b>riferimenti</b> a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
       output += '<div class="gramsci-quaderni panel-facet" style="margin-bottom:10px">';
 
       if (nData > 1)
@@ -260,14 +260,14 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 			cols = 4;
 		}
 		output += '<div class="col-lg-' + cols + '">';
-		output += '<p>Diverse <b>grafie del nome</b> utilizzate da Gramsci:</p>';
+		output += '<p><b>Diverse grafie</b> del nome utilizzate da Gramsci:</p>';
 		output += this.writeAnnotationStats(sorted_annotations,total_annotations, struct_data, doc, 'grafia_ss', true);
         output += '</div>' 
     }
 
     if (typeof(doc.quaderno_aggettivi_ss) !== 'undefined')    {
 		output += '<div class="col-lg-4">';
-		output += '<p>Parole derivate dal nome utilizzate da Gramsci:</p>';
+		output += '<p><b>Parole derivate</b> dal nome utilizzate da Gramsci:</p>';
 		output += this.writeAnnotationStats(sorted_annotations_agg,total_annotations_agg, struct_data_agg, doc, 'aggettivo_ss', false);
         output += '</div>' 
     }
