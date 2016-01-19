@@ -196,9 +196,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 		output += '<p>' + '<a href="/index-media.html#' + lnkData + '" target="_blank">Vai ai media collegati.</a></p>';
 	}
 
-    output += '<div class="col-lg-4">';
-
-
+    output += '<div class="col-lg-12">';
 
     if (typeof(doc.quaderno_count_ss) !== 'undefined')
     {
@@ -223,8 +221,9 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   	  	  noteCountLabel = 'note';
   	  }
 
-  	  output += '<p>Il nome è presente ' + '<a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + totalCount + ' ' + totalCountLabel + '</a> nei Quaderni in ' + noteCount + ' ' + noteCountLabel + '.</p>';
-      output += '<p>I <b>riferimenti</b> a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
+  	  output += '<hr/><p>Il nome è presente ' + '<a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + totalCount + ' ' + totalCountLabel + '</a> nei Quaderni in ' + noteCount + ' ' + noteCountLabel + '.</p>';
+      output += '<hr/></div><div class="col-lg-4">';
+	  output += '<p>I <b>riferimenti</b> a “' + doc.nome_s + '” sono così presenti all’interno dei singoli quaderni\:</p>';
       output += '<div class="gramsci-quaderni panel-facet" style="margin-bottom:10px">';
 
       if (nData > 1)
