@@ -316,7 +316,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   },
 
   writeAnnotationStats: function(sorted_annotations,total_annotations, struct_data, doc, facet_out, setQueryNome) {
-      var output = '<div class="gramsci-grafie panel-facet" style="margin-bottom:10px">';
+      var output = '<div class="gramsci-grafie" style="margin-bottom:5px">';
 
       for (var iKey in Object.keys(sorted_annotations)) {
         var key  = sorted_annotations[iKey];
@@ -339,8 +339,8 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 		lnkGrafiaAll = encodeURI(lnkGrafiaAll);
         output += '“' + key + '” <a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkGrafiaAll + '" target="_blank"><b>(' + grafia_count + ')</b></a>';
 
-//        output += '<div class="panel-facet" style="margin-bottom:15px">';
-//        output += '<ul style="padding-left:18px">';
+        output += '<div class="panel-facet" style="margin-bottom:15px">';
+        output += '<ul style="padding-left:18px">';
 
         for (var t = 0; t < nGraphData; t++) {
           var cGraphData = data[t];
@@ -352,11 +352,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
           var lnkData  = '{"facets_selector":{"label_ss":"' + note + '","' + facet_out + '":"' + key + '"' + queryNome + '}}';
           lnkData = encodeURI(lnkData);
 
-          output +=   '<a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a><br/>';
+          output +=   '<li><a href="http://quaderni.gramsciproject.org/index-quaderni-pundit.html#' + lnkData + '" target="_blank">' + note + ' - ' + title + ' <b>(' + count + ')</b></a><br/></li>';
         }
 
-//        output += '</ul>';
-//        output += '</div>';
+        output += '</ul>';
+        output += '</div>';
       }
 
       output += '</div>';
