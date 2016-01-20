@@ -1,8 +1,3 @@
-.panel-facet br {
-    display: block;
-    height: 8px;
-    content: " ";
-}
 
 * {
   padding: 0;
@@ -100,6 +95,22 @@ a:hover {
     overflow-y: scroll;
 }
 
+.panel-facet br {
+    display: block;
+    height: 8px;
+    content: " ";
+}
+
+.panel-facet-long {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.panel-facet-long br {
+    display: block;
+    height: 8px;
+    content: " ";
+}
 
 /* left */
 
