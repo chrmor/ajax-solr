@@ -4,6 +4,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
   start: 0,
   showAnnotations: true,
   punditlive: false,
+  showAllAnnotations: false,
 
   beforeRequest: function () {
     $(this.target).html($('<img>').attr('src', 'gramsci-quaderni/images/ajax-loader.gif'));
@@ -79,51 +80,24 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	  /*CONSOLIDATION OF NNOTATIONS*/
 	  //Support for consolidation of annotations via Pundit. This is executed only if angular is activated
 	  if (this.showAnnotations && typeof angular != 'undefined') {
+		  
+		  
+		  var nomeStruct = new Object();
+		  
 		  var fqs = this.manager.store.values('fq');
 		  for (var j = 0; j<fqs.length; j++) {
 			  //If the the facet nome_ss is selected...
 			  if (fqs[j].indexOf('nome_ss') == 0) {
+				  var grafie = new Array();
 				  var nome = fqs[j].split('nome_ss')[1].replace(':','').replace('"','').replace('"','');	
 				  for (var k = 0; k<fqs.length; k++) {
 					  if (fqs[k].indexOf('grafia_ss') == 0) {
-					  	var grafia = fqs[k].split('grafia_ss')[1].replace(':','').replace('"','').replace('"','');	
+					  	var grafia = fqs[k].split('grafia_ss')[1].replace(':','').replace('"','').replace('"','');
+						grafie.push(grafia);
 					  }	
 				  }
-				  
-				  if (doc.grafie_xpointer_ss !== undefined) {
-					  for (var k = 0; k < doc.grafie_xpointer_ss.length ; k++) {
-						  var json = $.parseJSON(doc.grafie_xpointer_ss[k]);
-						  n = json.nome;
-						  g = json.value;
-						  if (n == nome && (grafia == undefined || grafia == g)) {
-							  xpointers = json.xpointers.split("; ");
-							  for (var co = 0; co < xpointers.length; co++) {
-								  
-				  		        var item = {
-				  		            uri: xpointers[co],
-				  		            label: nome,
-				  		            description: nome,
-				  		            type: ["http://purl.org/pundit/ont/ao#fragment-text"],
-									link: "http://nomi.gramsciproject.org/index-nomi.html#" + encodeURIComponent('{"facets_selector":{"nome_s":"' + nome + '"}}')
-				  		        };
-								  
-							  	  allXpointers.push(xpointers[co]);
-								  allItems.push(item);
-								  if (this.punditLive) {
-									  if (allXpointers.length > 10) {
-								   		 angular.element('#consolidatehook').scope().dwload(allXpointers);
-								 		 allXpointers = new Array();
-									  }	
-								  }								  
-							  }
-							  
-						  }
-					  
-					  }
-
-				  }
+				  nomeStruct[nome] = grafie;
 			  }
-			  
 			  if (fqs[j].indexOf('aggettivo_ss') == 0) {
 				  var aggettivo = fqs[j].split('aggettivo_ss')[1].replace(':','').replace('"','').replace('"','');	
 				  
@@ -149,8 +123,41 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
 				  }
 			  }
-			  
 		  }	
+		  
+		  if (doc.grafie_xpointer_ss !== undefined) {
+			  for (var k = 0; k < doc.grafie_xpointer_ss.length ; k++) {
+				  var json = $.parseJSON(doc.grafie_xpointer_ss[k]);
+				  n = json.nome;
+				  g = json.value;
+				  if (this.showAllAnnotations || (nomeStruct !== undefined && nomeStruct[n] && (nomeStruct[n] || $.inArray(g, nomeStruct[n])))) {
+					  xpointers = json.xpointers.split("; ");
+					  for (var co = 0; co < xpointers.length; co++) {
+						  
+		  		        var item = {
+		  		            uri: xpointers[co],
+		  		            label: n,
+		  		            description: n,
+		  		            type: ["http://purl.org/pundit/ont/ao#fragment-text"],
+							link: "http://nomi.gramsciproject.org/index-nomi.html#" + encodeURIComponent('{"facets_selector":{"nome_s":"' + n + '"}}')
+		  		        };
+						  
+					  	  allXpointers.push(xpointers[co]);
+						  allItems.push(item);
+						  if (this.punditLive) {
+							  if (allXpointers.length > 10) {
+						   		 angular.element('#consolidatehook').scope().dwload(allXpointers);
+						 		 allXpointers = new Array();
+							  }	
+						  }								  
+					  }
+					  
+				  }
+			  
+			  }
+
+		  }
+		  
 	  }
 	  
     }

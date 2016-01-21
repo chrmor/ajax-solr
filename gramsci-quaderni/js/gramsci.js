@@ -9,7 +9,9 @@ var Manager;
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
-      target: '#docs'
+      target: '#docs',
+	  showAnnotations: true,
+	  showAllAnnotations: false
     }));
     Manager.addWidget(new AjaxSolr.PagerWidget({
       id: 'pager',
