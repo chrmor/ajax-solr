@@ -2,6 +2,7 @@
 AjaxSolr.ApiManager = AjaxSolr.Manager.extend({
 
     processURI: function(uri, facetsList) {
+		
         if (typeof(location.hash) !== "undefined" && location.hash !== "" && (typeof(facetsList) !== "undefined" && facetsList.length > 0)) {
             var jsonData, data = null;
             var paramLocation  = location.hash.indexOf('?');
@@ -12,7 +13,7 @@ AjaxSolr.ApiManager = AjaxSolr.Manager.extend({
                 data = location.hash.substring(1);
             }
 
-            var decodedData     = decodeURIComponent(data);
+            var decodedData = decodeURIComponent(data);
 
             try {
                 jsonData = JSON.parse(decodedData);
@@ -41,6 +42,8 @@ AjaxSolr.ApiManager = AjaxSolr.Manager.extend({
 				}
                 
                 location.hash = '';
+            } else if (jsonData.hasOwnProperty('annotations')) {
+            	Manager.widgets.result.showAllAnnotations = jsonData.annotations;
             }
         }
     }
