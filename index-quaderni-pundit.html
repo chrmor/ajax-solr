@@ -22,6 +22,8 @@
 
 <body>
 	
+	
+	
 	<script src=http://demo-cloud.as.thepund.it/pundit2/build/scripts/6caf7295.libs.js></script>
 	<script src=http://demo-cloud.as.thepund.it/pundit2/build/scripts/7840faf8.pundit2.js></script>
 	<style>.pnd-cons {
@@ -34,6 +36,7 @@
       // in new ones!
       $controllerProvider.allowGlobals();
     }]);
+	var annotationElements = new Array();
 	var punditConfig = {
 	    debugAllModules: false,
 		annotationServerBaseURL: 'http://as.thepund.it:8080/annotationserver/',
@@ -48,7 +51,7 @@
 
 	};
 	var ConsolidationDemoCtrl = function($scope, $q, Consolidation, Annotation, AnnotationsExchange,
-	    TextFragmentAnnotator, ItemsExchange, Item) {
+	    TextFragmentAnnotator, ItemsExchange, Item, EventDispatcher) {
 
 	    $scope.$watch(function() {
 	        return ItemsExchange.getItems();
@@ -86,7 +89,7 @@
 		
 	    };
 
-
+		//Consolidates creating a fake Pundit Item
 	    $scope.consolidate = function(xpointers) {
 			var items = new Array();
 			for (var i = 0; i < xpointers.length; i++) {
@@ -100,6 +103,49 @@
 				items.push(structItem);
 			}
 	        Consolidation.consolidate(items);
+			
+	    };
+
+		//Consolidates an already existing Pundit JSON Item
+	    $scope.consolidateItems = function(items) {
+			var punditItems = new Array();
+			for (var i = 0; i < items.length; i++) {
+		        var item = items[i];
+				var structItem = new Item(item.uri, item);	
+				punditItems.push(structItem);
+			}
+			EventDispatcher.addListener('Consolidation.consolidate',function(e) {
+				var id = 0;
+				for (xpointer in Consolidation.getItems()) {
+					
+					var elementId = TextFragmentAnnotator.getFragmentIdByUri(xpointer)[0];
+					var punditItem = Consolidation.getItems()[xpointer]; 
+					//$('.' + elementId).balloon({contents: 'Pippo'});
+					var node = $('.' + elementId);
+					var found = false;
+					for (s in node.children()) {
+						if (node.children()[s].className == "pundit-annotation") {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						var pid = 'pundit-annotation-' + id;
+						node.append('<span id="' + pid + '" class="pundit-annotation">[ Si riferisce a: <a target="_blank"  href="' + punditItem.link + '">' + punditItem.label+ '<a/>]</span>');
+						node.attr('ref',pid);	
+						$('#' + pid).hide();
+						node.click(function() {
+							var pid = $(this).attr('ref');
+							$('#' + pid).toggle();
+						});
+						id++;
+					}
+					
+				}		
+			});
+	        Consolidation.consolidate(punditItems);
+			
+			
 	    };
 
 	    $scope.go = function() {
@@ -125,7 +171,9 @@
 	        return Consolidation.isConsolidated(item);
 	    };
 
-	}</script>
+	}
+	
+	</script>
 	
 	<div data-ng-app=Pundit2 class="pundit2 pnd-wrp">
 		<div id="consolidatehook" ng-controller=ConsolidationDemoCtrl class="container clearfix">
@@ -321,5 +369,10 @@
       ga('create', 'UA-61479510-1', 'auto');
       ga('send', 'pageview');
     </script>
+	<script src="shared/jquery.balloon/jquery.balloon.js"></script>
+
+
+	
+	  
 </body>
 </html>
