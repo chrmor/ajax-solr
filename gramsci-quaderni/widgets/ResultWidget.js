@@ -130,7 +130,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 				  var json = $.parseJSON(doc.grafie_xpointer_ss[k]);
 				  n = json.nome;
 				  g = json.value;
-				  if (this.showAllAnnotations || (nomeStruct !== undefined && nomeStruct[n] && (nomeStruct[n] || ($.inArray(g, nomeStruct[n]) != -1) ))) {
+				  if (this.showAllAnnotations || ( (nomeStruct[n] !== undefined && nomeStruct[n].length == 0)  ||  ($.inArray(g, nomeStruct[n]) != -1) ) ) {
 					  xpointers = json.xpointers.split("; ");
 					  for (var co = 0; co < xpointers.length; co++) {
 						  
