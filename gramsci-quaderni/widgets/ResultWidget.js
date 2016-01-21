@@ -47,6 +47,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	/*CONSOLIDATION OF NNOTATIONS*/
 	if (this.showAnnotations) {
 		var allXpointers = new Array();
+		var allItems = new Array();
 	    if (typeof angular != 'undefined') {
 	 		 angular.element('#consolidatehook').scope().wipe();
 	    }	
@@ -97,7 +98,17 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 						  if (n == nome && (grafia == undefined || grafia == g)) {
 							  xpointers = json.xpointers.split("; ");
 							  for (var co = 0; co < xpointers.length; co++) {
+								  
+				  		        var item = {
+				  		            uri: xpointers[co],
+				  		            label: nome,
+				  		            description: nome,
+				  		            type: ["http://purl.org/pundit/ont/ao#fragment-text"],
+									link: "http://nomi.gramsciproject.org/index-nomi.html#" + encodeURIComponent('{"facets_selector":{"nome_s":"' + nome + '"}}')
+				  		        };
+								  
 							  	  allXpointers.push(xpointers[co]);
+								  allItems.push(item);
 								  if (this.punditLive) {
 									  if (allXpointers.length > 10) {
 								   		 angular.element('#consolidatehook').scope().dwload(allXpointers);
@@ -152,7 +163,11 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 	}
   	/*CONSOLIDATION OF NNOTATIONS*/
 	if (this.showAnnotations && !this.punditLive && typeof angular != 'undefined') {
-			angular.element('#consolidatehook').scope().consolidate(allXpointers);
+			
+			angular.element('#consolidatehook').scope().consolidateItems(allItems,allXpointers);
+			//var punditItems = angular.element('#consolidatehook').scope().addOnMouseOver();
+			
+			//angular.element('#consolidatehook').scope().consolidate(allXpointers);
 	}
 	
 	
