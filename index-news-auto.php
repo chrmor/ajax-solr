@@ -12,21 +12,27 @@ function microtime_float()
 function addFacets($tagFacet, $placeHolder, $last, $minCount, $prefix, $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, $arrangeHierarchichal) {
 	
 	global $conf, $html;
-
+	$facets = [];
 	
-	$solrServer = "http://localhost:8080/solr-leaks-auto/";
-	//$solrServer = "http://gramsciproject.org:8080/solr-leaks-auto/";
+	//$solrServer = "http://localhost:8080/solr-leaks-auto/";
+	$solrServer = "http://gramsciproject.org:8080/solr-leaks-auto/";
 	$solrQuery = $solrServer . 'news/select?q=*%3A*&start=1&wt=json&indent=true&facet=true&facet.query=*%3A*&facet.mincount=' . $minCount . '&facet.field=' . $tagFacet;
 	//echo $solrQuery . '<br/>';
-	$list_str =		
-	file_get_contents($solrQuery);
-	
+	$list_str =	file_get_contents($solrQuery);
+	//echo $list_str . '<br/>';
 	$p = split('"facet_fields":',$list_str);
+	//echo $tagFacet . '<br/>';
+	//echo $p[1] . '<br/>';
 	$p = split('"'. $tagFacet .'":',$p[1]);
+	//echo $p[1] . '<br/>';
+	
+	
 	
 	$p = split(']',$p[1]);
 	$list = str_replace('[','',$p[0]);
 	$list = str_replace(' ','',$list);
+	
+	
 	
 	$arr = split('"',$list);
 	$i = 0;
@@ -159,12 +165,14 @@ $time_start = microtime_float();
 $facetsBlackList = array();
 $highPriorityFacets = array();
 $numberOfFacetsLimit = 50;
-addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,$facetscount,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, true);
+//addFacets('rdf_type_ss',"<!--auto-type-facets-here-->",0,$facetscount,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, true);
+addFacets('tagType_ss',"<!--auto-type-facets-here-->",0,$facetscount,'type_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, false);
 
 $facetsBlackList = array();
 $highPriorityFacets = array();
 $numberOfFacetsLimit = 50;
-addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,$facetscount,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, false);
+//addFacets('wikipedia_category_ss',"<!--auto-cat-facets-here-->",1,$facetscount,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, false);
+addFacets('tagCategory_ss',"<!--auto-cat-facets-here-->",1,$facetscount,'cat_', $facetsBlackList, $highPriorityFacets, $numberOfFacetsLimit, false);
 
 //echo "Updating js confign file...<br/>";
 $time_start = microtime_float();

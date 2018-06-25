@@ -5,7 +5,8 @@ var Manager;
   $(function () {
     Manager = new AjaxSolr.ApiManager({
 	  //solrUrl: 'http://localhost:8983/solr/'
-      solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-quaderni/'
+     // solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-quaderni/'
+      solrUrl: 'http://193.205.129.92:8080/solr-gramsci-quaderni/' 
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',

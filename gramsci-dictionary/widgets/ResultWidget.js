@@ -198,6 +198,7 @@ AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
 
     var entryFile;
     var localName = doc.uri_ss[0].split("/")[doc.uri_ss[0].split("/").length - 1];
+    localName = localName.replace("+","%20");
     entryFile = "gramsci-dictionary/dictionary_entries/" + localName + "/index.html";
 
     $.ajax({

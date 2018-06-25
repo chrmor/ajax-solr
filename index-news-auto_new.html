@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ESWC Demo: Data crowdsourcing with Pundit 2.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="news-auto/css/iswcdemo.css">
+  <!-- ><link rel="stylesheet" type="text/css" href="shared/css/gramsci.css"> -->
+  <link rel="stylesheet" type="text/css" href="shared/bootstrap-3.1.1-dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="shared/css/awesome-bootstrap-checkbox.css">
+
+</head>
+
+<body>
+    <a name="top-page"></a>
+    <div class="container-fluid">
+      <div class="col-md-10">
+        <h1>New York Times science news <small>Automatic facets demo</small></h1>
+		<h3>How does it work? </h3>
+		<h5><p>Facets in this page represent entities (resources) mentioned in the documents. On the left they are grouped by most recurring types, while on the right they are grouped by most recurring wikipedia categories. </p>Facets are automatically extracted with the help of the <a href="https://dandelion.eu/docs/api/datatxt/nex/v1/">Dandelion Entity Recognition API</a></h5>
+		<!--<div style="float:right"><a href="#" onclick="toggleOrQuery()">Toggle OR-ed filter</a> (Alfa)</div> -->
+      </div>
+	  <div class="col-md-2"><br/><span><a href="http://semedia.univpm.it"><img src="news-auto/images/semedia_logo.png" width="60"/></span><br/><span><a href="http://semedia.dii.univpm.it">Semedia - UNIVPM</a></span><br/><br/>powered by<br/><a href="http://dandelion.eu"><img src="news-auto/images/dandelion-logo.png" width="120"/></a><br/><br/></div>
+    </div>
+	
+    <div class="panel panel-default">
+	<div>
+      <div class="panel-body">
+        <div class="container-fluid">
+
+          <div class="col-md-3">
+		             <p class="h5">Search by annotated entities</p>
+		             <ul id="dbp_search">
+		               <input class="form-control" type="dbp_text" id="dbp_query" name="dbp_query" autocomplete="off">
+		             </ul>
+					 <hr/>
+					 <!--auto-type-facets-here-->
+<p class="h5">Person</p>
+<div class="tagcloud panel-facet" id="type_Person_ss"></div>
+<hr/>
+<p class="h5">Company</p>
+<div class="tagcloud panel-facet" id="type_Company_ss"></div>
+<hr/>
+<p class="h5">City</p>
+<div class="tagcloud panel-facet" id="type_City_ss"></div>
+<hr/>
+<p class="h5">OfficeHolder</p>
+<div class="tagcloud panel-facet" id="type_OfficeHolder_ss"></div>
+<hr/>
+<p class="h5">Country</p>
+<div class="tagcloud panel-facet" id="type_Country_ss"></div>
+<hr/>
+<p class="h5">MusicalArtist</p>
+<div class="tagcloud panel-facet" id="type_MusicalArtist_ss"></div>
+<hr/>
+<p class="h5">Place</p>
+<div class="tagcloud panel-facet" id="type_Place_ss"></div>
+<hr/>
+<p class="h5">University</p>
+<div class="tagcloud panel-facet" id="type_University_ss"></div>
+<hr/>
+<p class="h5">President</p>
+<div class="tagcloud panel-facet" id="type_President_ss"></div>
+<hr/>
+<p class="h5">Organisation</p>
+<div class="tagcloud panel-facet" id="type_Organisation_ss"></div>
+<hr/>
+<p class="h5">PopulatedPlace</p>
+<div class="tagcloud panel-facet" id="type_PopulatedPlace_ss"></div>
+<hr/>
+<p class="h5">Politician</p>
+<div class="tagcloud panel-facet" id="type_Politician_ss"></div>
+<hr/>
+<p class="h5">Building</p>
+<div class="tagcloud panel-facet" id="type_Building_ss"></div>
+<hr/>
+<p class="h5">Event</p>
+<div class="tagcloud panel-facet" id="type_Event_ss"></div>
+<hr/>
+<p class="h5">Newspaper</p>
+<div class="tagcloud panel-facet" id="type_Newspaper_ss"></div>
+<hr/>
+
+          </div>
+
+          <div class="col-md-6">
+            <hr/>
+            <div id="result">
+              <div id="navigation">
+                <ul id="pager" class="pagination"></ul>
+                <div id="pager-header"></div>
+              </div>
+              <hr/>
+              <div id="docs"></div>
+            </div>
+          </div>
+		  <div class="col-md-3">
+              <p class="h5">Selected Facets</p>
+              <ul id="selection"></ul>
+              <hr/>
+              <ul class="h5" id="search">
+              	<label class="control-label">Text search:</label>
+                <input class="form-control" type="text" id="query" name="query" autocomplete="off">
+			  </ul>
+			  <hr/>
+			  <!--auto-cat-facets-here-->
+<p class="h5">Living people</p>
+<div class="tagcloud panel-facet" id="cat_Living_people_ss"></div>
+<hr/>
+<p class="h5">Grammy Award-winning artists</p>
+<div class="tagcloud panel-facet" id="cat_Grammy_Award-winning_artists_ss"></div>
+<hr/>
+<p class="h5">American people of Irish descent</p>
+<div class="tagcloud panel-facet" id="cat_American_people_of_Irish_descent_ss"></div>
+<hr/>
+<p class="h5">Member states of the United Nations</p>
+<div class="tagcloud panel-facet" id="cat_Member_states_of_the_United_Nations_ss"></div>
+<hr/>
+<p class="h5">Companies listed on the New York Stock Exchange</p>
+<div class="tagcloud panel-facet" id="cat_Companies_listed_on_the_New_York_Stock_Exchange_ss"></div>
+<hr/>
+<p class="h5">American people of English descent</p>
+<div class="tagcloud panel-facet" id="cat_American_people_of_English_descent_ss"></div>
+<hr/>
+<p class="h5">American Roman Catholics</p>
+<div class="tagcloud panel-facet" id="cat_American_Roman_Catholics_ss"></div>
+<hr/>
+<p class="h5">Republics</p>
+<div class="tagcloud panel-facet" id="cat_Republics_ss"></div>
+<hr/>
+<p class="h5">Liberal democracies</p>
+<div class="tagcloud panel-facet" id="cat_Liberal_democracies_ss"></div>
+<hr/>
+<p class="h5">Member states of the Organisation of Islamic Cooperation</p>
+<div class="tagcloud panel-facet" id="cat_Member_states_of_the_Organisation_of_Islamic_Cooperation_ss"></div>
+<hr/>
+<p class="h5">Former British colonies</p>
+<div class="tagcloud panel-facet" id="cat_Former_British_colonies_ss"></div>
+<hr/>
+<p class="h5">Countries in Europe</p>
+<div class="tagcloud panel-facet" id="cat_Countries_in_Europe_ss"></div>
+<hr/>
+<p class="h5">Member states of the Union for the Mediterranean</p>
+<div class="tagcloud panel-facet" id="cat_Member_states_of_the_Union_for_the_Mediterranean_ss"></div>
+<hr/>
+<p class="h5">G20 nations</p>
+<div class="tagcloud panel-facet" id="cat_G20_nations_ss"></div>
+<hr/>
+<p class="h5">G15 nations</p>
+<div class="tagcloud panel-facet" id="cat_G15_nations_ss"></div>
+<hr/>
+			  
+		  </div>
+        </div>
+      </div>
+    </div>
+	<div class="panel panel-footer">
+		<div class="panel-body">
+			<p><h4>Contacts:</p><p>christian.morbidoni@gmail.com</h4></p>
+		</div>
+	</div>	
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+    <script src="gramsci-media/css/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+    <script src="core/Core.js"></script>
+    <script src="core/AbstractManager.js"></script>
+    <script src="managers/Manager.jquery.js"></script>
+    <script src="core/Parameter.js"></script>
+    <script src="core/ParameterStore.js"></script>
+    <script src="core/AbstractWidget.js"></script>
+    <script src="news-auto/widgets/ResultWidget.js"></script>
+    <script src="widgets/jquery/PagerWidget.js"></script>
+    <script src="core/AbstractFacetWidget.js"></script>
+    <script src="news-auto/widgets/TagcloudWidget.js"></script>
+    <script src="news-auto/widgets/FacetsWidget.js"></script>
+    <script src="news-auto/widgets/SmallFacetsWidget.js"></script>
+	<script src="news-auto/widgets/WikipediaSmallFacetsWidget.js"></script>
+	<script src="news-auto/widgets/DataSmallFacetsWidget.js"></script>
+    <script src="news-auto/widgets/CurrentSearchWidget.9.js"></script>
+    <script src="core/AbstractTextWidget.js"></script>
+    <script src="news-auto/js/unorm.js"></script>
+    <script src="news-auto/widgets/AutocompleteWidget.js"></script>
+    <script src="news-auto/widgets/CountryCodeWidget.js"></script>
+    <script src="news-auto/widgets/CalendarWidget.js"></script>
+    <script src="news-auto/js/demo.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-61479510-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
+</html>

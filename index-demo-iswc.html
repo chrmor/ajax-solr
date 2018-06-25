@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ESWC Demo: Data crowdsourcing with Pundit 2.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="demo-iswc/css/iswcdemo.css">
+  <!-- ><link rel="stylesheet" type="text/css" href="shared/css/gramsci.css"> -->
+  <link rel="stylesheet" type="text/css" href="shared/bootstrap-3.1.1-dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="shared/css/awesome-bootstrap-checkbox.css">
+
+</head>
+
+<body>
+    <a name="top-page"></a>
+    <div class="container-fluid">
+      <div class="col-md-10">
+        <h1>Automatic facets demo</h1>
+		<h3>How does it work? </h3>
+		<h5><p>Facets in this page represent entities (resources) mentioned in the documents. On the left they are grouped by most recurring types, while on the right they are grouped by most recurring wikipedia categories. </p>Facets are automatically extracted with the help of the <a href="https://dandelion.eu/docs/api/datatxt/nex/v1/">Dandelion Entity Recognition API</a></h5>
+		<!--<div style="float:right"><a href="#" onclick="toggleOrQuery()">Toggle OR-ed filter</a> (Alfa)</div> -->
+      </div>
+	  <div class="col-md-2"><br/><span><a href="http://semedia.univpm.it"><img src="demo-iswc/images/semedia_logo.png" width="60"/></span><br/><span><a href="http://semedia.dii.univpm.it">Semedia - UNIVPM</a></span><br/><br/>powered by<br/><a href="http://dandelion.eu"><img src="demo-iswc/images/dandelion-logo.png" width="120"/></a><br/><br/></div>
+    </div>
+	
+    <div class="panel panel-default">
+	<div>
+      <div class="panel-body">
+        <div class="container-fluid">
+
+          <div class="col-md-3">
+		             <p class="h5">Search by annotated entities</p>
+		             <ul id="dbp_search">
+		               <input class="form-control" type="dbp_text" id="dbp_query" name="dbp_query" autocomplete="off">
+		             </ul>
+					 <hr/>
+					 <!--auto-type-facets-here-->
+<p class="h5">Country</p>
+<div class="tagcloud panel-facet" id="type_Country_ss"></div>
+<hr/>
+<p class="h5">Politician</p>
+<div class="tagcloud panel-facet" id="type_Politician_ss"></div>
+<hr/>
+<p class="h5">Artist</p>
+<div class="tagcloud panel-facet" id="type_Artist_ss"></div>
+<hr/>
+<p class="h5">Writer</p>
+<div class="tagcloud panel-facet" id="type_Writer_ss"></div>
+<hr/>
+<p class="h5">Settlement</p>
+<div class="tagcloud panel-facet" id="type_Settlement_ss"></div>
+<hr/>
+<p class="h5">Monarch</p>
+<div class="tagcloud panel-facet" id="type_Monarch_ss"></div>
+<hr/>
+<p class="h5">Place</p>
+<div class="tagcloud panel-facet" id="type_Place_ss"></div>
+<hr/>
+<p class="h5">Event</p>
+<div class="tagcloud panel-facet" id="type_Event_ss"></div>
+<hr/>
+<p class="h5">Philosopher</p>
+<div class="tagcloud panel-facet" id="type_Philosopher_ss"></div>
+<hr/>
+<p class="h5">AdministrativeRegion</p>
+<div class="tagcloud panel-facet" id="type_AdministrativeRegion_ss"></div>
+<hr/>
+<p class="h5">MilitaryConflict</p>
+<div class="tagcloud panel-facet" id="type_MilitaryConflict_ss"></div>
+<hr/>
+<p class="h5">Language</p>
+<div class="tagcloud panel-facet" id="type_Language_ss"></div>
+<hr/>
+<p class="h5">Book</p>
+<div class="tagcloud panel-facet" id="type_Book_ss"></div>
+<hr/>
+<p class="h5">OfficeHolder</p>
+<div class="tagcloud panel-facet" id="type_OfficeHolder_ss"></div>
+<hr/>
+<p class="h5">Cleric</p>
+<div class="tagcloud panel-facet" id="type_Cleric_ss"></div>
+<hr/>
+<p class="h5">PeriodicalLiterature</p>
+<div class="tagcloud panel-facet" id="type_PeriodicalLiterature_ss"></div>
+<hr/>
+<p class="h5">PoliticalParty</p>
+<div class="tagcloud panel-facet" id="type_PoliticalParty_ss"></div>
+<hr/>
+<p class="h5">FictionalCharacter</p>
+<div class="tagcloud panel-facet" id="type_FictionalCharacter_ss"></div>
+<hr/>
+<p class="h5">Island</p>
+<div class="tagcloud panel-facet" id="type_Island_ss"></div>
+<hr/>
+<p class="h5">Scientist</p>
+<div class="tagcloud panel-facet" id="type_Scientist_ss"></div>
+<hr/>
+<p class="h5">Building</p>
+<div class="tagcloud panel-facet" id="type_Building_ss"></div>
+<hr/>
+<p class="h5">Company</p>
+<div class="tagcloud panel-facet" id="type_Company_ss"></div>
+<hr/>
+<p class="h5">Saint</p>
+<div class="tagcloud panel-facet" id="type_Saint_ss"></div>
+<hr/>
+<p class="h5">Work</p>
+<div class="tagcloud panel-facet" id="type_Work_ss"></div>
+<hr/>
+<p class="h5">Agent</p>
+<div class="tagcloud panel-facet" id="type_Agent_ss"></div>
+<hr/>
+<p class="h5">Disease</p>
+<div class="tagcloud panel-facet" id="type_Disease_ss"></div>
+<hr/>
+<p class="h5">EthnicGroup</p>
+<div class="tagcloud panel-facet" id="type_EthnicGroup_ss"></div>
+<hr/>
+<p class="h5">Continent</p>
+<div class="tagcloud panel-facet" id="type_Continent_ss"></div>
+<hr/>
+<p class="h5">Lake</p>
+<div class="tagcloud panel-facet" id="type_Lake_ss"></div>
+<hr/>
+<p class="h5">MilitaryPerson</p>
+<div class="tagcloud panel-facet" id="type_MilitaryPerson_ss"></div>
+<hr/>
+<p class="h5">Museum</p>
+<div class="tagcloud panel-facet" id="type_Museum_ss"></div>
+<hr/>
+<p class="h5">Athlete</p>
+<div class="tagcloud panel-facet" id="type_Athlete_ss"></div>
+<hr/>
+<p class="h5">MilitaryUnit</p>
+<div class="tagcloud panel-facet" id="type_MilitaryUnit_ss"></div>
+<hr/>
+<p class="h5">Newspaper</p>
+<div class="tagcloud panel-facet" id="type_Newspaper_ss"></div>
+<hr/>
+<p class="h5">ChemicalCompound</p>
+<div class="tagcloud panel-facet" id="type_ChemicalCompound_ss"></div>
+<hr/>
+<p class="h5">ChemicalSubstance</p>
+<div class="tagcloud panel-facet" id="type_ChemicalSubstance_ss"></div>
+<hr/>
+<p class="h5">FloweringPlant</p>
+<div class="tagcloud panel-facet" id="type_FloweringPlant_ss"></div>
+<hr/>
+<p class="h5">Pope</p>
+<div class="tagcloud panel-facet" id="type_Pope_ss"></div>
+<hr/>
+<p class="h5">Royalty</p>
+<div class="tagcloud panel-facet" id="type_Royalty_ss"></div>
+<hr/>
+<p class="h5">Album</p>
+<div class="tagcloud panel-facet" id="type_Album_ss"></div>
+<hr/>
+<p class="h5">AnatomicalStructure</p>
+<div class="tagcloud panel-facet" id="type_AnatomicalStructure_ss"></div>
+<hr/>
+<p class="h5">BritishRoyalty</p>
+<div class="tagcloud panel-facet" id="type_BritishRoyalty_ss"></div>
+<hr/>
+<p class="h5">Mammal</p>
+<div class="tagcloud panel-facet" id="type_Mammal_ss"></div>
+<hr/>
+<p class="h5">TelevisionShow</p>
+<div class="tagcloud panel-facet" id="type_TelevisionShow_ss"></div>
+<hr/>
+<p class="h5">Artwork</p>
+<div class="tagcloud panel-facet" id="type_Artwork_ss"></div>
+<hr/>
+<p class="h5">ChristianBishop</p>
+<div class="tagcloud panel-facet" id="type_ChristianBishop_ss"></div>
+<hr/>
+<p class="h5">Currency</p>
+<div class="tagcloud panel-facet" id="type_Currency_ss"></div>
+<hr/>
+<p class="h5">MusicalArtist</p>
+<div class="tagcloud panel-facet" id="type_MusicalArtist_ss"></div>
+<hr/>
+<p class="h5">NaturalPlace</p>
+<div class="tagcloud panel-facet" id="type_NaturalPlace_ss"></div>
+<hr/>
+<p class="h5">SportsEvent</p>
+<div class="tagcloud panel-facet" id="type_SportsEvent_ss"></div>
+<hr/>
+<p class="h5">WorldHeritageSite</p>
+<div class="tagcloud panel-facet" id="type_WorldHeritageSite_ss"></div>
+<hr/>
+
+          </div>
+
+          <div class="col-md-6">
+            <hr/>
+            <div id="result">
+              <div id="navigation">
+                <ul id="pager" class="pagination"></ul>
+                <div id="pager-header"></div>
+              </div>
+              <hr/>
+              <div id="docs"></div>
+            </div>
+          </div>
+		  <div class="col-md-3">
+              <p class="h5">Selected Facets</p>
+              <ul id="selection"></ul>
+              <hr/>
+              <ul class="h5" id="search">
+              	<label class="control-label">Text search:</label>
+                <input class="form-control" type="text" id="query" name="query" autocomplete="off">
+			  </ul>
+			  <hr/>
+			  <!--auto-cat-facets-here-->
+<p class="h5">Decorati con l’Ordine dei Santi Maurizio e Lazzaro</p>
+<div class="tagcloud panel-facet" id="cat_Decorati_con_l’Ordine_dei_Santi_Maurizio_e_Lazzaro_ss"></div>
+<hr/>
+<p class="h5">Personalità del Risorgimento</p>
+<div class="tagcloud panel-facet" id="cat_Personalità_del_Risorgimento_ss"></div>
+<hr/>
+<p class="h5">Personaggi citati nella Divina Commedia Inferno</p>
+<div class="tagcloud panel-facet" id="cat_Personaggi_citati_nella_Divina_Commedia_Inferno_ss"></div>
+<hr/>
+<p class="h5">Scuole e correnti filosofiche</p>
+<div class="tagcloud panel-facet" id="cat_Scuole_e_correnti_filosofiche_ss"></div>
+<hr/>
+<p class="h5">Religione e politica</p>
+<div class="tagcloud panel-facet" id="cat_Religione_e_politica_ss"></div>
+<hr/>
+<p class="h5">Fondatori di riviste italiane</p>
+<div class="tagcloud panel-facet" id="cat_Fondatori_di_riviste_italiane_ss"></div>
+<hr/>
+<p class="h5">Massoni</p>
+<div class="tagcloud panel-facet" id="cat_Massoni_ss"></div>
+<hr/>
+<p class="h5">Ebrei italiani</p>
+<div class="tagcloud panel-facet" id="cat_Ebrei_italiani_ss"></div>
+<hr/>
+<p class="h5">Concetti e principi filosofici</p>
+<div class="tagcloud panel-facet" id="cat_Concetti_e_principi_filosofici_ss"></div>
+<hr/>
+<p class="h5">Posizioni e teorie filosofiche</p>
+<div class="tagcloud panel-facet" id="cat_Posizioni_e_teorie_filosofiche_ss"></div>
+<hr/>
+<p class="h5">Ideologie politiche</p>
+<div class="tagcloud panel-facet" id="cat_Ideologie_politiche_ss"></div>
+<hr/>
+<p class="h5">Militari italiani della prima guerra mondiale</p>
+<div class="tagcloud panel-facet" id="cat_Militari_italiani_della_prima_guerra_mondiale_ss"></div>
+<hr/>
+<p class="h5">Antifascisti italiani</p>
+<div class="tagcloud panel-facet" id="cat_Antifascisti_italiani_ss"></div>
+<hr/>
+<p class="h5">Film drammatici</p>
+<div class="tagcloud panel-facet" id="cat_Film_drammatici_ss"></div>
+<hr/>
+<p class="h5">Ministri della Pubblica Istruzione del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Ministri_della_Pubblica_Istruzione_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Capitali europee della cultura</p>
+<div class="tagcloud panel-facet" id="cat_Capitali_europee_della_cultura_ss"></div>
+<hr/>
+<p class="h5">Città benemerite del Risorgimento italiano</p>
+<div class="tagcloud panel-facet" id="cat_Città_benemerite_del_Risorgimento_italiano_ss"></div>
+<hr/>
+<p class="h5">Città medaglie d’oro al valor militare</p>
+<div class="tagcloud panel-facet" id="cat_Città_medaglie_d’oro_al_valor_militare_ss"></div>
+<hr/>
+<p class="h5">Ufficiali del Regio Esercito</p>
+<div class="tagcloud panel-facet" id="cat_Ufficiali_del_Regio_Esercito_ss"></div>
+<hr/>
+<p class="h5">Politici del Partito Nazionale Fascista</p>
+<div class="tagcloud panel-facet" id="cat_Politici_del_Partito_Nazionale_Fascista_ss"></div>
+<hr/>
+<p class="h5">Periodici del passato</p>
+<div class="tagcloud panel-facet" id="cat_Periodici_del_passato_ss"></div>
+<hr/>
+<p class="h5">Personalità dell’Italia fascista</p>
+<div class="tagcloud panel-facet" id="cat_Personalità_dell’Italia_fascista_ss"></div>
+<hr/>
+<p class="h5">Scrittori toscani</p>
+<div class="tagcloud panel-facet" id="cat_Scrittori_toscani_ss"></div>
+<hr/>
+<p class="h5">Accademici dei Lincei</p>
+<div class="tagcloud panel-facet" id="cat_Accademici_dei_Lincei_ss"></div>
+<hr/>
+<p class="h5">Cavalieri dell’Ordine della Giarrettiera</p>
+<div class="tagcloud panel-facet" id="cat_Cavalieri_dell’Ordine_della_Giarrettiera_ss"></div>
+<hr/>
+<p class="h5">Decorati con l’Ordine supremo della Santissima Annunziata</p>
+<div class="tagcloud panel-facet" id="cat_Decorati_con_l’Ordine_supremo_della_Santissima_Annunziata_ss"></div>
+<hr/>
+<p class="h5">Direttori di periodici</p>
+<div class="tagcloud panel-facet" id="cat_Direttori_di_periodici_ss"></div>
+<hr/>
+<p class="h5">Diritto costituzionale</p>
+<div class="tagcloud panel-facet" id="cat_Diritto_costituzionale_ss"></div>
+<hr/>
+<p class="h5">Membri dell’Accademia delle Scienze di Torino</p>
+<div class="tagcloud panel-facet" id="cat_Membri_dell’Accademia_delle_Scienze_di_Torino_ss"></div>
+<hr/>
+<p class="h5">Storia dei rapporti fra Stato italiano e Chiesa cattolica</p>
+<div class="tagcloud panel-facet" id="cat_Storia_dei_rapporti_fra_Stato_italiano_e_Chiesa_cattolica_ss"></div>
+<hr/>
+<p class="h5">Deputati della Consulta Nazionale</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_Consulta_Nazionale_ss"></div>
+<hr/>
+<p class="h5">Deputati dell’VIII Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_dell’VIII_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Filosofi della politica</p>
+<div class="tagcloud panel-facet" id="cat_Filosofi_della_politica_ss"></div>
+<hr/>
+<p class="h5">Filosofia politica</p>
+<div class="tagcloud panel-facet" id="cat_Filosofia_politica_ss"></div>
+<hr/>
+<p class="h5">Marxismo</p>
+<div class="tagcloud panel-facet" id="cat_Marxismo_ss"></div>
+<hr/>
+<p class="h5">Personalità dell’ateismo</p>
+<div class="tagcloud panel-facet" id="cat_Personalità_dell’ateismo_ss"></div>
+<hr/>
+<p class="h5">Politici del Partito Socialista Italiano</p>
+<div class="tagcloud panel-facet" id="cat_Politici_del_Partito_Socialista_Italiano_ss"></div>
+<hr/>
+<p class="h5">Rivoluzione francese</p>
+<div class="tagcloud panel-facet" id="cat_Rivoluzione_francese_ss"></div>
+<hr/>
+<p class="h5">Storia del pensiero economico</p>
+<div class="tagcloud panel-facet" id="cat_Storia_del_pensiero_economico_ss"></div>
+<hr/>
+<p class="h5">Teorie politiche</p>
+<div class="tagcloud panel-facet" id="cat_Teorie_politiche_ss"></div>
+<hr/>
+<p class="h5">Epistemologia</p>
+<div class="tagcloud panel-facet" id="cat_Epistemologia_ss"></div>
+<hr/>
+<p class="h5">Etica</p>
+<div class="tagcloud panel-facet" id="cat_Etica_ss"></div>
+<hr/>
+<p class="h5">Forme di governo</p>
+<div class="tagcloud panel-facet" id="cat_Forme_di_governo_ss"></div>
+<hr/>
+<p class="h5">Membri dell’Académie française</p>
+<div class="tagcloud panel-facet" id="cat_Membri_dell’Académie_française_ss"></div>
+<hr/>
+<p class="h5">Ministri del Tesoro del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Ministri_del_Tesoro_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Re di Francia</p>
+<div class="tagcloud panel-facet" id="cat_Re_di_Francia_ss"></div>
+<hr/>
+<p class="h5">Regioni geografiche</p>
+<div class="tagcloud panel-facet" id="cat_Regioni_geografiche_ss"></div>
+<hr/>
+<p class="h5">Scrittori italiani del XIX secolo</p>
+<div class="tagcloud panel-facet" id="cat_Scrittori_italiani_del_XIX_secolo_ss"></div>
+<hr/>
+<p class="h5">Scrittori legati a Napoli</p>
+<div class="tagcloud panel-facet" id="cat_Scrittori_legati_a_Napoli_ss"></div>
+<hr/>
+<p class="h5">Storia contemporanea europea</p>
+<div class="tagcloud panel-facet" id="cat_Storia_contemporanea_europea_ss"></div>
+<hr/>
+<p class="h5">Storia moderna del Cristianesimo</p>
+<div class="tagcloud panel-facet" id="cat_Storia_moderna_del_Cristianesimo_ss"></div>
+<hr/>
+<p class="h5">Storia moderna</p>
+<div class="tagcloud panel-facet" id="cat_Storia_moderna_ss"></div>
+<hr/>
+<p class="h5">Antisemitismo</p>
+<div class="tagcloud panel-facet" id="cat_Antisemitismo_ss"></div>
+<hr/>
+<p class="h5">Deputati della IX Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_IX_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XVI Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XVI_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati dell’Assemblea Costituente</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_dell’Assemblea_Costituente_ss"></div>
+<hr/>
+<p class="h5">Politici legati a Parigi</p>
+<div class="tagcloud panel-facet" id="cat_Politici_legati_a_Parigi_ss"></div>
+<hr/>
+<p class="h5">Stato</p>
+<div class="tagcloud panel-facet" id="cat_Stato_ss"></div>
+<hr/>
+<p class="h5">Arte e cultura fascista</p>
+<div class="tagcloud panel-facet" id="cat_Arte_e_cultura_fascista_ss"></div>
+<hr/>
+<p class="h5">Cavalieri di gran croce OMRI</p>
+<div class="tagcloud panel-facet" id="cat_Cavalieri_di_gran_croce_OMRI_ss"></div>
+<hr/>
+<p class="h5">Città romane dell’Emilia-Romagna</p>
+<div class="tagcloud panel-facet" id="cat_Città_romane_dell’Emilia-Romagna_ss"></div>
+<hr/>
+<p class="h5">Concetti religiosi</p>
+<div class="tagcloud panel-facet" id="cat_Concetti_religiosi_ss"></div>
+<hr/>
+<p class="h5">Deputati della VII Legislatura del Regno di Sardegna</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_VII_Legislatura_del_Regno_di_Sardegna_ss"></div>
+<hr/>
+<p class="h5">Deputati della XIII Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XIII_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XVIII Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XVIII_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XVII Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XVII_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XXIII Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XXIII_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XXVI Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XXVI_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della X Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_X_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Diritto canonico</p>
+<div class="tagcloud panel-facet" id="cat_Diritto_canonico_ss"></div>
+<hr/>
+<p class="h5">Filosofi della storia</p>
+<div class="tagcloud panel-facet" id="cat_Filosofi_della_storia_ss"></div>
+<hr/>
+<p class="h5">Filosofia della mente</p>
+<div class="tagcloud panel-facet" id="cat_Filosofia_della_mente_ss"></div>
+<hr/>
+<p class="h5">Meridionalismo</p>
+<div class="tagcloud panel-facet" id="cat_Meridionalismo_ss"></div>
+<hr/>
+<p class="h5">Militari sabaudi</p>
+<div class="tagcloud panel-facet" id="cat_Militari_sabaudi_ss"></div>
+<hr/>
+<p class="h5">Ministri delle Finanze del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Ministri_delle_Finanze_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Personaggi citati nella Divina Commedia Paradiso</p>
+<div class="tagcloud panel-facet" id="cat_Personaggi_citati_nella_Divina_Commedia_Paradiso_ss"></div>
+<hr/>
+<p class="h5">Politici legati a Roma</p>
+<div class="tagcloud panel-facet" id="cat_Politici_legati_a_Roma_ss"></div>
+<hr/>
+<p class="h5">Quotidiani italiani</p>
+<div class="tagcloud panel-facet" id="cat_Quotidiani_italiani_ss"></div>
+<hr/>
+<p class="h5">Scrittori italiani del XX secolo</p>
+<div class="tagcloud panel-facet" id="cat_Scrittori_italiani_del_XX_secolo_ss"></div>
+<hr/>
+<p class="h5">Scrittori legati all’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Scrittori_legati_all’Italia_ss"></div>
+<hr/>
+<p class="h5">Sepolti nella Basilica di Saint-Denis</p>
+<div class="tagcloud panel-facet" id="cat_Sepolti_nella_Basilica_di_Saint-Denis_ss"></div>
+<hr/>
+<p class="h5">Socialismo</p>
+<div class="tagcloud panel-facet" id="cat_Socialismo_ss"></div>
+<hr/>
+<p class="h5">Socialisti</p>
+<div class="tagcloud panel-facet" id="cat_Socialisti_ss"></div>
+<hr/>
+<p class="h5">Storici del Medioevo</p>
+<div class="tagcloud panel-facet" id="cat_Storici_del_Medioevo_ss"></div>
+<hr/>
+<p class="h5">Aforisti italiani</p>
+<div class="tagcloud panel-facet" id="cat_Aforisti_italiani_ss"></div>
+<hr/>
+<p class="h5">Anticlericali italiani</p>
+<div class="tagcloud panel-facet" id="cat_Anticlericali_italiani_ss"></div>
+<hr/>
+<p class="h5">Borbone-Francia</p>
+<div class="tagcloud panel-facet" id="cat_Borbone-Francia_ss"></div>
+<hr/>
+<p class="h5">Cavalieri del Toson d’oro</p>
+<div class="tagcloud panel-facet" id="cat_Cavalieri_del_Toson_d’oro_ss"></div>
+<hr/>
+<p class="h5">Comunismo</p>
+<div class="tagcloud panel-facet" id="cat_Comunismo_ss"></div>
+<hr/>
+<p class="h5">Coprincipi francesi di Andorra</p>
+<div class="tagcloud panel-facet" id="cat_Coprincipi_francesi_di_Andorra_ss"></div>
+<hr/>
+<p class="h5">Delfini di Francia</p>
+<div class="tagcloud panel-facet" id="cat_Delfini_di_Francia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XII Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XII_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XIX Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XIX_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XV Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XV_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XXVII Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XXVII_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati della XXV Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_della_XXV_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Deputati dell’XI Legislatura del Regno d’Italia</p>
+<div class="tagcloud panel-facet" id="cat_Deputati_dell’XI_Legislatura_del_Regno_d’Italia_ss"></div>
+<hr/>
+<p class="h5">Economia politica</p>
+<div class="tagcloud panel-facet" id="cat_Economia_politica_ss"></div>
+<hr/>
+<p class="h5">Film commedia</p>
+<div class="tagcloud panel-facet" id="cat_Film_commedia_ss"></div>
+<hr/>
+<p class="h5">Fondatori di quotidiani</p>
+<div class="tagcloud panel-facet" id="cat_Fondatori_di_quotidiani_ss"></div>
+<hr/>
+			  
+		  </div>
+        </div>
+      </div>
+    </div>
+	<div class="panel panel-footer">
+		<div class="panel-body">
+			<p><h4>Contacts:</p><p>christian.morbidoni@gmail.com</h4></p>
+		</div>
+	</div>	
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+    <script src="gramsci-media/css/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+    <script src="core/Core.js"></script>
+    <script src="core/AbstractManager.js"></script>
+    <script src="managers/Manager.jquery.js"></script>
+    <script src="core/Parameter.js"></script>
+    <script src="core/ParameterStore.js"></script>
+    <script src="core/AbstractWidget.js"></script>
+    <script src="demo-iswc/widgets/ResultWidget.js"></script>
+    <script src="widgets/jquery/PagerWidget.js"></script>
+    <script src="core/AbstractFacetWidget.js"></script>
+    <script src="demo-iswc/widgets/TagcloudWidget.js"></script>
+    <script src="demo-iswc/widgets/FacetsWidget.js"></script>
+    <script src="demo-iswc/widgets/SmallFacetsWidget.js"></script>
+	<script src="demo-iswc/widgets/WikipediaSmallFacetsWidget.js"></script>
+	<script src="demo-iswc/widgets/DataSmallFacetsWidget.js"></script>
+    <script src="demo-iswc/widgets/CurrentSearchWidget.9.js"></script>
+    <script src="core/AbstractTextWidget.js"></script>
+    <script src="demo-iswc/js/unorm.js"></script>
+    <script src="demo-iswc/widgets/AutocompleteWidget.js"></script>
+    <script src="demo-iswc/widgets/CountryCodeWidget.js"></script>
+    <script src="demo-iswc/widgets/CalendarWidget.js"></script>
+    <script src="demo-iswc/js/demo.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-61479510-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
+</html>

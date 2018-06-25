@@ -54,6 +54,8 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
 //              if (cf == '')
 				if (matchedData[1]=='*')
 					cf += '* : ';
+				if (matchedData[1]=='type_s')
+					continue;
 				else 
 					cf += self.facetsNamesMapping[matchedData[1]] + ' : ';
 //              else if (!cf.endsWith('OR '))
@@ -88,12 +90,53 @@ AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
     }
 
     if (links.length) {
-      var $target = $(this.target);
-      $target.empty();
+      var target = $(this.target);
+      target.empty();
       //$(this.target).html('Applied filters');
       for (var i = 0, l = links.length; i < l; i++) {
-        $target.append($('<li></li>').append(links[i]));
+        target.append($('<li></li>').append(links[i]));
       }
+	  fqs = self.manager.store.values('fq');
+
+	  /* TO BE REMOVED
+	  query = '';
+	  
+	  for (i=0; i<fqs.length;i++) {
+		  
+		  var orred = fqs[i].split(' OR ');
+		  for (k=0; k<orred.length; k++) {
+		  	  pieces = orred[k].split(':');
+			  if (pieces[0].indexOf('"') == -1) {
+				  query += '"' + pieces[0] + '":';
+			  } else {
+				  query += pieces[0];
+			  }
+			  if (pieces[1].indexOf('"') == -1) {
+				  query += '"' + pieces[1] + '"';
+			  } else {
+				  query += pieces[1];
+			  }	  
+			  if (k < orred.length -1) {
+			  		query += ' OR ';
+			  }
+		  }
+		  if (i < fqs.length - 1) {
+		   	  query += ',';
+		  }
+		  
+		  
+	  	  
+	  }
+	  */
+	  
+	  //query = encodeURIComponent('{"facets_selector":{"' + serfq.split('"').join('').split(':').join('":"').split(',').join('","').replace('"type_s":"document",','') + '"}}');
+	  
+	  var query = fqs.join(' AND ');
+	  query = encodeURIComponent('{"facet_query_solr":"' + query.split('"').join('\\"') + '"}');
+	  var apiHost = document.location.href.replace('.html','.php').split('#')[0];
+	  var apiCall = apiHost + "?api_call=" + query;
+	  target.append('<br/><div><a href="' + apiCall + '">Rebuild facets based on current filters</a></div>');
+	  target.append('<br/><div><a href="' + apiHost + '">Reset facets to default</a></div>');
     }
     else {
       $(this.target).html('Viewing all documents');

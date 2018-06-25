@@ -5,8 +5,9 @@ var Manager;
   $(function () {
 
     Manager = new AjaxSolr.ApiManager({
-      solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-nomi/'
-    });
+      //solrUrl: 'http://gramsciproject.org:8080/solr-gramsci-nomi/'
+      solrUrl: 'http://193.205.129.92:8080/solr-gramsci-nomi/'
+     });
 
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
