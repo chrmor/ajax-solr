@@ -10,7 +10,7 @@ This consists of a set of interconnected customized faceted browsers to explore 
 * Support for handling structured JSON data stored in Solr
 * UI customizations, e.g. accordion to visualize long test items content, support for keywords search highlight in text, etc.
 
-For a short pseudo-technical presentation of the GramsciProject faceted browsers please see [this presentation](https://www.slideshare.net/christianmorbidoni/gramsciproject-technical-presentation)
+For a high level technical presentation of the GramsciProject faceted browsers please see [this presentation](https://www.slideshare.net/christianmorbidoni/gramsciproject-technical-presentation)
 
 # Contacts
 
